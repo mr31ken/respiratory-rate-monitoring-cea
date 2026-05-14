@@ -35,9 +35,9 @@ Thank you for considering our manuscript. We look forward to your editorial asse
 
 Sincerely,
 
-Kenichi Saito
-[Affiliation: Department, Institution, City, Country — to be confirmed]
-[Postal address — to be confirmed]
-[Phone — to be confirmed]
+Kenichi Saito, MD
+Center for Medical DX Education and Research, Graduate School of Medicine, Kyoto University
+Graduate School of Medicine, Osaka Metropolitan University
+Postal address: 54 Shogoin-Kawahara-cho, Sakyo-ku, Kyoto 606-8507, Japan
 E-mail: mr31ken@kuhp.kyoto-u.ac.jp
 ORCID: https://orcid.org/0000-0003-2301-706X

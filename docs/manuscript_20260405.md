@@ -1,11 +1,12 @@
 # Economic Evaluation of Automated Respiratory Rate Monitoring in General Hospital Wards: A Deterministic Cost-Minimization and Break-Even Modeling Study
 
 ## Authors
-Kenichi Saito¹
+Kenichi Saito¹,²
 
-¹ [Department, Institution, City, Country — to be confirmed]
+¹ Center for Medical DX Education and Research, Graduate School of Medicine, Kyoto University, Kyoto, Japan
+² Graduate School of Medicine, Osaka Metropolitan University, Osaka, Japan
 
-**Corresponding author:** Kenichi Saito (mr31ken@kuhp.kyoto-u.ac.jp; ORCID: [0000-0003-2301-706X](https://orcid.org/0000-0003-2301-706X))
+**Corresponding author:** Kenichi Saito, Center for Medical DX Education and Research, Graduate School of Medicine, Kyoto University, 54 Shogoin-Kawahara-cho, Sakyo-ku, Kyoto 606-8507, Japan. E-mail: mr31ken@kuhp.kyoto-u.ac.jp. ORCID: [0000-0003-2301-706X](https://orcid.org/0000-0003-2301-706X).
 
 ## Target Journal
 Journal of Clinical Monitoring and Computing (Springer)
