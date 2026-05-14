@@ -1,7 +1,11 @@
 # Economic Evaluation of Automated Respiratory Rate Monitoring in General Hospital Wards: A Deterministic Cost-Minimization and Break-Even Modeling Study
 
 ## Authors
-[Author names to be confirmed]
+Kenichi Saito¹
+
+¹ [Department, Institution, City, Country — to be confirmed]
+
+**Corresponding author:** Kenichi Saito ([institutional e-mail], ORCID: [ORCID iD — to be confirmed])
 
 ## Target Journal
 Journal of Clinical Monitoring and Computing (Springer)
@@ -129,7 +133,7 @@ A large language model (LLM; Anthropic Claude) was used during the drafting and 
 
 ### Reproducibility and Data Availability
 
-All data inputs, analysis scripts (Python 3.x), and generated outputs are publicly available in the project repository at [REPOSITORY URL TO BE INSERTED — e.g., https://github.com/[username]/respiratory-rate-monitoring-cea]. Analyses use pandas, numpy, matplotlib, and scipy. All figures and tables are programmatically generated from the input CSV files. The complete parameter set is provided in machine-readable format (data/cost_parameters.csv) to enable institutional adaptation with local cost data. An archived version with a permanent DOI will be deposited at [Zenodo / Figshare DOI TO BE INSERTED] prior to submission.
+All data inputs, analysis scripts (Python 3.x), and generated outputs are publicly available in the project repository at https://github.com/mr31ken/respiratory-rate-monitoring-cea. Analyses use pandas, numpy, matplotlib, and scipy. All figures and tables are programmatically generated from the input CSV files. The complete parameter set is provided in machine-readable format (data/cost_parameters.csv) to enable institutional adaptation with local cost data. An archived version with a permanent DOI will be deposited at [Zenodo / Figshare DOI TO BE INSERTED] prior to submission.
 
 ## Results
 
@@ -272,15 +276,15 @@ This study constructed a deterministic cost-minimization and break-even model co
 
 **Funding:** [TO BE COMPLETED: State funding sources, or "This research received no specific grant from any funding agency in the public, commercial, or not-for-profit sectors."]
 
-**Conflicts of interest:** [TO BE COMPLETED: Declare all conflicts of interest, or "The author(s) declare no conflicts of interest. No device manufacturer was involved in study design, data collection, analysis, interpretation, or manuscript preparation."]
+**Conflicts of interest:** The author declares no conflicts of interest. No device manufacturer was involved in study design, data collection, analysis, interpretation, or manuscript preparation.
 
 **Ethics approval:** Not applicable. This study used only published aggregate data and did not involve human participants, human tissue, or animals.
 
 **Consent to participate:** Not applicable.
 
-**Author contributions:** [TO BE COMPLETED: e.g., "[Author name]: Conceptualization, methodology, data collection, formal analysis, software, writing—original draft, writing—review and editing."]
+**Author contributions:** Kenichi Saito: Conceptualization, methodology, data curation, formal analysis, software, validation, visualization, writing—original draft, writing—review and editing.
 
-**Data availability:** The complete dataset, analysis code (Python 3.x), and data dictionary supporting this study are publicly available at [REPOSITORY URL TO BE INSERTED — e.g., https://github.com/[username]/respiratory-rate-monitoring-cea]. An archived version with a permanent DOI is deposited at [Zenodo/Figshare DOI TO BE INSERTED]. The repository contains: (1) all input CSV files with source attribution; (2) Python scripts that programmatically generate all figures and tables; (3) complete parameter sets in machine-readable format for institutional adaptation. No patient-level data were used; all inputs derive from published aggregate statistics.
+**Data availability:** The complete dataset, analysis code (Python 3.x), and data dictionary supporting this study are publicly available at https://github.com/mr31ken/respiratory-rate-monitoring-cea. An archived version with a permanent DOI is deposited at [Zenodo/Figshare DOI TO BE INSERTED]. The repository contains: (1) all input CSV files with source attribution; (2) Python scripts that programmatically generate all figures and tables; (3) complete parameter sets in machine-readable format for institutional adaptation. No patient-level data were used; all inputs derive from published aggregate statistics.
 
 ---
 
