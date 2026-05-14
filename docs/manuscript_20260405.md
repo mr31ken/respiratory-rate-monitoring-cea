@@ -133,7 +133,7 @@ A large language model (LLM; Anthropic Claude) was used during the drafting and 
 
 ### Reproducibility and Data Availability
 
-All data inputs, analysis scripts (Python 3.x), and generated outputs are publicly available in the project repository at https://github.com/mr31ken/respiratory-rate-monitoring-cea. Analyses use pandas, numpy, matplotlib, and scipy. All figures and tables are programmatically generated from the input CSV files. The complete parameter set is provided in machine-readable format (data/cost_parameters.csv) to enable institutional adaptation with local cost data. An archived version with a permanent DOI will be deposited at [Zenodo / Figshare DOI TO BE INSERTED] prior to submission.
+All data inputs, analysis scripts (Python 3.x), and generated outputs are publicly available in the project repository at https://github.com/mr31ken/respiratory-rate-monitoring-cea. Analyses use pandas, numpy, matplotlib, and scipy. All figures and tables are programmatically generated from the input CSV files. The complete parameter set is provided in machine-readable format (data/cost_parameters.csv) to enable institutional adaptation with local cost data. A snapshot of the repository (release v1.0.1-jcmc-submission) is archived at Zenodo with DOI [10.5281/zenodo.20176683](https://doi.org/10.5281/zenodo.20176683).
 
 ## Results
 
@@ -284,7 +284,7 @@ This study constructed a deterministic cost-minimization and break-even model co
 
 **Author contributions:** Kenichi Saito: Conceptualization, methodology, data curation, formal analysis, software, validation, visualization, writing—original draft, writing—review and editing.
 
-**Data availability:** The complete dataset, analysis code (Python 3.x), and data dictionary supporting this study are publicly available at https://github.com/mr31ken/respiratory-rate-monitoring-cea. An archived version with a permanent DOI is deposited at [Zenodo/Figshare DOI TO BE INSERTED]. The repository contains: (1) all input CSV files with source attribution; (2) Python scripts that programmatically generate all figures and tables; (3) complete parameter sets in machine-readable format for institutional adaptation. No patient-level data were used; all inputs derive from published aggregate statistics.
+**Data availability:** The complete dataset, analysis code (Python 3.x), and data dictionary supporting this study are publicly available at https://github.com/mr31ken/respiratory-rate-monitoring-cea. An archived snapshot (release v1.0.1-jcmc-submission) is deposited at Zenodo with DOI [10.5281/zenodo.20176683](https://doi.org/10.5281/zenodo.20176683). The repository contains: (1) all input CSV files with source attribution; (2) Python scripts that programmatically generate all figures and tables; (3) complete parameter sets in machine-readable format for institutional adaptation. No patient-level data were used; all inputs derive from published aggregate statistics.
 
 ---
 

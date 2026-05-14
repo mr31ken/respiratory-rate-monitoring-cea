@@ -11,6 +11,10 @@ authors:
   - given-names: "Kenichi"
     family-names: "Saito"
 repository-code: "https://github.com/mr31ken/respiratory-rate-monitoring-cea"
+identifiers:
+  - type: doi
+    value: "10.5281/zenodo.20176683"
+    description: "Zenodo archive (v1.0.1-jcmc-submission)"
 license: MIT
 keywords:
   - respiratory rate

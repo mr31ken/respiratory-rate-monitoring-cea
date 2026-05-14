@@ -1,5 +1,8 @@
 # Economic Evaluation of Automated Respiratory Rate Monitoring in General Hospital Wards
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20176683.svg)](https://doi.org/10.5281/zenodo.20176683)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 A reproducible, deterministic cost-minimization and break-even modeling study comparing manual respiratory rate (RR) counting with six automated monitoring scenarios across four national healthcare systems (Japan, UK, Australia, USA).
 
 This repository contains all data, analysis code, and documentation accompanying the manuscript submitted to the *Journal of Clinical Monitoring and Computing*.
