@@ -10,6 +10,7 @@ type: software
 authors:
   - given-names: "Kenichi"
     family-names: "Saito"
+    orcid: "https://orcid.org/0000-0003-2301-706X"
 repository-code: "https://github.com/mr31ken/respiratory-rate-monitoring-cea"
 identifiers:
   - type: doi
@@ -32,5 +33,6 @@ preferred-citation:
   authors:
     - given-names: "Kenichi"
       family-names: "Saito"
+      orcid: "https://orcid.org/0000-0003-2301-706X"
   journal: "Journal of Clinical Monitoring and Computing"
   year: 2026

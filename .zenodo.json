@@ -3,7 +3,8 @@
   "description": "Companion repository for a manuscript submitted to the Journal of Clinical Monitoring and Computing. Contains a reproducible deterministic cost-minimization and break-even model comparing manual respiratory rate counting with six automated monitoring scenarios across four national healthcare systems (Japan, UK, Australia, USA). All input data, Python analysis scripts, generated figures and tables, and supplementary materials are included; reporting follows CHEERS 2022.",
   "creators": [
     {
-      "name": "Saito, Kenichi"
+      "name": "Saito, Kenichi",
+      "orcid": "0000-0003-2301-706X"
     }
   ],
   "upload_type": "software",

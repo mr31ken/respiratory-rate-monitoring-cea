@@ -5,7 +5,7 @@ Kenichi Saito¹
 
 ¹ [Department, Institution, City, Country — to be confirmed]
 
-**Corresponding author:** Kenichi Saito ([institutional e-mail], ORCID: [ORCID iD — to be confirmed])
+**Corresponding author:** Kenichi Saito (mr31ken@kuhp.kyoto-u.ac.jp; ORCID: [0000-0003-2301-706X](https://orcid.org/0000-0003-2301-706X))
 
 ## Target Journal
 Journal of Clinical Monitoring and Computing (Springer)
@@ -274,7 +274,7 @@ This study constructed a deterministic cost-minimization and break-even model co
 
 ## Declarations
 
-**Funding:** [TO BE COMPLETED: State funding sources, or "This research received no specific grant from any funding agency in the public, commercial, or not-for-profit sectors."]
+**Funding:** This research received no specific grant from any funding agency in the public, commercial, or not-for-profit sectors.
 
 **Conflicts of interest:** The author declares no conflicts of interest. No device manufacturer was involved in study design, data collection, analysis, interpretation, or manuscript preparation.
 

@@ -36,8 +36,8 @@ Thank you for considering our manuscript. We look forward to your editorial asse
 Sincerely,
 
 Kenichi Saito
-[Affiliation: Department, Institution — to be confirmed]
+[Affiliation: Department, Institution, City, Country — to be confirmed]
 [Postal address — to be confirmed]
 [Phone — to be confirmed]
-[E-mail — to be confirmed]
-[ORCID iD — to be confirmed]
+E-mail: mr31ken@kuhp.kyoto-u.ac.jp
+ORCID: https://orcid.org/0000-0003-2301-706X
