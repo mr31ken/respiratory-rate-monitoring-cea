@@ -38,6 +38,7 @@ Sincerely,
 Kenichi Saito, MD
 Center for Medical DX Education and Research, Graduate School of Medicine, Kyoto University
 Graduate School of Medicine, Osaka Metropolitan University
-Postal address: 54 Shogoin-Kawahara-cho, Sakyo-ku, Kyoto 606-8507, Japan
+Postal address: 53 Kawahara-cho, Shogoin, Sakyo-ku, Kyoto 606-8507, Japan
+Telephone: +81-75-751-4836
 E-mail: mr31ken@kuhp.kyoto-u.ac.jp
 ORCID: https://orcid.org/0000-0003-2301-706X

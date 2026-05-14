@@ -6,7 +6,7 @@ Kenichi Saito¹,²
 ¹ Center for Medical DX Education and Research, Graduate School of Medicine, Kyoto University, Kyoto, Japan
 ² Graduate School of Medicine, Osaka Metropolitan University, Osaka, Japan
 
-**Corresponding author:** Kenichi Saito, Center for Medical DX Education and Research, Graduate School of Medicine, Kyoto University, 54 Shogoin-Kawahara-cho, Sakyo-ku, Kyoto 606-8507, Japan. E-mail: mr31ken@kuhp.kyoto-u.ac.jp. ORCID: [0000-0003-2301-706X](https://orcid.org/0000-0003-2301-706X).
+**Corresponding author:** Kenichi Saito, Center for Medical DX Education and Research, Graduate School of Medicine, Kyoto University, 53 Kawahara-cho, Shogoin, Sakyo-ku, Kyoto 606-8507, Japan. Tel: +81-75-751-4836. E-mail: mr31ken@kuhp.kyoto-u.ac.jp. ORCID: [0000-0003-2301-706X](https://orcid.org/0000-0003-2301-706X).
 
 ## Target Journal
 Journal of Clinical Monitoring and Computing (Springer)
