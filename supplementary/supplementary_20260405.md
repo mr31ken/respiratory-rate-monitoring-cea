@@ -1,0 +1,264 @@
+# Supplementary Materials
+
+## Economic Evaluation of Automated Respiratory Rate Monitoring in General Hospital Wards: A Deterministic Cost-Minimization and Break-Even Modeling Study
+
+---
+
+## S1. Fact-Check Summary and Corrections from Prior Draft Documents
+
+This study was preceded by two preliminary reports generated through LLM-assisted literature review. Prior to constructing the current analysis, all key factual claims were independently verified against primary sources. This supplement documents the verification process and all corrections applied.
+
+### Critical Corrections (Issues Identified in Revision)
+
+| Original Claim (v1 manuscript) | Correction | Impact |
+|-------------------------------|-----------|--------|
+| "Capnography bias 0.0, LoA ±1.0 [21]" | **Removed.** Bergese 2017 [21] validates pulse-ox-derived RR (Nellcor CNRRS), not capnography itself. The cited bias/LoA values do not appear in [21]. Primary source for these values was not identified despite systematic search. | Accuracy summary in Abstract and Results rewritten |
+| "Thoracic impedance bias −2.2, LoA −6.5 to +2.0 [21]" | **Removed.** These values do not appear in Bergese 2017. Replaced with verified data: Kelley 2014 (abstract): TTI bias −2.56, SD 9.01 [13]; van Loon 2018: IPG bias −1.9, 98.9% LoA −13.1 to +9.2 [12]; Lee 2024: impedance bias 0.2, LoA −6.2 to +6.6 [14] | Three independent sources now cited for impedance |
+| "Over 10 years and 32,000 patients, 50% ICU reduction + zero OIRD deaths [6]" | **Split into 3 correctly attributed studies.** Taenzer 2010 [6]: ~21 months, single unit, 48% ICU reduction. McGrath 2020 [7]: 10 years, 111,488 monitored discharges, zero OIRD deaths. Blike 2025 [8]: 3.5 years, 31,993 patients, financial analysis. | Discussion section rewritten with correct attributions |
+| Guardian M10 "bias near zero, LoA ±1.2" | **Refined.** Toften 2024 [19] reports: stationary bias 0.1, LoA −1.09 to +1.19; mobile bias 0.0, LoA −1.07 to +1.07 (32 patients, 1,112/1,119 paired measurements). | Values updated to verified precision |
+
+### Verified Claims (Unchanged)
+| Claim | Source | Verification Status |
+|-------|--------|-------------------|
+| Masimo Rad-G price €795 (ex-VAT) | DocCheckShop.eu | **Verified** |
+| NEWS2 score-based escalation thresholds | RCP NEWS2 report [1] | **Verified** |
+| NICE CG50: minimum 12-hourly monitoring | NICE CG50 [23] | **Verified** |
+| Australian deterioration cost A$14,134/episode | Curtis et al. 2021 [18] | **Verified** (n=929, PMID: 34314776) |
+| Taenzer 2010: ICU transfers 5.6→2.9/1000 pt-days | Taenzer et al. [6] | **Verified** (48% reduction, ~21-month before-after) |
+| Guardian M10 MDR Class IIb certification | Vitalthings/Toften 2024 [19] | **Verified** (PMID: 39665054) |
+| Neteera 510(k) FDA clearance | FDA K212143 [25] | **Verified** (cleared September 2022) |
+| MHLW 2021: 3,710.2 points/day inpatient | MHLW statistics [15] | **Verified** |
+| Blike 2025: $10,700/ICU transfer avoided | J Patient Saf 2025 [8] | **Verified** (31,993 patients, 3.5 years) |
+
+### Other Corrected/Clarified Claims
+| Original Claim | Correction |
+|----------------|-----------|
+| EarlySense as current product | **Corrected**: EarlySense's contact-free monitoring technology and IP were acquired by Hillrom (now Baxter) in February 2021 [20]. No claim is made regarding the current corporate status of EarlySense Ltd., as verifiable public records are limited. |
+| "72% of recorded RR were inaccurate" (DOCX draft) | **Clarified**: Philip et al. 2015 [4] is a perception survey (72% of doctors rated RR records as only "sometimes accurate"), not a direct accuracy measurement. |
+| UK critical care £1,173/bed-day | **Verified but outdated**: From 2012-13 NHS reference costs [17]. Acknowledged as limitation. |
+| Neteera "95% accuracy rate" | **Partially verified**: Website claims 95%; FDA 510(k) data show ~93%. Discrepancy noted. |
+| Blike et al. 2025 citation | **Corrected**: Full citation: Blike G, McGrath S, Perreard I, McGovern K. J Patient Saf. 2025;21(8):e169-e175. doi:10.1097/PTS.0000000000001392 |
+
+---
+
+## S2. Model Assumptions and Parameter Sources
+
+All model parameters are documented in `data/cost_parameters.csv` with source attribution. Parameters are classified as:
+- **Published**: Value derived directly from a cited source (peer-reviewed, government, or regulatory)
+- **Assumption**: Author-determined value requiring sensitivity testing
+
+### Explicitly Assumed Parameters (flagged for sensitivity analysis)
+
+1. **Manual RR counting time (80 seconds)**: Composed of 60 seconds observation + 20 seconds documentation. Literature reports range from 60 seconds (timing only) to 180 seconds (including preparation and recording). Sensitivity range: 60–120 seconds.
+
+2. **Nurse hourly cost (¥3,500 Japan)**: Approximated from average nursing salary with overhead. Japanese nursing salary data from MHLW suggest base hourly rates of ¥2,500–3,000; the ¥3,500 figure includes estimated social insurance and indirect costs. Sensitivity range: ¥2,800–4,200.
+
+3. **Device staff time (2–10 min/patient-day)**: Represents time for alarm management, device checking, and documentation. Highly variable in practice and depends on alarm algorithm tuning.
+
+4. **Radar sensor price (¥500,000/bed)**: The Vitalthings Guardian M10 price is not publicly disclosed. ¥500,000 is a conservative estimate based on comparable medical radar devices. Sensitivity range: ¥400,000–¥1,000,000.
+
+5. **Exchange rates**: USD/JPY 150, GBP/JPY 190, AUD/JPY 100, EUR/JPY 160. Approximate 2024 values; sensitivity ±15%.
+
+### Device Prices: Source Classification
+
+| Device | Price | Source | Classification |
+|--------|-------|--------|---------------|
+| Masimo Rad-G | €795 | DocCheckShop.eu retail | Published (retail) |
+| EarlySense (10-bed) | £35,000 | NICE MIB49 [9] | Published (HTA) |
+| RespiraSense (per patch) | £35 | NICE MIB299 [10] | Published (HTA) |
+| Nihon Kohden PVM-4000 | ¥1,350,000 | Press release | Published (manufacturer) |
+| Capnostream 35 | $3,000–6,000 | Third-party retailers | Published (range) |
+| Neteera 130H/131H | Not disclosed | — | **Assumption** |
+| Guardian M10 | Not disclosed | — | **Assumption** |
+| Equivital eq02+ | €1,944 | Mindtecstore retail | Published (retail) |
+
+---
+
+## S3. Detailed Break-Even Calculations
+
+The break-even formula is:
+
+```
+Break-even events/year = (Incremental cost/patient-day × Patient-days/year) / Cost per adverse event
+```
+
+Where:
+- Incremental cost = Total device scenario cost − Manual counting cost (per patient-day)
+- Patient-days/year = Ward beds × Occupancy × 365
+- Cost per adverse event = Country-specific estimate from published sources
+
+### Example (Under-mattress sensor, Japan, conservative estimate):
+- Incremental cost: ¥388.9/patient-day
+- Patient-days/year: 30 × 0.90 × 365 = 9,855
+- Adverse event cost (Japan, bed-day): ¥96,970 × 3 + ¥37,102 × 5 = ¥476,420
+- Break-even: (388.9 × 9,855) / 476,420 = **8.0 events/year** (0.81 per 1,000 patient-days)
+
+### Cross-country break-even comparison (under-mattress sensor):
+
+| Country | Adverse event cost (local) | In JPY | Break-even (events/year) | Per 1,000 pt-days |
+|---------|--------------------------|--------|------------------------|-------------------|
+| Japan (conservative) | ¥476,420 | ¥476,420 | 8.0 | 0.81 |
+| Japan (mid-range) | ¥1,000,000 | ¥1,000,000 | 3.8 | 0.39 |
+| Australia | A$14,134 | ¥1,413,400 | 2.7 | 0.28 |
+| USA | $10,700 | ¥1,605,000 | 2.4 | 0.24 |
+| UK (2020/21 NCC) | £7,368 | ¥1,399,920 | 2.7 | 0.28 |
+
+---
+
+## S4. Adverse Event Cost Derivation by Country
+
+### Japan
+- ICU bed-day: ¥96,970 (特定集中治療室管理料 categories 3-4: 9,697 points × 10 yen/point [15])
+- General ward bed-day: ¥37,102 (MHLW 2021 national average: 3,710.2 points × 10 [15])
+- Base estimate: 3 additional ICU days + 5 additional ward days = ¥476,420
+- This is a **highly conservative floor estimate**: it includes only 診療報酬 (medical fee schedule) reimbursement points and excludes procedure costs, pharmaceutical costs, imaging, and laboratory tests associated with managing the deterioration event
+- **Important**: The reimbursement-based ICU bed-day cost of ¥96,970 substantially understates actual resource consumption. Hospital cost accounting studies report that the actual operating cost of ICU care in Japan averages approximately ¥197,277/bed-day [16], more than double the reimbursement rate. Using actual costs would yield a base-case adverse event estimate of approximately ¥777,000 (3 × ¥197,277 + 5 × ¥37,102), substantially lowering break-even thresholds.
+- Sensitivity range: ¥300,000 (minimal deterioration with rapid recovery) to ¥2,000,000 (including ICU procedures, ventilation, drugs, extended stay)
+
+### United Kingdom
+- Critical care bed-day: £1,881 (2020/21 NCC data, via Parliament Written Question 165361 [17])
+- General ward bed-day: £345 (2020/21 NCC, acute clinical setting maintenance cost excl. diagnosis/treatment [17])
+- Estimate: 3 × £1,881 + 5 × £345 = £7,368
+- **Note**: Updated from 2012-13 reference costs (£1,173 critical care, £273 excess bed-day) used in the preliminary draft. The most granular data (HRG-level critical care costs XC01-XC07, 2023/24 NCC) are published via NHS England Power BI dashboards but not yet available as citable tabulated per-day values.
+
+### Australia
+- Per-episode incremental cost: A$14,134 (Curtis et al. 2021 [18])
+- This is the most methodologically robust estimate in our analysis: derived from 929 deterioration episodes among 71,000 admissions, controlled for length-of-stay and AR-DRG using multivariate regression
+- Includes all treatment cost differences, not limited to bed-day fees
+
+### USA
+- Operating margin impact per ICU transfer avoided: $10,700 (Blike et al. 2025 [8])
+- Operating margin impact per rescue event avoided: $5,500 [8]
+- These represent financial impact on hospital operations (revenue minus cost), not total healthcare cost
+- Derived from 31,993 patients over 3.5 years at Dartmouth-Hitchcock Medical Center
+- Note: Direct cost comparisons with other countries should be interpreted cautiously due to differences in cost accounting methods
+
+---
+
+## S5. Accuracy Data Quality Notes
+
+### Reference Standard Heterogeneity
+A critical limitation in comparing accuracy across devices is the use of different reference standards:
+
+| Reference Standard | Used by | Strengths | Limitations |
+|-------------------|---------|-----------|-------------|
+| Capnography | [21], [13], [12], [14] | Gold standard for RR; breath-by-breath | Requires nasal cannula; patient cooperation |
+| Respiratory inductance plethysmography (RIP) | [19] | Non-invasive; validated against pneumotachograph | Requires calibrated bands; body position-dependent |
+| Manual counting | [10], [14] | Universal availability | Known to be inaccurate (LoA −13.5 to +12.3 vs capnography [14]) |
+| ECG-derived | [10] | Available from existing monitoring | Algorithm-dependent; not a true gold standard |
+| Standard monitoring (unspecified) | [9] | As used clinically | Varies by institution |
+
+Studies using manual counting as reference may underestimate device accuracy, as the reference itself introduces substantial measurement error [3, 14].
+
+### Statistical Reporting Heterogeneity
+- Most studies report 95% LoA (bias ± 1.96 × SD)
+- Van Loon et al. [12] reports 98.9% LoA (bias ± 2.63 × SD with repeated-measures correction)
+- Kelley et al. [13] reports bias and SD but not formal LoA (conference abstract)
+- EarlySense studies [9] report percentage accuracy (aRE within threshold) rather than Bland-Altman metrics
+- Neteera [25] reports percentage within 10% or 2 bpm
+
+These reporting differences preclude a formal meta-analysis and require caution in cross-device comparisons.
+
+---
+
+## S6. Reproducibility Statement
+
+All analyses in this paper are fully reproducible. The complete repository includes:
+- `data/`: All input data with documented sources (CSV format with source attribution)
+- `data/DATA_DICTIONARY.md`: Complete variable definitions for all data files
+- `analysis/`: Python scripts that generate all figures and tables
+- `supplementary/`: This document
+
+To reproduce:
+```bash
+cd analysis/
+pip install pandas numpy matplotlib scipy
+python 05_generate_all.py
+```
+
+All intermediate outputs are regenerated from source data. No manual data manipulation is performed outside the documented scripts. Parameters classified as "Assumption" in `data/cost_parameters.csv` are explicitly flagged and tested in sensitivity analysis.
+
+---
+
+## S8. Device-by-Device Accuracy Data (Detail)
+
+This section provides detailed accuracy findings for each device category, supplementing the summary in the main text (Results: Technology Landscape).
+
+### Radar-based non-contact sensors
+The Vitalthings Guardian M10 was validated against respiratory inductance plethysmography (Nox T3s) in 32 emergency ward patients (1,112 paired measurements). Bland-Altman analysis showed bias of 0.1 breaths/min (stationary) and 0.0 breaths/min (mobile), with 95% LoA of −1.09 to +1.19 and −1.07 to +1.07 breaths/min, respectively [19]. This represents the narrowest LoA among devices evaluated in a hospital setting.
+
+### Pulse-oximetry-derived RR
+The Medtronic Nellcor Continuous RR (CNRRS) was validated against clinician-overscored capnography in a multicenter study of 79 subjects (23,243 paired observations). Overall bias was 0.18 breaths/min with 95% LoA of −3.06 to +3.42 (RMSD 1.35 breaths/min). Among 53 hospitalized patients, bias was 0.07 breaths/min with wider LoA of −3.84 to +3.97 [21]. Separately, Masimo Rad-G (pulse-oximetry plethysmographic RR) showed sensitivity of 95% and specificity of 94% for detecting abnormal RR, though Bland-Altman data were not reported in the available study.
+
+### Thoracic impedance
+Transthoracic impedance (TTI) showed the poorest agreement across multiple studies. In pooled data from Kelley et al. (23,243 paired observations), TTI demonstrated bias of −2.56 breaths/min with SD of 9.01 and RMSD of 5.21 breaths/min against capnography [13]. The implied 95% LoA (approximately −20.2 to +15.1) is extremely wide, though formal LoA were not reported in this conference abstract. Van Loon et al. reported impedance plethysmography (IPG) bias of −1.9 breaths/min with 98.9% LoA of −13.1 to +9.2 in 20 PACU patients [12]; notably, these are 98.9% LoA (using ±2.63×SD with repeated-measures correction), and 95% LoA would be somewhat narrower. In a recent ED study, telemetry-based impedance showed bias of 0.2 breaths/min but LoA of −6.2 to +6.6 against capnography [14]. In the same study, manual nurse-documented RR showed bias of −0.6 with LoA of −13.5 to +12.3 against capnography, illustrating the magnitude of manual measurement error [14].
+
+### Wearable patches
+For RespiraSense, NICE MIB299 reported mean bias of −0.41 breaths/min versus ECG-derived RR with 95% LoA of −3.9 to +3.1 [10]. Against nurse manual counting, the agreement was wider (mean bias −0.58, LoA −5.5 to +4.3), with 20% of intervals showing differences exceeding 3 breaths/min [10]. The Equivital chest belt reported bias of 0.2 breaths/min with LoA of −2.2 to +2.6 breaths/min under controlled laboratory conditions.
+
+### Under-mattress sensors
+For EarlySense, NICE MIB49 summarized accuracy rates from manufacturer-submitted studies rather than Bland-Altman metrics: adult sleep lab accuracy 93.1%, ICU accuracy 82% versus end-tidal CO₂, and 75% versus manual counting [9]. The varying definitions of "accuracy" across these source studies preclude direct comparison with Bland-Altman data from other devices.
+
+### Non-contact radar (Neteera)
+The Neteera 130H/131H received FDA 510(k) clearance with reported accuracy of approximately 93% (within 10% or 2 breaths/min of reference) based on clinical validation in ~170 subjects [25]. The manufacturer's website claims 95% accuracy; the basis for this discrepancy is unclear.
+
+---
+
+## S9. Supplementary Tables (Moved from Main Text)
+
+### Supplementary Table S1. Device Characteristics
+Characteristics of commercially available automated respiratory rate monitoring devices. Full data available in tables/table1_device_comparison.csv.
+
+[Table to be generated from tables/table1_device_comparison.csv]
+
+### Supplementary Table S2. Per-Patient-Day Cost Comparison
+Per-patient-day cost comparison: manual counting versus automated monitoring scenarios, Japan base case. Full data available in tables/table3_cost_per_patient_day.csv.
+
+[Table to be generated from tables/table3_cost_per_patient_day.csv]
+
+### Supplementary Table S3. One-Way Sensitivity Analysis Results
+One-way sensitivity analysis results for the under-mattress sensor scenario (Japan base case). Full data available in tables/table5_sensitivity.csv.
+
+[Table to be generated from tables/table5_sensitivity.csv]
+
+### Supplementary Table S4. Multi-Way Scenario Analysis Results
+Break-even thresholds under simultaneous best-case, base-case, and worst-case parameter assumptions. Full data available in tables/table6_scenario_analysis.csv.
+
+[Table to be generated from tables/table6_scenario_analysis.csv]
+
+---
+
+## S10. CHEERS 2022 Reporting Checklist
+
+Completed checklist per Husereau et al. (BMJ 2022;376:e067975) [11].
+
+| Item No. | CHEERS 2022 Item | Location in Manuscript |
+|----------|-----------------|----------------------|
+| 1 | Title: identify as economic evaluation | Title: "Economic Evaluation...Cost-Minimization and Break-Even Modeling Study" |
+| 2 | Abstract: structured summary | Abstract |
+| 3 | Background and objectives | Introduction, paragraphs 1–3 |
+| 4 | Health economic analysis plan | Methods: Study Design and Reporting (CHEERS 2022 compliance stated) |
+| 5 | Study population | Methods: Eligibility Criteria; Results: Identified Technologies |
+| 6 | Setting and location | Methods: Cost-Effectiveness Model (Japan base case; multi-country) |
+| 7 | Comparators | Methods: Cost-Effectiveness Model (manual counting vs 6 automated scenarios) |
+| 8 | Perspective | Methods: Cost-Effectiveness Model ("Hospital perspective") |
+| 9 | Time horizon | Methods: Cost-Effectiveness Model ("1-year time horizon") |
+| 10 | Discount rate | Not applicable (1-year time horizon; no discounting required) |
+| 11 | Selection of outcomes | Methods: Cost-Effectiveness Model, Outcomes subsection |
+| 12 | Measurement of outcomes | Methods: Cost-Effectiveness Model; Table 1; Supplementary S4 |
+| 13 | Valuation of outcomes | Methods: Adverse event costs (4 national sources); Supplementary S4 |
+| 14 | Measurement and valuation of resources and costs | Methods: Cost-Effectiveness Model; Table 1; data/cost_parameters.csv |
+| 15 | Currency, price date, and conversion | Methods: Currency, price year, and conversion (¥ at 2024 mid-year rates; price years 2019–2024; no inflation adjustment with rationale); Table 1 note |
+| 16 | Rationale for and description of model | Methods: Cost-Effectiveness Model, Structure subsection; Model Validation (face validity, extreme value, cross-validation) |
+| 17 | Analytics and assumptions | Methods: Cost-Effectiveness Model; Table 1 (Published/Assumption classification); Supplementary S2 |
+| 18 | Characterizing heterogeneity | Results: Multi-country break-even analysis (Figure 3); Supplementary S3 |
+| 19 | Characterizing distributional effects | Not performed (deterministic model); see Limitations paragraph 1 |
+| 20 | Characterizing uncertainty | Results: Sensitivity Analysis (Figure 4); Multi-Way Scenario Analysis (Figure 5) |
+| 21 | Approach to engagement with patients and others affected | Not applicable (no patient engagement in model construction) |
+| 22 | Study parameters | Table 1 (complete parameter set with sources and ranges) |
+| 23 | Summary of main results | Results: Break-Even Analysis; Discussion: Principal Findings |
+| 24 | Effect of uncertainty | Results: Sensitivity Analysis; Multi-Way Scenario Analysis |
+| 25 | Effect of engagement with patients and others affected | Not applicable |
+| 26 | Study findings, limitations, generalizability, and current knowledge | Discussion: Limitations (6 paragraphs); Research Priorities |
+| 27 | Source of funding | Funding section (after Conclusions) |
+| 28 | Conflicts of interest | Conflicts of Interest section (after Conclusions) |

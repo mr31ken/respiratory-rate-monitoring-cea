@@ -1,0 +1,26 @@
+device_scenario,adverse_event_cost_scenario,incremental_cost_jpd,adverse_event_cost_jpy,breakeven_events_per_year,breakeven_per_1000pd,note
+Under-mattress sensor (EarlySense-type),Japan (bed-day estimate),388.9,476420,8.0,0.82,3 additional ICU days + 5 additional ward days (lower bound)
+Under-mattress sensor (EarlySense-type),Japan (with procedures),388.9,1000000,3.8,0.39,Sensitivity estimate including procedures/drugs
+Under-mattress sensor (EarlySense-type),UK (2020-21 NCC),388.9,1399920,2.7,0.28,"£7,368 converted at ¥190.0/£ (2020/21 NCC via Parliament WQ 165361)"
+Under-mattress sensor (EarlySense-type),Australia (Curtis 2021),388.9,1413400,2.7,0.28,"A$14,134 converted at ¥100.0/A$"
+Under-mattress sensor (EarlySense-type),USA (Blike 2025 transfer),388.9,1605000,2.4,0.24,"$10,700 operating margin impact per transfer avoided"
+Bedside monitor (impedance RR),Japan (bed-day estimate),999.2,476420,20.7,2.1,3 additional ICU days + 5 additional ward days (lower bound)
+Bedside monitor (impedance RR),Japan (with procedures),999.2,1000000,9.8,1.0,Sensitivity estimate including procedures/drugs
+Bedside monitor (impedance RR),UK (2020-21 NCC),999.2,1399920,7.0,0.71,"£7,368 converted at ¥190.0/£ (2020/21 NCC via Parliament WQ 165361)"
+Bedside monitor (impedance RR),Australia (Curtis 2021),999.2,1413400,7.0,0.71,"A$14,134 converted at ¥100.0/A$"
+Bedside monitor (impedance RR),USA (Blike 2025 transfer),999.2,1605000,6.1,0.62,"$10,700 operating margin impact per transfer avoided"
+Capnography (Capnostream-type),Japan (bed-day estimate),1899.6,476420,39.3,3.99,3 additional ICU days + 5 additional ward days (lower bound)
+Capnography (Capnostream-type),Japan (with procedures),1899.6,1000000,18.7,1.9,Sensitivity estimate including procedures/drugs
+Capnography (Capnostream-type),UK (2020-21 NCC),1899.6,1399920,13.4,1.36,"£7,368 converted at ¥190.0/£ (2020/21 NCC via Parliament WQ 165361)"
+Capnography (Capnostream-type),Australia (Curtis 2021),1899.6,1413400,13.2,1.34,"A$14,134 converted at ¥100.0/A$"
+Capnography (Capnostream-type),USA (Blike 2025 transfer),1899.6,1605000,11.7,1.18,"$10,700 operating margin impact per transfer avoided"
+Wearable patch (RespiraSense-type),Japan (bed-day estimate),891.7,476420,18.4,1.87,3 additional ICU days + 5 additional ward days (lower bound)
+Wearable patch (RespiraSense-type),Japan (with procedures),891.7,1000000,8.8,0.89,Sensitivity estimate including procedures/drugs
+Wearable patch (RespiraSense-type),UK (2020-21 NCC),891.7,1399920,6.3,0.64,"£7,368 converted at ¥190.0/£ (2020/21 NCC via Parliament WQ 165361)"
+Wearable patch (RespiraSense-type),Australia (Curtis 2021),891.7,1413400,6.2,0.63,"A$14,134 converted at ¥100.0/A$"
+Wearable patch (RespiraSense-type),USA (Blike 2025 transfer),891.7,1605000,5.5,0.56,"$10,700 operating margin impact per transfer avoided"
+Radar sensor (Guardian M10-type),Japan (bed-day estimate),105.9,476420,2.2,0.22,3 additional ICU days + 5 additional ward days (lower bound)
+Radar sensor (Guardian M10-type),Japan (with procedures),105.9,1000000,1.0,0.11,Sensitivity estimate including procedures/drugs
+Radar sensor (Guardian M10-type),UK (2020-21 NCC),105.9,1399920,0.7,0.08,"£7,368 converted at ¥190.0/£ (2020/21 NCC via Parliament WQ 165361)"
+Radar sensor (Guardian M10-type),Australia (Curtis 2021),105.9,1413400,0.7,0.07,"A$14,134 converted at ¥100.0/A$"
+Radar sensor (Guardian M10-type),USA (Blike 2025 transfer),105.9,1605000,0.7,0.07,"$10,700 operating margin impact per transfer avoided"

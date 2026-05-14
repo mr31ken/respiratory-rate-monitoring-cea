@@ -1,0 +1,4 @@
+scenario,incremental_cost_jpd,ae_cost_jpy,breakeven_events_year,breakeven_per_1000pd
+Best case (device favored),-336.7,2000000,-1.8,-0.17
+Base case,550.9,476420,11.4,1.16
+Worst case (device disfavored),1778.6,300000,48.7,5.93

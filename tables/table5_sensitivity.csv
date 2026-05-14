@@ -1,0 +1,10 @@
+parameter,base_value,low_value,high_value,incremental_at_low,incremental_at_high,breakeven_at_low,breakeven_at_high,base_incremental,base_breakeven
+Nurse hourly cost (JPY),3500.0,2800.0,4200.0,585.9,515.9,12.1,10.7,550.9,11.4
+Manual obs time (sec),80.0,60.0,120.0,638.4,375.9,13.2,7.8,550.9,11.4
+Monitoring frequency (obs/day),4.5,2.0,8.0,745.3,278.7,15.4,5.8,550.9,11.4
+Ward occupancy,0.9,0.75,0.95,696.1,512.7,12.0,11.2,550.9,11.4
+Device cost/bed (JPY),665000.0,400000.0,1000000.0,371.1,778.1,7.7,16.1,550.9,11.4
+Device useful life (yr),7.0,5.0,10.0,666.6,464.1,13.8,9.6,550.9,11.4
+Maintenance rate (%),0.08,0.05,0.12,490.1,631.8,10.1,13.1,550.9,11.4
+Staff time for device (min/pd),3.0,1.0,8.0,434.2,842.5,9.0,17.4,550.9,11.4
+Adverse event cost (JPY),476420.0,300000.0,2000000.0,550.9,550.9,18.1,2.7,550.9,11.4

@@ -1,0 +1,35 @@
+cff-version: 1.2.0
+title: >-
+  Economic Evaluation of Automated Respiratory Rate Monitoring in General
+  Hospital Wards: A Deterministic Cost-Minimization and Break-Even Modeling
+  Study
+message: >-
+  If you use this software or adapt the model, please cite the accompanying
+  manuscript.
+type: software
+authors:
+  - given-names: "Kenichi"
+    family-names: "Saito"
+    affiliation: "[Affiliation — to be filled]"
+    orcid: "https://orcid.org/[ORCID iD — to be filled]"
+repository-code: "https://github.com/mr31ken/respiratory-rate-monitoring-cea"
+license: MIT
+keywords:
+  - respiratory rate
+  - continuous monitoring
+  - cost-minimization analysis
+  - break-even analysis
+  - patient deterioration
+  - health economic modeling
+preferred-citation:
+  type: article
+  title: >-
+    Economic Evaluation of Automated Respiratory Rate Monitoring in General
+    Hospital Wards: A Deterministic Cost-Minimization and Break-Even Modeling
+    Study
+  authors:
+    - given-names: "Kenichi"
+      family-names: "Saito"
+  journal: "Journal of Clinical Monitoring and Computing"
+  year: 2026
+  doi: "[DOI to be assigned upon acceptance]"

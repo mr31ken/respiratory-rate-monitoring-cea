@@ -1,0 +1,7 @@
+scenario,category,device_depreciation_jpd,maintenance_jpd,consumables_jpd,staff_time_jpd,total_cost_jpd,incremental_vs_manual_jpd,annual_total_jpy,staff_minutes_per_pd
+Manual (standard care),Manual,0.0,0.0,0.0,350.0,350.0,-0.0,3449250,6.0
+Under-mattress sensor (EarlySense-type),Non-contact,563.9,274.7,0.0,175.0,738.9,388.9,7282125,3.0
+Bedside monitor (impedance RR),Impedance,915.9,328.8,200.0,233.3,1349.2,999.2,13296214,4.0
+Capnography (Capnostream-type),Capnography,457.9,164.4,1500.0,291.7,2249.6,1899.6,22169732,5.0
+Wearable patch (RespiraSense-type),Wearable,0.0,0.0,950.0,291.7,1241.7,891.7,12236625,5.0
+Radar sensor (Guardian M10-type),Non-contact,339.2,121.8,0.0,116.7,455.9,105.9,4492607,2.0
