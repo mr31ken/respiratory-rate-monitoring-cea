@@ -112,7 +112,7 @@ Where:
 - General ward bed-day: ¥37,102 (MHLW 2021 national average: 3,710.2 points × 10 [15])
 - Base estimate: 3 additional ICU days + 5 additional ward days = ¥476,420
 - This is a **highly conservative floor estimate**: it includes only 診療報酬 (medical fee schedule) reimbursement points and excludes procedure costs, pharmaceutical costs, imaging, and laboratory tests associated with managing the deterioration event
-- **Important**: The reimbursement-based ICU bed-day cost of ¥96,970 substantially understates actual resource consumption. Hospital cost accounting studies report that the actual operating cost of ICU care in Japan averages approximately ¥197,277/bed-day [16], more than double the reimbursement rate. Using actual costs would yield a base-case adverse event estimate of approximately ¥777,000 (3 × ¥197,277 + 5 × ¥37,102), substantially lowering break-even thresholds.
+- **Important**: The reimbursement-based ICU bed-day cost of ¥96,970 substantially understates actual resource consumption. A recent nationwide cohort study using bottom-up cost accounting (1,453,929 ICU patients across fiscal years 2018–2022) estimated the mean ICU cost at ¥197,277/patient-day [16], more than double the reimbursement rate. Substituting this bottom-up figure for the reimbursement-based ICU rate yields an alternative base-case adverse event estimate of approximately ¥777,000 (3 × ¥197,277 + 5 × ¥37,102), substantially lowering break-even thresholds.
 - Sensitivity range: ¥300,000 (minimal deterioration with rapid recovery) to ¥2,000,000 (including ICU procedures, ventilation, drugs, extended stay)
 
 ### United Kingdom
