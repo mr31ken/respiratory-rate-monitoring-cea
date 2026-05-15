@@ -371,8 +371,58 @@ All authors read and approved the final manuscript and meet the four ICMJE autho
 
 ## Tables
 
-**Table 1.** Complete model input parameters with values, ranges, sources, and source classification (Published/Assumption). Available as supplementary CSV (data/cost_parameters.csv).
+**Table 1.** Complete model input parameters with values, ranges, sources, and source classification (Published/Assumption). The complete machine-readable parameter set is also available as a supplementary CSV file (`data/cost_parameters.csv`). *Table 1 is presented inline in Methods: Cost-Effectiveness Model.*
 
-**Table 2.** Summary of published accuracy data for automated RR monitoring devices, including reference standard, sample size, and Bland-Altman parameters where available. Studies are grouped by technology category. Methodological limitations (sample size, setting, reference standard) are noted for each entry (see tables/table2_accuracy_summary.csv).
+---
 
-**Table 3.** Break-even analysis: adverse events avoided to achieve cost-neutrality, by device scenario and national adverse event cost (see tables/table4_breakeven_analysis.csv).
+**Table 2.** Summary of published accuracy data for automated respiratory rate monitoring devices. Studies are listed in order of increasing limits of agreement (LoA) magnitude against the reference standard. Heterogeneity in reference standards, populations, and statistical reporting conventions precludes direct cross-device comparison (see Methods and Supplementary S5).
+
+| Device (Source) | N | Reference standard | Bias (bpm) | 95% LoA (bpm) | Sens/Spec | Notes |
+|-----------------|---|--------------------|------------|---------------|-----------|-------|
+| Guardian M10 (Toften 2024 [19]) | 32 | RIP (Nox T3s) | 0.1 | −1.09 to +1.19 | — | Stationary values; mobile LoA −1.07 to +1.07 |
+| Equivital eq02+ (Liu 2013) | NR | Reference respiratory monitor | 0.2 | −2.2 to +2.6 | — | Chest belt; artifact-dependent |
+| Nellcor CNRRS / Rad-G (Bergese 2017 [21]) | 79 (53 hosp.) | Capnography | 0.18 | −3.06 to +3.42 | — | 23,243 paired observations; hospitalized-only LoA −3.84 to +3.97 |
+| RespiraSense vs ECG (NICE MIB299 [10]) | Varies | ECG-derived RR | −0.41 | −3.9 to +3.1 | — | Tech assessment; 20% of intervals >3 bpm vs manual |
+| RespiraSense (Subbe 2018 [24]) | 24 | Capnography | 0.38 | NR (reported as 1.0–1.8) | — | Small sample; rest only |
+| Telemetry impedance (Lee 2024 [14]) | 351 | Capnography | 0.2 | −6.2 to +6.6 | — | Manual RR vs capnography in same study: −0.6, −13.5 to +12.3 |
+| PVM-4000 impedance / IPG (van Loon 2018 [12]) | 20 | Capnography | −1.9 | −13.1 to +9.2 | — | 98.9% LoA (±2.63×SD); 95% LoA would be narrower |
+| TTI (Kelley 2014 abstract [13]) | 79 (23,243 obs) | Capnography | −2.56 | NR (implied −20.2 to +15.1) | — | Conference abstract; SD 9.01; same cohort as Bergese 2017 [21] |
+| EarlySense (NICE MIB49 [9]) | Varies | Standard monitoring | NR | NR | Acc. 93.1% (sleep lab) / 82% (ICU vs ETCO₂) / 75% (vs manual) | Accuracy defined as aRE within thresholds |
+| Neteera 130H/131H (FDA 510(k) K212143 [25]) | ~170 | Reference vital signs monitor | NR | NR | Within 10% or 2 bpm: ~93% | Manufacturer claims 95%; FDA submission ~93% |
+| Masimo Rad-G (Lujan 2020) | NR | Manual counting | NR | NR | Sens 95% / Spec 94% | Abnormal RR detection; threshold-dependent |
+
+*NR = not reported. RIP = respiratory inductance plethysmography. TTI = transthoracic impedance. IPG = impedance plethysmography. CNRRS = Continuous Non-Invasive Respiratory Rate. Bias is mean device minus reference standard. Sens/Spec = sensitivity/specificity. Full machine-readable data: `tables/table2_accuracy_summary.csv`.*
+
+---
+
+**Table 3.** Break-even analysis: number of adverse events that must be avoided per year (and per 1,000 patient-days) for each device scenario to achieve cost-neutrality, by national adverse event cost. Calculations use the Japan base case (30-bed ward, 90% occupancy, 9,855 patient-days/year). Foreign currencies converted to ¥ at 2024 mid-year rates (¥150/USD, ¥190/GBP, ¥100/AUD).
+
+| Device scenario | Adverse event cost scenario | Incremental cost (¥/pt-day) | AE cost (¥/event) | Break-even (events/year) | Per 1,000 pt-days |
+|-----------------|---------------------------|----------------------------:|------------------:|-------------------------:|------------------:|
+| Radar sensor (Guardian M10-type) | Japan (bed-day, conservative) | 105.9 | 476,420 | 2.2 | 0.22 |
+| Radar sensor (Guardian M10-type) | Japan (with procedures, mid) | 105.9 | 1,000,000 | 1.0 | 0.11 |
+| Radar sensor (Guardian M10-type) | UK (2020/21 NCC) | 105.9 | 1,399,920 | 0.7 | 0.08 |
+| Radar sensor (Guardian M10-type) | Australia (Curtis 2021) | 105.9 | 1,413,400 | 0.7 | 0.07 |
+| Radar sensor (Guardian M10-type) | USA (Blike 2025, ICU transfer) | 105.9 | 1,605,000 | 0.7 | 0.07 |
+| Under-mattress (EarlySense-type) | Japan (bed-day, conservative) | 388.9 | 476,420 | 8.0 | 0.82 |
+| Under-mattress (EarlySense-type) | Japan (with procedures, mid) | 388.9 | 1,000,000 | 3.8 | 0.39 |
+| Under-mattress (EarlySense-type) | UK (2020/21 NCC) | 388.9 | 1,399,920 | 2.7 | 0.28 |
+| Under-mattress (EarlySense-type) | Australia (Curtis 2021) | 388.9 | 1,413,400 | 2.7 | 0.28 |
+| Under-mattress (EarlySense-type) | USA (Blike 2025, ICU transfer) | 388.9 | 1,605,000 | 2.4 | 0.24 |
+| Wearable patch (RespiraSense-type) | Japan (bed-day, conservative) | 891.7 | 476,420 | 18.4 | 1.87 |
+| Wearable patch (RespiraSense-type) | Japan (with procedures, mid) | 891.7 | 1,000,000 | 8.8 | 0.89 |
+| Wearable patch (RespiraSense-type) | UK (2020/21 NCC) | 891.7 | 1,399,920 | 6.3 | 0.64 |
+| Wearable patch (RespiraSense-type) | Australia (Curtis 2021) | 891.7 | 1,413,400 | 6.2 | 0.63 |
+| Wearable patch (RespiraSense-type) | USA (Blike 2025, ICU transfer) | 891.7 | 1,605,000 | 5.5 | 0.56 |
+| Bedside monitor (impedance RR) | Japan (bed-day, conservative) | 999.2 | 476,420 | 20.7 | 2.10 |
+| Bedside monitor (impedance RR) | Japan (with procedures, mid) | 999.2 | 1,000,000 | 9.8 | 1.00 |
+| Bedside monitor (impedance RR) | UK (2020/21 NCC) | 999.2 | 1,399,920 | 7.0 | 0.71 |
+| Bedside monitor (impedance RR) | Australia (Curtis 2021) | 999.2 | 1,413,400 | 7.0 | 0.71 |
+| Bedside monitor (impedance RR) | USA (Blike 2025, ICU transfer) | 999.2 | 1,605,000 | 6.1 | 0.62 |
+| Capnography (Capnostream-type) | Japan (bed-day, conservative) | 1,899.6 | 476,420 | 39.3 | 3.99 |
+| Capnography (Capnostream-type) | Japan (with procedures, mid) | 1,899.6 | 1,000,000 | 18.7 | 1.90 |
+| Capnography (Capnostream-type) | UK (2020/21 NCC) | 1,899.6 | 1,399,920 | 13.4 | 1.36 |
+| Capnography (Capnostream-type) | Australia (Curtis 2021) | 1,899.6 | 1,413,400 | 13.2 | 1.34 |
+| Capnography (Capnostream-type) | USA (Blike 2025, ICU transfer) | 1,899.6 | 1,605,000 | 11.7 | 1.18 |
+
+*Break-even (events/year) = Incremental cost per patient-day × patient-days per year ÷ Adverse event cost per event (Equation 4 in Methods). For context, general medical wards typically report deterioration event rates of 2–10 per 1,000 patient-days [18, 22]. Device scenarios are listed from lowest to highest incremental cost. Full machine-readable data: `tables/table4_breakeven_analysis.csv`.*
