@@ -207,24 +207,73 @@ The Neteera 130H/131H received FDA 510(k) clearance with reported accuracy of ap
 ## S9. Supplementary Tables (Moved from Main Text)
 
 ### Supplementary Table S1. Device Characteristics
-Characteristics of commercially available automated respiratory rate monitoring devices. Full data available in tables/table1_device_comparison.csv.
 
-[Table to be generated from tables/table1_device_comparison.csv]
+Characteristics of commercially available automated respiratory rate monitoring devices identified through literature search (PubMed, NICE Evidence, FDA 510(k), PMDA, manufacturer documentation). Full machine-readable data: `tables/table1_device_comparison.csv`.
 
-### Supplementary Table S2. Per-Patient-Day Cost Comparison
-Per-patient-day cost comparison: manual counting versus automated monitoring scenarios, Japan base case. Full data available in tables/table3_cost_per_patient_day.csv.
+| Device | Manufacturer | Measurement principle | Category | Contact type | FDA cleared | CE marked | EMR integration | Abnormal pattern detection | Price (local) | Status |
+|--------|--------------|----------------------|----------|--------------|-------------|-----------|-----------------|---------------------------|---------------|--------|
+| Rad-G (RRp) | Masimo | PPG-derived RR (plethysmography) | Pulse-ox derived | Finger clip | Yes | Yes | Limited | No (rate only) | €795 | Active |
+| Patient SafetyNet + Rad-97 | Masimo | PPG-derived RR + SpO₂ + alarm notification | Pulse-ox derived + notification | Finger clip | Yes | Yes | Yes (HL7/ADT) | Limited (rate trend + threshold) | NR (USD) | Active |
+| PVM-4000 series | Nihon Kohden | Thoracic impedance via ECG | Bedside monitor (impedance) | ECG electrodes | Yes (510k) | Yes | Yes (HL7 Gateway) | Limited (rate alarm) | ¥1,350,000 | Active |
+| Capnostream 35 | Medtronic | Sidestream capnography (EtCO₂) + SpO₂ | Capnography | Nasal cannula/mask | Yes | Yes | Yes (Vital Sync) | Yes (apnea; EtCO₂ waveform) | $3,000–6,000 | Active |
+| EarlySense System 2.0 | Baxter/Hillrom | Piezoelectric under-mattress (ballistocardiography) | Non-contact (under-mattress) | Non-contact | Yes | Yes | Partial | Yes (apnea; bed-exit) | £35,000/10 beds | Discontinued (acquired Feb 2021) |
+| Neteera 130H/131H | Neteera | Sub-THz micro-radar (122–123 GHz) | Non-contact (radar) | Non-contact | Yes (K212143, 2022) | Yes (CE MDR) | Partial | Limited | NR | Active |
+| Guardian M10 | Vitalthings | Ultra-wideband radar (7.29 GHz) | Non-contact (radar) | Non-contact | No (as of 2024) | Yes (CE MDR Class IIb) | Yes | Yes (waveform; continuous trend) | NR | Active (early commercialization) |
+| RespiraSense | PMD Solutions | Piezoelectric chest/abdomen patch | Wearable patch | Adhesive patch | No | Yes | Yes (Bluetooth) | Yes (waveform; motion-tolerant) | £35/patch | Active |
+| eq02+ LifeMonitor | Equivital (Hidalgo) | Respiratory inductive plethysmography + ECG | Wearable chest belt | Chest belt | Yes | Yes | Limited | Limited | €1,944 | Active |
 
-[Table to be generated from tables/table3_cost_per_patient_day.csv]
+*NR = not publicly reported. PPG = photoplethysmography. EtCO₂ = end-tidal CO₂. Status reflects market availability as of March 2025.*
 
-### Supplementary Table S3. One-Way Sensitivity Analysis Results
-One-way sensitivity analysis results for the under-mattress sensor scenario (Japan base case). Full data available in tables/table5_sensitivity.csv.
+---
 
-[Table to be generated from tables/table5_sensitivity.csv]
+### Supplementary Table S2. Per-Patient-Day Cost Comparison (Japan Base Case)
 
-### Supplementary Table S4. Multi-Way Scenario Analysis Results
-Break-even thresholds under simultaneous best-case, base-case, and worst-case parameter assumptions. Full data available in tables/table6_scenario_analysis.csv.
+Per-patient-day cost decomposition for manual respiratory rate counting versus six automated monitoring scenarios. Japan base case: 30-bed ward, 90% occupancy, nurse hourly cost ¥3,500, 4.5 observations/patient-day. Full machine-readable data: `tables/table3_cost_per_patient_day.csv`.
 
-[Table to be generated from tables/table6_scenario_analysis.csv]
+| Scenario | Device depreciation (¥/pd) | Maintenance (¥/pd) | Consumables (¥/pd) | Staff time (¥/pd) | Total (¥/pd) | Incremental vs manual (¥/pd) | Annual total (¥) | Staff time (min/pd) |
+|----------|---------------------------:|-------------------:|-------------------:|------------------:|-------------:|------------------------------:|------------------:|--------------------:|
+| Manual (standard care) | 0.0 | 0.0 | 0.0 | 350.0 | 350.0 | — | 3,449,250 | 6.0 |
+| Radar sensor (Guardian M10-type) | 339.2 | 121.8 | 0.0 | 116.7 | 455.9 | +105.9 | 4,492,607 | 2.0 |
+| Under-mattress (EarlySense-type) | 563.9 | 274.7 | 0.0 | 175.0 | 738.9 | +388.9 | 7,282,125 | 3.0 |
+| Wearable patch (RespiraSense-type) | 0.0 | 0.0 | 950.0 | 291.7 | 1,241.7 | +891.7 | 12,236,625 | 5.0 |
+| Bedside monitor (impedance RR) | 915.9 | 328.8 | 200.0 | 233.3 | 1,349.2 | +999.2 | 13,296,214 | 4.0 |
+| Capnography (Capnostream-type) | 457.9 | 164.4 | 1,500.0 | 291.7 | 2,249.6 | +1,899.6 | 22,169,732 | 5.0 |
+
+*Sorted by total cost. Device depreciation = (purchase price + installation) / (useful life × beds × occupancy × 365). Annual total = total per-patient-day × ward patient-days/year (9,855).*
+
+---
+
+### Supplementary Table S3. One-Way Sensitivity Analysis (Under-Mattress Sensor, Japan)
+
+Effect of varying each parameter (one at a time) across its plausible range on the incremental cost (¥/patient-day) and break-even threshold (events/year). Base case: 30-bed ward, 90% occupancy, Japan adverse event cost ¥476,420. Full machine-readable data: `tables/table5_sensitivity.csv`.
+
+| Parameter | Base value | Low | High | Incremental cost at low (¥/pd) | Incremental cost at high (¥/pd) | Break-even at low (events/yr) | Break-even at high (events/yr) |
+|-----------|-----------:|----:|-----:|-------------------------------:|--------------------------------:|------------------------------:|-------------------------------:|
+| Nurse hourly cost (¥) | 3,500 | 2,800 | 4,200 | 585.9 | 515.9 | 12.1 | 10.7 |
+| Manual obs time (sec) | 80 | 60 | 120 | 638.4 | 375.9 | 13.2 | 7.8 |
+| Monitoring frequency (obs/day) | 4.5 | 2.0 | 8.0 | 745.3 | 278.7 | 15.4 | 5.8 |
+| Ward occupancy | 0.90 | 0.75 | 0.95 | 696.1 | 512.7 | 12.0 | 11.2 |
+| Device cost per bed (¥) | 665,000 | 400,000 | 1,000,000 | 371.1 | 778.1 | 7.7 | 16.1 |
+| Device useful life (yr) | 7 | 5 | 10 | 666.6 | 464.1 | 13.8 | 9.6 |
+| Maintenance rate (%) | 8 | 5 | 12 | 490.1 | 631.8 | 10.1 | 13.1 |
+| Device-related staff time (min/pd) | 3 | 1 | 8 | 434.2 | 842.5 | 9.0 | 17.4 |
+| Adverse event cost (¥) | 476,420 | 300,000 | 2,000,000 | 550.9 | 550.9 | 18.1 | 2.7 |
+
+*Base case incremental cost ¥550.9/pd, base case break-even 11.4 events/year (0.83 per 1,000 patient-days). Sensitivity range corresponds to the "Range" column in main-text Table 1. The most influential parameters (largest break-even spread) are adverse event cost, device cost per bed, and monitoring frequency.*
+
+---
+
+### Supplementary Table S4. Multi-Way Scenario Analysis
+
+Break-even thresholds under simultaneous variation of all assumption parameters. Best case = all parameters set to values favoring device adoption (high nurse cost, long manual counting time, high observation frequency, low device cost, long useful life, low maintenance, minimal device staff time, high adverse event cost); worst case = all values reversed. Full machine-readable data: `tables/table6_scenario_analysis.csv`.
+
+| Scenario | Incremental cost (¥/pd) | Adverse event cost (¥/event) | Break-even (events/year) | Per 1,000 patient-days |
+|----------|------------------------:|-----------------------------:|-------------------------:|-----------------------:|
+| Best case (device favored) | −336.7 | 2,000,000 | −1.8 | −0.17 |
+| Base case | 550.9 | 476,420 | 11.4 | 1.16 |
+| Worst case (device disfavored) | 1,778.6 | 300,000 | 48.7 | 5.93 |
+
+*Negative break-even in the best case indicates that the device scenario is less expensive than manual counting even without crediting any avoided adverse events; under such conditions, automated monitoring is dominant on cost alone. The worst-case threshold (5.93 events per 1,000 patient-days) remains within the published range of ward deterioration rates (2–10 per 1,000 patient-days [18, 22]).*
 
 ---
 
