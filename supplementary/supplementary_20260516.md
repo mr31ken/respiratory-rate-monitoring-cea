@@ -13,7 +13,7 @@ This study was preceded by two preliminary reports generated through LLM-assiste
 | Original Claim (v1 manuscript) | Correction | Impact |
 |-------------------------------|-----------|--------|
 | "Capnography bias 0.0, LoA ±1.0 [21]" | **Removed.** Bergese 2017 [21] validates pulse-ox-derived RR (Nellcor CNRRS), not capnography itself. The cited bias/LoA values do not appear in [21]. Primary source for these values was not identified despite systematic search. | Accuracy summary in Abstract and Results rewritten |
-| "Thoracic impedance bias −2.2, LoA −6.5 to +2.0 [21]" | **Removed.** These values do not appear in Bergese 2017. Replaced with verified data: Kelley 2014 (abstract): TTI bias −2.56, SD 9.01 [13]; van Loon 2018: IPG bias −1.9, 98.9% LoA −13.1 to +9.2 [12]; Lee 2024: impedance bias 0.2, LoA −6.2 to +6.6 [14] | Three independent sources now cited for impedance |
+| "Thoracic impedance bias −2.2, LoA −6.5 to +2.0 [21]" | **Removed.** These values do not appear in Bergese 2017. Replaced with verified data: Kelley 2014 (conference abstract; full co-author list not independently verifiable): TTI bias −2.56, SD 9.01 [13]; van Loon 2018: IPG bias −1.9, 98.9% LoA −13.1 to +9.2 [12]; Lee 2024: impedance bias 0.2, LoA −6.2 to +6.6 [14] | Three independent sources now cited for impedance |
 | "Over 10 years and 32,000 patients, 50% ICU reduction + zero OIRD deaths [6]" | **Split into 3 correctly attributed studies.** Taenzer 2010 [6]: ~21 months, single unit, 48% ICU reduction. McGrath 2021 [7]: 10 years, 111,488 monitored discharges, zero OIRD deaths. Blike 2025 [8]: 3.5 years, 31,993 patients, financial analysis. | Discussion section rewritten with correct attributions |
 | Guardian M10 "bias near zero, LoA ±1.2" | **Refined.** Toften 2024 [19] reports: stationary bias 0.1, LoA −1.09 to +1.19; mobile bias 0.0, LoA −1.07 to +1.07 (32 patients, 1,112/1,119 paired measurements). | Values updated to verified precision |
 
@@ -259,7 +259,7 @@ Effect of varying each parameter (one at a time) across its plausible range on t
 | Device-related staff time (min/pd) | 3 | 1 | 8 | 434.2 | 842.5 | 9.0 | 17.4 |
 | Adverse event cost (¥) | 476,420 | 300,000 | 2,000,000 | 550.9 | 550.9 | 18.1 | 2.7 |
 
-*Base case incremental cost ¥550.9/pd, base case break-even 11.4 events/year (0.83 per 1,000 patient-days). Sensitivity range corresponds to the "Range" column in main-text Table 1. The most influential parameters (largest break-even spread) are adverse event cost, device cost per bed, and monitoring frequency.*
+*Base case incremental cost ¥550.9/pd, base case break-even 11.4 events/year (0.83 per 1,000 patient-days). **Note on reconciliation with main-text Table 3:** the sensitivity scenario uses a representative EarlySense-type device (¥665,000/bed) with explicit annual sensor-replacement cost (~¥90,250/year, derived from £475/year × ¥190/£); this raises the base incremental cost to ¥550.9/pd compared with ¥388.9/pd shown in the main-text Table 3, where annual sensor replacement is included implicitly within the maintenance term. Both treatments are valid; the sensitivity scenario isolates sensor-replacement as a separately varying cost component for transparency. Sensitivity range corresponds to the "Range" column in main-text Table 1. The most influential parameters (largest break-even spread) are adverse event cost, device cost per bed, and monitoring frequency.*
 
 ---
 

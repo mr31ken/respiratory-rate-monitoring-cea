@@ -25,7 +25,7 @@ Display items: 6 figures, 3 tables (main text) + 4 supplementary tables
 
 **Methods:** A deterministic decision-analytic model (hospital perspective, 1-year horizon, CHEERS 2022-compliant) compared manual RR counting with six automated monitoring scenarios. Model parameters—device accuracy, costs, and adverse event costs from Japan, UK, Australia, and USA—were identified through comprehensive searches of PubMed, NICE Evidence, FDA 510(k), and government statistics (2010–2025). Nine devices across five technology categories were identified. Costs were converted to Japanese yen at 2024 mid-year exchange rates. One-way sensitivity, multi-way scenario, and cross-country break-even analyses were performed.
 
-**Results:** Manual RR counting cost ¥350/patient-day (Japan base case). Incremental costs of automated monitoring ranged from ¥106 (radar) to ¥1,900 (capnography) per patient-day. Non-contact sensors required avoidance of only 0.24–1.3 deterioration events per 1,000 patient-days for cost-neutrality, depending on national adverse event cost (¥476,000–¥1,605,000). Even under worst-case assumptions, the break-even threshold (5.93/1,000 patient-days) remained within published ward deterioration rates (2–10/1,000 patient-days). Adverse event cost and device unit cost were the dominant parameters.
+**Results:** Manual RR counting cost ¥350/patient-day (Japan base case). Incremental costs of automated monitoring ranged from ¥106 (radar) to ¥1,900 (capnography) per patient-day. Non-contact sensors (radar and under-mattress) required avoidance of only 0.07–0.82 deterioration events per 1,000 patient-days for cost-neutrality, depending on device type and national adverse event cost (¥476,420–¥1,605,000). Even under worst-case multi-way assumptions, the break-even threshold (5.93/1,000 patient-days) remained within published ward deterioration rates (2–10/1,000 patient-days). Adverse event cost and device unit cost were the dominant parameters.
 
 **Conclusions:** Break-even thresholds for automated RR monitoring are clinically achievable on wards with moderate-to-high deterioration rates. This study provides a threshold analysis framework—not a definitive cost-effectiveness conclusion—that hospitals can adapt with local data. All model parameters and analysis code are publicly available.
 
@@ -127,7 +127,7 @@ Model validation was performed through the following approaches:
 
 **Extreme value testing:** All parameters were individually set to extreme boundary values to verify that model outputs responded in the expected direction and magnitude. For example, setting adverse event cost to ¥0 correctly yielded infinite break-even thresholds (device never pays for itself through event avoidance alone), while setting device cost to ¥0 correctly yielded negative incremental costs (device scenario cheaper than manual counting).
 
-**Cross-validation:** Break-even thresholds were compared against external benchmarks. Our base-case threshold for pulse-oximetry monitoring (0.24–0.81 events/1,000 patient-days) is consistent with the Dartmouth-Hitchcock observed reduction of 2.7 events/1,000 patient-days [6], which substantially exceeds our threshold—suggesting that the model's break-even estimates are conservative relative to observed real-world outcomes.
+**Cross-validation:** Break-even thresholds were compared against external benchmarks. Our base-case threshold for non-contact monitoring (0.07–0.82 events/1,000 patient-days across radar and under-mattress scenarios) is well below the Dartmouth-Hitchcock observed reduction of 2.7 events/1,000 patient-days under pulse-oximetry surveillance [6], suggesting that the model's break-even estimates are conservative relative to observed real-world outcomes.
 
 **Internal consistency:** All figures and tables are programmatically generated from source CSV files, eliminating transcription errors between data inputs and reported results. The complete analysis code is available for independent verification (see Data Availability).
 
@@ -169,7 +169,7 @@ Table 1 presents the complete parameter set used in the cost-effectiveness model
 | Manual counting time | 80 sec/obs | 60–120 | Assumption (60s count + 20s doc) |
 | Nurse hourly cost (Japan) | ¥3,500 | ¥2,800–4,200 | Assumption (salary + overhead) |
 | General ward bed-day (Japan) | ¥37,102 | — | MHLW 2021 [15] |
-| ICU bed-day (Japan) | ¥96,970 | — | 診療報酬 2024 [15] |
+| ICU bed-day (Japan) | ¥96,970 | — | MHLW 2021 [15] (特定集中治療室管理料-equivalent, ~9,697 points × ¥10) |
 | Adverse event cost (Japan, conservative) | ¥476,420 | ¥300,000–2,000,000 | Derived (see S4) |
 | Adverse event cost (UK, 2020/21 NCC) | £7,368 | — | Parliament WQ 165361 [17] |
 | Adverse event cost (Australia) | A$14,134 | — | Curtis 2021 [18] |
@@ -204,10 +204,10 @@ For context, general medical wards typically report deterioration event rates of
 
 #### Sensitivity Analysis (Figure 5; Supplementary Table S3)
 
-One-way sensitivity analysis identified the cost per adverse event and device unit cost as the most influential parameters on the break-even threshold. Over the tested ranges:
+One-way sensitivity analysis was performed on a representative non-contact (EarlySense-type) device scenario whose base incremental cost is ¥550.9 per patient-day (slightly higher than the ¥388.9 in Table 3 because the sensitivity scenario explicitly accounts for annual sensor-replacement expense of approximately ¥90,250/year on top of the base device price; see Supplementary S3 note). The analysis identified the cost per adverse event and device unit cost as the most influential parameters on the break-even threshold. Over the tested ranges:
 
 - **Adverse event cost** (¥300,000–¥2,000,000): Break-even ranged from 2.7 to 18.1 events/year.
-- **Device cost per bed** (¥400,000–¥1,000,000): Break-even ranged from 7.9 to 16.5 events/year.
+- **Device cost per bed** (¥400,000–¥1,000,000): Break-even ranged from 7.7 to 16.1 events/year.
 - **Nurse hourly cost** (¥2,800–¥4,200): Modest impact, as higher nurse costs make manual counting more expensive, slightly favoring device adoption.
 - **Monitoring frequency** (2–8 observations/day): Higher manual frequency increases manual cost, improving the device's relative economics.
 
@@ -223,7 +223,7 @@ In the base case, break-even required avoidance of 1.16 events per 1,000 patient
 
 ### Principal Findings
 
-This threshold analysis yields three principal findings. First, the per-patient-day cost of automated RR monitoring is modest (¥106–¥1,900 above manual counting in the Japan base case), placing the economic question firmly in the domain of adverse event avoidance rather than measurement cost savings. Second, break-even thresholds are clinically plausible across all four national healthcare systems examined (0.24–1.3 deterioration events per 1,000 patient-days for non-contact sensors), and even worst-case multi-way scenario analysis yields thresholds within published deterioration rate ranges. These thresholds represent the conditions under which device adoption achieves cost-neutrality; whether devices actually deliver this level of event avoidance in a given institution remains an empirical question that our model cannot answer. Third, the technology landscape reveals wide accuracy variation (LoA ranging from ±1.1 breaths/min for radar to >±6 breaths/min for impedance), which has important implications for clinical deployment decisions even though accuracy differences were not directly incorporated into the cost model.
+This threshold analysis yields three principal findings. First, the per-patient-day cost of automated RR monitoring is modest (¥106–¥1,900 above manual counting in the Japan base case), placing the economic question firmly in the domain of adverse event avoidance rather than measurement cost savings. Second, break-even thresholds are clinically plausible across all four national healthcare systems examined (0.07–0.82 deterioration events per 1,000 patient-days for non-contact sensors, comprising radar and under-mattress devices), and even worst-case multi-way scenario analysis yields thresholds within published deterioration rate ranges. These thresholds represent the conditions under which device adoption achieves cost-neutrality; whether devices actually deliver this level of event avoidance in a given institution remains an empirical question that our model cannot answer. Third, the technology landscape reveals wide accuracy variation (LoA ranging from ±1.1 breaths/min for radar to >±6 breaths/min for impedance), which has important implications for clinical deployment decisions even though accuracy differences were not directly incorporated into the cost model.
 
 ### Comparison with Prior Economic Analyses
 
@@ -231,7 +231,7 @@ The Dartmouth-Hitchcock Medical Center program provides the most extensive body 
 
 Our model extends this evidence base in three ways. First, we compare six device scenarios rather than a single technology, revealing that cost structures differ markedly (consumable-dominated vs. capital-dominated). Second, by incorporating adverse event costs from four national systems, we demonstrate that the economic case is robust across healthcare contexts with very different cost structures. Third, by providing all parameters in machine-readable format with explicit sensitivity ranges, we enable institutional adaptation—a feature absent from prior analyses.
 
-The $10,700 per ICU transfer avoided estimated by Blike et al. [8] is broadly consistent with the Australian estimate of A$14,134 per deterioration episode by Curtis et al. [18] when accounting for healthcare system cost differences. Our model's break-even thresholds (0.24–1.3 events per 1,000 patient-days for non-contact sensors) are conservative compared to published deterioration rates. Curtis et al. reported that approximately 1,600 of 71,000 admissions (2.3%) experienced clinical deterioration within 72 hours [18], suggesting that even modest detection improvements could exceed break-even.
+The $10,700 per ICU transfer avoided estimated by Blike et al. [8] is broadly consistent with the Australian estimate of A$14,134 per deterioration episode by Curtis et al. [18] when accounting for healthcare system cost differences. Our model's break-even thresholds (0.07–0.82 events per 1,000 patient-days for non-contact sensors) are conservative compared to published deterioration rates. Curtis et al. reported that approximately 1,600 of 71,000 admissions (2.3%) experienced clinical deterioration within 72 hours [18], suggesting that even modest detection improvements could exceed break-even.
 
 ### Practical Implications for Hospital Decision-Making
 
@@ -272,7 +272,7 @@ Three research priorities emerge from this analysis. First, pragmatic comparativ
 
 ## Conclusions
 
-This study constructed a deterministic cost-minimization and break-even model comparing manual respiratory rate counting with six automated monitoring scenarios across four national healthcare systems, and demonstrated that break-even thresholds (0.24–5.93 avoided deterioration events per 1,000 patient-days) are clinically achievable on general wards with moderate-to-high acuity. The economic case for device adoption rests on avoidance of downstream deterioration costs; whether devices actually deliver the required event reduction in specific institutional contexts remains to be established through prospective comparative studies. Hospitals considering automated RR monitoring should use this openly available framework—with institution-specific deterioration rates, adverse event costs, and device procurement prices—to perform local threshold analyses before adoption decisions.
+This study constructed a deterministic cost-minimization and break-even model comparing manual respiratory rate counting with six automated monitoring scenarios across four national healthcare systems, and demonstrated that break-even thresholds (0.07–3.99 deterioration events avoided per 1,000 patient-days across device technologies and country adverse-event-cost scenarios; up to 5.93/1,000 under multi-way worst-case assumptions) are clinically achievable on general wards with moderate-to-high acuity. The economic case for device adoption rests on avoidance of downstream deterioration costs; whether devices actually deliver the required event reduction in specific institutional contexts remains to be established through prospective comparative studies. Hospitals considering automated RR monitoring should use this openly available framework—with institution-specific deterioration rates, adverse event costs, and device procurement prices—to perform local threshold analyses before adoption decisions.
 
 ---
 
@@ -309,7 +309,7 @@ All authors read and approved the final manuscript and meet the four ICMJE autho
 
 [4] Philip KEJ, Pack E, Cambiano V, et al. The accuracy of respiratory rate assessment by doctors in a London teaching hospital: a cross-sectional study. J Clin Monit Comput. 2015;29:455-460. doi:10.1007/s10877-014-9621-3
 
-[5] Pankhurst T, Sapey E, Stanley B, et al. Evaluation of NEWS2 response thresholds in a retrospective observational study from a UK acute hospital. BMJ Open. 2022;12:e054027. doi:10.1136/bmjopen-2021-054027
+[5] Pankhurst T, Sapey E, Gyves H, Evison F, Gallier S, Gkoutos G, Ball S. Evaluation of NEWS2 response thresholds in a retrospective observational study from a UK acute hospital. BMJ Open. 2022;12(2):e054027. doi:10.1136/bmjopen-2021-054027
 
 [6] Taenzer AH, Pyke JB, McGrath SP, Blike GT. Impact of pulse oximetry surveillance on rescue events and intensive care unit transfers. Anesthesiology. 2010;112:282-287. doi:10.1097/ALN.0b013e3181ca7a9b
 
@@ -323,11 +323,11 @@ All authors read and approved the final manuscript and meet the four ICMJE autho
 
 [11] Husereau D, Drummond M, Augustovski F, et al. Consolidated Health Economic Evaluation Reporting Standards 2022 (CHEERS 2022) statement: updated reporting guidance for health economic evaluations. BMJ. 2022;376:e067975. doi:10.1136/bmj-2021-067975
 
-[12] van Loon K, Breteler MJM, van Wolfwinkel L, et al. Accuracy of remote continuous respiratory rate monitoring technologies intended for low care clinical settings: a prospective observational study. Can J Anesth. 2018;65:1324-1332. doi:10.1007/s12630-018-1214-z
+[12] van Loon K, Peelen LM, van de Vlasakker EC, Kalkman CJ, van Wolfswinkel L, van Zaane B. Accuracy of remote continuous respiratory rate monitoring technologies intended for low care clinical settings: a prospective observational study. Can J Anaesth. 2018;65(12):1324-1332. doi:10.1007/s12630-018-1214-z
 
-[13] Kelley SD, Mestek ML, Bergese SD, et al. Comparison of respiration rate derived from pulse oximetry and transthoracic impedance vs capnography. Eur J Anaesthesiol. 2014;31(Suppl 52):30-31. [Conference abstract]
+[13] Kelley SD, et al. Comparison of respiration rate derived from pulse oximetry and transthoracic impedance vs capnography. Eur J Anaesthesiol. 2014;31(e-Suppl 52):30-31. [Conference abstract; the 23,243 paired-observation cohort was subsequently published in full as Bergese et al. 2017 (reference 21)]
 
-[14] Lee JH, Nathanson LA, Burke RC, Anthony BW, Shapiro NI, Dagan AS. Assessment of respiratory rate monitoring in the emergency department. J Am Coll Emerg Physicians Open. 2024;5(3):e13186. PMC11077426.
+[14] Lee JH, Nathanson LA, Burke RC, Anthony BW, Shapiro NI, Dagan AS. Assessment of respiratory rate monitoring in the emergency department. J Am Coll Emerg Physicians Open. 2024;5(3):e13154. doi:10.1002/emp2.13154
 
 [15] Ministry of Health, Labour and Welfare (Japan). 社会医療診療行為別統計 2021年. Available from: https://www.mhlw.go.jp/toukei/saikin/hw/sinryo/tyosa21/dl/gaikyou2021.pdf
 
@@ -363,7 +363,7 @@ All authors read and approved the final manuscript and meet the four ICMJE autho
 
 **Figure 4.** Break-even analysis showing the number of adverse events (deterioration episodes) that must be avoided per 1,000 patient-days for each device scenario to achieve cost-neutrality, across five adverse event cost assumptions derived from Japan, UK, Australia, and USA data.
 
-**Figure 5.** Tornado diagram for one-way sensitivity analysis of the under-mattress sensor scenario (Japan). Bars represent the change in break-even threshold (adverse events avoided per year) when each parameter is varied across its plausible range. Parameters classified as "Assumption" in Table 1 are marked with an asterisk.
+**Figure 5.** Tornado diagram for one-way sensitivity analysis of a representative non-contact (EarlySense-type) device scenario (Japan; base incremental ¥550.9/patient-day, base break-even 11.4 events/year). Bars represent the change in break-even threshold (adverse events avoided per year) when each parameter is varied across its plausible range. Parameters classified as "Assumption" in Table 1 are marked with an asterisk.
 
 **Figure 6.** Multi-way scenario analysis showing break-even thresholds when all assumption parameters are simultaneously varied. Best case: all parameters set to values favoring device adoption; worst case: all parameters set to values disfavoring adoption. Orange dashed lines indicate the published range of deterioration events (2–10 per 1,000 patient-days [18, 22]).
 
