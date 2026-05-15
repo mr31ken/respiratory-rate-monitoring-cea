@@ -1,7 +1,7 @@
 # Economic Evaluation of Automated Respiratory Rate Monitoring in General Hospital Wards: A Deterministic Cost-Minimization and Break-Even Modeling Study
 
 ## Authors
-Kenichi Saito¹,²; Kazumasa Kishimoto³,⁴,⁵; Naoki Ishizuka¹; Kaori Kusuda¹; Tomohiro Kuroda³,⁴,⁵
+Kenichi Saito¹,²; Kazumasa Kishimoto³,⁴,⁵; Naoki Ishizuka¹; Kaori Kusuda¹,³; Tomohiro Kuroda¹,³,⁴,⁵
 
 ¹ Center for Digital Transformation of Healthcare, Kyoto University Graduate School of Medicine, Kyoto, Japan
 ² Graduate School of Medicine, Osaka Metropolitan University, Osaka, Japan
@@ -286,12 +286,14 @@ This study constructed a deterministic cost-minimization and break-even model co
 
 **Consent to participate:** Not applicable.
 
-**Author contributions:** [TO BE FINALIZED with each coauthor — CRediT taxonomy. Draft proposal:]
-- **Kenichi Saito**: Conceptualization, methodology, data curation, formal analysis, software, validation, visualization, writing—original draft, writing—review and editing.
-- **Kazumasa Kishimoto**: [Conceptualization, methodology, supervision, writing—review and editing — to be confirmed]
-- **Naoki Ishizuka**: [Methodology, validation, writing—review and editing — to be confirmed]
-- **Kaori Kusuda**: [Methodology, validation, writing—review and editing — to be confirmed]
-- **Tomohiro Kuroda**: [Conceptualization, supervision, project administration, writing—review and editing — to be confirmed]
+**Author contributions:** Contributions are described using the CRediT (Contributor Roles Taxonomy):
+- **Kenichi Saito**: Conceptualization, Data curation, Formal analysis, Investigation, Methodology, Software, Validation, Visualization, Writing—original draft, Writing—review and editing.
+- **Kazumasa Kishimoto**: Methodology, Writing—review and editing.
+- **Naoki Ishizuka**: Formal analysis, Writing—review and editing.
+- **Kaori Kusuda**: Methodology, Writing—review and editing.
+- **Tomohiro Kuroda**: Conceptualization, Project administration, Supervision, Writing—review and editing.
+
+All authors read and approved the final manuscript and meet the four ICMJE authorship criteria.
 
 **Data availability:** The complete dataset, analysis code (Python 3.x), and data dictionary supporting this study are publicly available at https://github.com/mr31ken/respiratory-rate-monitoring-cea. An archived snapshot (release v1.0.1-jcmc-submission) is deposited at Zenodo with DOI [10.5281/zenodo.20176683](https://doi.org/10.5281/zenodo.20176683). The repository contains: (1) all input CSV files with source attribution; (2) Python scripts that programmatically generate all figures and tables; (3) complete parameter sets in machine-readable format for institutional adaptation. No patient-level data were used; all inputs derive from published aggregate statistics.
 

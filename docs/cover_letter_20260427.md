@@ -44,7 +44,11 @@ E-mail: mr31ken@kuhp.kyoto-u.ac.jp
 ORCID: https://orcid.org/0000-0003-2301-706X
 
 **Coauthors:**
-- Kazumasa Kishimoto (Division of Medical Information Technology and Administration Planning, Kyoto University Hospital; Graduate School of Medicine, Kyoto University; Graduate School of Informatics, Kyoto University)
-- Naoki Ishizuka (Center for Digital Transformation of Healthcare, Kyoto University Graduate School of Medicine)
-- Kaori Kusuda (Center for Digital Transformation of Healthcare, Kyoto University Graduate School of Medicine)
-- Tomohiro Kuroda (Division of Medical Information Technology and Administration Planning, Kyoto University Hospital; Graduate School of Medicine, Kyoto University; Graduate School of Informatics, Kyoto University)
+- Kazumasa Kishimoto — kishimoto@kuhp.kyoto-u.ac.jp
+  Division of Medical Information Technology and Administration Planning, Kyoto University Hospital; Graduate School of Medicine, Kyoto University; Graduate School of Informatics, Kyoto University
+- Naoki Ishizuka — ishizuka.naoki.5a@kyoto-u.ac.jp
+  Center for Digital Transformation of Healthcare, Kyoto University Graduate School of Medicine
+- Kaori Kusuda — kusuda_kaori@kuhp.kyoto-u.ac.jp
+  Center for Digital Transformation of Healthcare, Kyoto University Graduate School of Medicine; Division of Medical Information Technology and Administration Planning, Kyoto University Hospital
+- Tomohiro Kuroda — tomo@kuhp.kyoto-u.ac.jp
+  Center for Digital Transformation of Healthcare, Kyoto University Graduate School of Medicine; Division of Medical Information Technology and Administration Planning, Kyoto University Hospital; Graduate School of Medicine, Kyoto University; Graduate School of Informatics, Kyoto University
