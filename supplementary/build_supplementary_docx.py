@@ -15,7 +15,7 @@ from docx.oxml import parse_xml
 
 ROOT = Path(__file__).resolve().parent.parent
 SUPP = ROOT / "supplementary"
-OUTPUT = SUPP / "supplementary_20260405.docx"
+OUTPUT = SUPP / "supplementary_20260516.docx"
 
 FONT_NAME = "Times New Roman"
 FONT_SIZE = 11
@@ -123,7 +123,7 @@ def flush_table(doc, rows):
 
 
 # ── Read markdown ────────────────────────────────────────────────────
-md_text = (SUPP / "supplementary_20260405.md").read_text(encoding="utf-8")
+md_text = (SUPP / "supplementary_20260516.md").read_text(encoding="utf-8")
 
 doc = Document()
 

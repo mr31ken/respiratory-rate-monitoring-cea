@@ -47,7 +47,9 @@ ba_data["loa_upper_bpm"] = pd.to_numeric(ba_data["loa_upper_bpm"], errors="coerc
 # Keep rows with at least bias
 ba_data = ba_data.dropna(subset=["bias_bpm"]).copy()
 
-# Create label
+# Create label (use a fallback for studies whose device_id is generic / not in device table)
+ba_data["device_name"] = ba_data["device_name"].fillna("Telemetry impedance (generic)")
+ba_data["category"] = ba_data["category"].fillna("Bedside monitor (impedance)")
 ba_data["label"] = (ba_data["device_name"].str.replace(r"\s*\(.*?\)", "", regex=True)
                     + "\n" + ba_data["first_author"] + " " + ba_data["year"].astype(str))
 

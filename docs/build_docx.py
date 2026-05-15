@@ -18,7 +18,7 @@ from docx.oxml import parse_xml
 ROOT = Path(__file__).resolve().parent.parent
 MANUSCRIPT = ROOT / "manuscript"
 FIGURES = ROOT / "figures"
-OUTPUT = MANUSCRIPT / "manuscript_20260405.docx"
+OUTPUT = MANUSCRIPT / "manuscript_20260516.docx"
 
 
 def set_run_font(run, name="Times New Roman", size=12, bold=False, italic=False):
@@ -99,7 +99,7 @@ def add_page_break(doc):
 
 # ── Parse markdown and build document ────────────────────────────────
 
-md_text = (MANUSCRIPT / "manuscript_20260405.md").read_text(encoding="utf-8")
+md_text = (MANUSCRIPT / "manuscript_20260516.md").read_text(encoding="utf-8")
 
 doc = Document()
 
@@ -234,7 +234,7 @@ add_para(doc, "in General Hospital Wards:",
 add_para(doc, "A Deterministic Cost-Minimization and Break-Even Modeling Study",
          bold=True, alignment=WD_ALIGN_PARAGRAPH.CENTER, space_after=24)
 
-# Pull Authors section content from parsed sections (single source of truth: manuscript_20260405.md)
+# Pull Authors section content from parsed sections (single source of truth: manuscript_20260516.md)
 authors_section = next(((h, c) for h, c in sections if h == "Authors"), None)
 if authors_section is not None:
     author_lines = [l.strip() for l in authors_section[1] if l.strip()]
@@ -257,15 +257,13 @@ if authors_section is not None:
             # Author name line — centered, slightly larger feel via spacing
             add_para(doc, line, alignment=WD_ALIGN_PARAGRAPH.CENTER, space_after=6)
 else:
-    add_para(doc, "[Authors section missing in manuscript_20260405.md]",
+    add_para(doc, "[Authors section missing in manuscript_20260516.md]",
              alignment=WD_ALIGN_PARAGRAPH.CENTER, space_after=24)
 
 add_para(doc, "Tables: 3  |  Figures: 6  |  References: 25",
          alignment=WD_ALIGN_PARAGRAPH.CENTER, space_before=24, space_after=0)
 add_para(doc, "Supplementary Materials: 10 sections",
          alignment=WD_ALIGN_PARAGRAPH.CENTER, space_after=24)
-add_para(doc, "Target Journal: Journal of Clinical Monitoring and Computing",
-         italic=True, alignment=WD_ALIGN_PARAGRAPH.CENTER)
 add_page_break(doc)
 
 # ══════════════════════════════════════════════════════════════════════
