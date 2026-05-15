@@ -213,7 +213,7 @@ ax.set_xticks(x)
 ax.set_xticklabels([k.replace("\n", "\n") for k in device_types.keys()],
                    fontsize=8, ha="center")
 ax.set_ylabel("Break-even: adverse events avoided\n(per 1,000 patient-days)", fontsize=9)
-ax.set_title("Figure 4. Break-Even Analysis: Adverse Events to Avoid\n"
+ax.set_title("Break-Even Analysis: Adverse Events to Avoid\n"
              "for Cost-Neutral Automated RR Monitoring",
              fontsize=11, fontweight="bold")
 ax.legend(fontsize=7, loc="upper right", ncol=2)
@@ -264,7 +264,7 @@ ax.axvline(base_be, color="black", linewidth=1.2, linestyle="--", alpha=0.7)
 ax.set_yticks(y)
 ax.set_yticklabels(tornado_df["parameter"], fontsize=9)
 ax.set_xlabel("Break-even: adverse events avoided per year", fontsize=10)
-ax.set_title("Figure 5. Tornado Diagram: One-Way Sensitivity Analysis\n"
+ax.set_title("Tornado Diagram: One-Way Sensitivity Analysis\n"
              "(Under-Mattress Sensor vs. Manual RR Counting, Japan)",
              fontsize=11, fontweight="bold")
 
@@ -363,7 +363,7 @@ for i, (bar, val) in enumerate(zip(bars, be_values)):
 ax.set_xticks(range(len(sc_labels)))
 ax.set_xticklabels(sc_labels, fontsize=10)
 ax.set_ylabel("Break-even: adverse events avoided\n(per 1,000 patient-days)", fontsize=10)
-ax.set_title("Figure 6. Multi-Way Scenario Analysis:\n"
+ax.set_title("Multi-Way Scenario Analysis:\n"
              "Break-Even Under Simultaneous Parameter Variation",
              fontsize=11, fontweight="bold")
 
@@ -381,7 +381,7 @@ ax.spines["right"].set_visible(False)
 ax.text(0.02, -0.15,
         "Best case: all assumption parameters simultaneously set to values favoring device adoption.\n"
         "Worst case: all assumption parameters simultaneously set to values disfavoring device adoption.\n"
-        "Orange dashed lines: published range of deterioration events (2–10 per 1,000 patient-days [4, 18]).",
+        "Orange dashed lines: published range of deterioration events (2–10 per 1,000 patient-days [17, 21]).",
         transform=ax.transAxes, fontsize=7, color="gray")
 
 plt.tight_layout()

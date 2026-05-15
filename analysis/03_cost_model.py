@@ -261,8 +261,7 @@ for col, (color, label) in colors_stack.items():
 ax.set_xticks(x)
 ax.set_xticklabels(categories, fontsize=8, rotation=15, ha="right")
 ax.set_ylabel("Cost per patient-day (JPY)", fontsize=10)
-ax.set_title("Figure 3. Per-Patient-Day Cost Comparison:\n"
-             "Manual RR Measurement vs. Automated Monitoring Devices",
+ax.set_title("Manual RR Measurement vs. Automated Monitoring Devices",
              fontsize=11, fontweight="bold")
 ax.legend(fontsize=8, loc="upper left")
 

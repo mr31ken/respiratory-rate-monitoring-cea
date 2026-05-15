@@ -12,30 +12,30 @@ This study was preceded by two preliminary reports generated through LLM-assiste
 
 | Original Claim (v1 manuscript) | Correction | Impact |
 |-------------------------------|-----------|--------|
-| "Capnography bias 0.0, LoA ±1.0 [21]" | **Removed.** Bergese 2017 [21] validates pulse-ox-derived RR (Nellcor CNRRS), not capnography itself. The cited bias/LoA values do not appear in [21]. Primary source for these values was not identified despite systematic search. | Accuracy summary in Abstract and Results rewritten |
-| "Thoracic impedance bias −2.2, LoA −6.5 to +2.0 [21]" | **Removed.** These values do not appear in Bergese 2017. Replaced with verified data: Kelley 2014 (conference abstract; full co-author list not independently verifiable): TTI bias −2.56, SD 9.01 [13]; van Loon 2018: IPG bias −1.9, 98.9% LoA −13.1 to +9.2 [12]; Lee 2024: impedance bias 0.2, LoA −6.2 to +6.6 [14] | Three independent sources now cited for impedance |
+| "Capnography bias 0.0, LoA ±1.0 [20]" | **Removed.** Bergese 2017 [20] validates pulse-ox-derived RR (Nellcor CNRRS), not capnography itself. The cited bias/LoA values do not appear in [20]. Primary source for these values was not identified despite systematic search. | Accuracy summary in Abstract and Results rewritten |
+| "Thoracic impedance bias −2.2, LoA −6.5 to +2.0 [20]" | **Removed.** These values do not appear in Bergese 2017. Replaced with verified data: van Loon 2018: IPG bias −1.9, 98.9% LoA −13.1 to +9.2 [12]; Lee 2024: impedance bias 0.2, LoA −6.2 to +6.6 [13] | Two independent sources now cited for impedance |
 | "Over 10 years and 32,000 patients, 50% ICU reduction + zero OIRD deaths [6]" | **Split into 3 correctly attributed studies.** Taenzer 2010 [6]: ~21 months, single unit, 48% ICU reduction. McGrath 2021 [7]: 10 years, 111,488 monitored discharges, zero OIRD deaths. Blike 2025 [8]: 3.5 years, 31,993 patients, financial analysis. | Discussion section rewritten with correct attributions |
-| Guardian M10 "bias near zero, LoA ±1.2" | **Refined.** Toften 2024 [19] reports: stationary bias 0.1, LoA −1.09 to +1.19; mobile bias 0.0, LoA −1.07 to +1.07 (32 patients, 1,112/1,119 paired measurements). | Values updated to verified precision |
+| Guardian M10 "bias near zero, LoA ±1.2" | **Refined.** Toften 2024 [18] reports: stationary bias 0.1, LoA −1.09 to +1.19; mobile bias 0.0, LoA −1.07 to +1.07 (32 patients, 1,112/1,119 paired measurements). | Values updated to verified precision |
 
 ### Verified Claims (Unchanged)
 | Claim | Source | Verification Status |
 |-------|--------|-------------------|
 | Masimo Rad-G price €795 (ex-VAT) | DocCheckShop.eu | **Verified** |
 | NEWS2 score-based escalation thresholds | RCP NEWS2 report [1] | **Verified** |
-| NICE CG50: minimum 12-hourly monitoring | NICE CG50 [23] | **Verified** |
-| Australian deterioration cost A$14,134/episode | Curtis et al. 2021 [18] | **Verified** (n=929, PMID: 34314776) |
+| NICE CG50: minimum 12-hourly monitoring | NICE CG50 [22] | **Verified** |
+| Australian deterioration cost A$14,134/episode | Curtis et al. 2021 [17] | **Verified** (n=929, PMID: 34314776) |
 | Taenzer 2010: ICU transfers 5.6→2.9/1000 pt-days | Taenzer et al. [6] | **Verified** (48% reduction, ~21-month before-after) |
-| Guardian M10 MDR Class IIb certification | Vitalthings/Toften 2024 [19] | **Verified** (PMID: 39665054) |
-| Neteera 510(k) FDA clearance | FDA K212143 [25] | **Verified** (cleared September 2022) |
-| MHLW 2021: 3,710.2 points/day inpatient | MHLW statistics [15] | **Verified** |
+| Guardian M10 MDR Class IIb certification | Vitalthings/Toften 2024 [18] | **Verified** (PMID: 39665054) |
+| Neteera 510(k) FDA clearance | FDA K212143 [24] | **Verified** (cleared September 2022) |
+| MHLW 2021: 3,710.2 points/day inpatient | MHLW statistics [14] | **Verified** |
 | Blike 2025: $10,700/ICU transfer avoided | J Patient Saf 2025 [8] | **Verified** (31,993 patients, 3.5 years) |
 
 ### Other Corrected/Clarified Claims
 | Original Claim | Correction |
 |----------------|-----------|
-| EarlySense as current product | **Corrected**: EarlySense's contact-free monitoring technology and IP were acquired by Hillrom (now Baxter) in February 2021 [20]. No claim is made regarding the current corporate status of EarlySense Ltd., as verifiable public records are limited. |
+| EarlySense as current product | **Corrected**: EarlySense's contact-free monitoring technology and IP were acquired by Hillrom (now Baxter) in February 2021 [19]. No claim is made regarding the current corporate status of EarlySense Ltd., as verifiable public records are limited. |
 | "72% of recorded RR were inaccurate" (DOCX draft) | **Clarified**: Philip et al. 2015 [4] is a perception survey (72% of doctors rated RR records as only "sometimes accurate"), not a direct accuracy measurement. |
-| UK critical care £1,173/bed-day | **Verified but outdated**: From 2012-13 NHS reference costs [17]. Acknowledged as limitation. |
+| UK critical care £1,173/bed-day | **Verified but outdated**: From 2012-13 NHS reference costs [16]. Acknowledged as limitation. |
 | Neteera "95% accuracy rate" | **Partially verified**: Website claims 95%; FDA 510(k) data show ~93%. Discrepancy noted. |
 | Blike et al. 2025 citation | **Corrected**: Full citation: Blike G, McGrath S, Perreard I, McGovern K. J Patient Saf. 2025;21(8):e169-e175. doi:10.1097/PTS.0000000000001392 |
 
@@ -108,21 +108,21 @@ Where:
 ## S4. Adverse Event Cost Derivation by Country
 
 ### Japan
-- ICU bed-day: ¥96,970 (特定集中治療室管理料 categories 3-4: 9,697 points × 10 yen/point [15])
-- General ward bed-day: ¥37,102 (MHLW 2021 national average: 3,710.2 points × 10 [15])
+- ICU bed-day: ¥96,970 (特定集中治療室管理料 categories 3-4: 9,697 points × 10 yen/point [14])
+- General ward bed-day: ¥37,102 (MHLW 2021 national average: 3,710.2 points × 10 [14])
 - Base estimate: 3 additional ICU days + 5 additional ward days = ¥476,420
 - This is a **highly conservative floor estimate**: it includes only 診療報酬 (medical fee schedule) reimbursement points and excludes procedure costs, pharmaceutical costs, imaging, and laboratory tests associated with managing the deterioration event
-- **Important**: The reimbursement-based ICU bed-day cost of ¥96,970 substantially understates actual resource consumption. A recent nationwide cohort study using bottom-up cost accounting (1,453,929 ICU patients across fiscal years 2018–2022) estimated the mean ICU cost at ¥197,277/patient-day [16], more than double the reimbursement rate. Substituting this bottom-up figure for the reimbursement-based ICU rate yields an alternative base-case adverse event estimate of approximately ¥777,000 (3 × ¥197,277 + 5 × ¥37,102), substantially lowering break-even thresholds.
+- **Important**: The reimbursement-based ICU bed-day cost of ¥96,970 substantially understates actual resource consumption. A recent nationwide cohort study using bottom-up cost accounting (1,453,929 ICU patients across fiscal years 2018–2022) estimated the mean ICU cost at ¥197,277/patient-day [15], more than double the reimbursement rate. Substituting this bottom-up figure for the reimbursement-based ICU rate yields an alternative base-case adverse event estimate of approximately ¥777,000 (3 × ¥197,277 + 5 × ¥37,102), substantially lowering break-even thresholds.
 - Sensitivity range: ¥300,000 (minimal deterioration with rapid recovery) to ¥2,000,000 (including ICU procedures, ventilation, drugs, extended stay)
 
 ### United Kingdom
-- Critical care bed-day: £1,881 (2020/21 NCC data, via Parliament Written Question 165361 [17])
-- General ward bed-day: £345 (2020/21 NCC, acute clinical setting maintenance cost excl. diagnosis/treatment [17])
+- Critical care bed-day: £1,881 (2020/21 NCC data, via Parliament Written Question 165361 [16])
+- General ward bed-day: £345 (2020/21 NCC, acute clinical setting maintenance cost excl. diagnosis/treatment [16])
 - Estimate: 3 × £1,881 + 5 × £345 = £7,368
 - **Note**: Updated from 2012-13 reference costs (£1,173 critical care, £273 excess bed-day) used in the preliminary draft. The most granular data (HRG-level critical care costs XC01-XC07, 2023/24 NCC) are published via NHS England Power BI dashboards but not yet available as citable tabulated per-day values.
 
 ### Australia
-- Per-episode incremental cost: A$14,134 (Curtis et al. 2021 [18])
+- Per-episode incremental cost: A$14,134 (Curtis et al. 2021 [17])
 - This is the most methodologically robust estimate in our analysis: derived from 929 deterioration episodes among 71,000 admissions, controlled for length-of-stay and AR-DRG using multivariate regression
 - Includes all treatment cost differences, not limited to bed-day fees
 
@@ -142,20 +142,19 @@ A critical limitation in comparing accuracy across devices is the use of differe
 
 | Reference Standard | Used by | Strengths | Limitations |
 |-------------------|---------|-----------|-------------|
-| Capnography | [21], [13], [12], [14] | Gold standard for RR; breath-by-breath | Requires nasal cannula; patient cooperation |
-| Respiratory inductance plethysmography (RIP) | [19] | Non-invasive; validated against pneumotachograph | Requires calibrated bands; body position-dependent |
-| Manual counting | [10], [14] | Universal availability | Known to be inaccurate (LoA −13.5 to +12.3 vs capnography [14]) |
+| Capnography | [20], [12], [13] | Gold standard for RR; breath-by-breath | Requires nasal cannula; patient cooperation |
+| Respiratory inductance plethysmography (RIP) | [18] | Non-invasive; validated against pneumotachograph | Requires calibrated bands; body position-dependent |
+| Manual counting | [10], [13] | Universal availability | Known to be inaccurate (LoA −13.5 to +12.3 vs capnography [13]) |
 | ECG-derived | [10] | Available from existing monitoring | Algorithm-dependent; not a true gold standard |
 | Standard monitoring (unspecified) | [9] | As used clinically | Varies by institution |
 
-Studies using manual counting as reference may underestimate device accuracy, as the reference itself introduces substantial measurement error [3, 14].
+Studies using manual counting as reference may underestimate device accuracy, as the reference itself introduces substantial measurement error [3, 13].
 
 ### Statistical Reporting Heterogeneity
 - Most studies report 95% LoA (bias ± 1.96 × SD)
 - Van Loon et al. [12] reports 98.9% LoA (bias ± 2.63 × SD with repeated-measures correction)
-- Kelley et al. [13] reports bias and SD but not formal LoA (conference abstract)
 - EarlySense studies [9] report percentage accuracy (aRE within threshold) rather than Bland-Altman metrics
-- Neteera [25] reports percentage within 10% or 2 bpm
+- Neteera [24] reports percentage within 10% or 2 bpm
 
 These reporting differences preclude a formal meta-analysis and require caution in cross-device comparisons.
 
@@ -185,13 +184,13 @@ All intermediate outputs are regenerated from source data. No manual data manipu
 This section provides detailed accuracy findings for each device category, supplementing the summary in the main text (Results: Technology Landscape).
 
 ### Radar-based non-contact sensors
-The Vitalthings Guardian M10 was validated against respiratory inductance plethysmography (Nox T3s) in 32 emergency ward patients (1,112 paired measurements). Bland-Altman analysis showed bias of 0.1 breaths/min (stationary) and 0.0 breaths/min (mobile), with 95% LoA of −1.09 to +1.19 and −1.07 to +1.07 breaths/min, respectively [19]. This represents the narrowest LoA among devices evaluated in a hospital setting.
+The Vitalthings Guardian M10 was validated against respiratory inductance plethysmography (Nox T3s) in 32 emergency ward patients (1,112 paired measurements). Bland-Altman analysis showed bias of 0.1 breaths/min (stationary) and 0.0 breaths/min (mobile), with 95% LoA of −1.09 to +1.19 and −1.07 to +1.07 breaths/min, respectively [18]. This represents the narrowest LoA among devices evaluated in a hospital setting.
 
 ### Pulse-oximetry-derived RR
-The Medtronic Nellcor Continuous RR (CNRRS) was validated against clinician-overscored capnography in a multicenter study of 79 subjects (23,243 paired observations). Overall bias was 0.18 breaths/min with 95% LoA of −3.06 to +3.42 (RMSD 1.35 breaths/min). Among 53 hospitalized patients, bias was 0.07 breaths/min with wider LoA of −3.84 to +3.97 [21]. Separately, Masimo Rad-G (pulse-oximetry plethysmographic RR) showed sensitivity of 95% and specificity of 94% for detecting abnormal RR, though Bland-Altman data were not reported in the available study.
+The Medtronic Nellcor Continuous RR (CNRRS) was validated against clinician-overscored capnography in a multicenter study of 79 subjects (23,243 paired observations). Overall bias was 0.18 breaths/min with 95% LoA of −3.06 to +3.42 (RMSD 1.35 breaths/min). Among 53 hospitalized patients, bias was 0.07 breaths/min with wider LoA of −3.84 to +3.97 [20]. Separately, Masimo Rad-G (pulse-oximetry plethysmographic RR) showed sensitivity of 95% and specificity of 94% for detecting abnormal RR, though Bland-Altman data were not reported in the available study.
 
 ### Thoracic impedance
-Transthoracic impedance (TTI) showed the poorest agreement across multiple studies. In pooled data from Kelley et al. (23,243 paired observations), TTI demonstrated bias of −2.56 breaths/min with SD of 9.01 and RMSD of 5.21 breaths/min against capnography [13]. The implied 95% LoA (approximately −20.2 to +15.1) is extremely wide, though formal LoA were not reported in this conference abstract. Van Loon et al. reported impedance plethysmography (IPG) bias of −1.9 breaths/min with 98.9% LoA of −13.1 to +9.2 in 20 PACU patients [12]; notably, these are 98.9% LoA (using ±2.63×SD with repeated-measures correction), and 95% LoA would be somewhat narrower. In a recent ED study, telemetry-based impedance showed bias of 0.2 breaths/min but LoA of −6.2 to +6.6 against capnography [14]. In the same study, manual nurse-documented RR showed bias of −0.6 with LoA of −13.5 to +12.3 against capnography, illustrating the magnitude of manual measurement error [14].
+Transthoracic impedance (TTI) showed the poorest agreement across multiple studies. Van Loon et al. reported impedance plethysmography (IPG) bias of −1.9 breaths/min with 98.9% LoA of −13.1 to +9.2 in 20 PACU patients [12]; notably, these are 98.9% LoA (using ±2.63×SD with repeated-measures correction), and 95% LoA would be somewhat narrower. In a recent ED study, telemetry-based impedance showed bias of 0.2 breaths/min but LoA of −6.2 to +6.6 against capnography [13]. In the same study, manual nurse-documented RR showed bias of −0.6 with LoA of −13.5 to +12.3 against capnography, illustrating the magnitude of manual measurement error [13].
 
 ### Wearable patches
 For RespiraSense, NICE MIB299 reported mean bias of −0.41 breaths/min versus ECG-derived RR with 95% LoA of −3.9 to +3.1 [10]. Against nurse manual counting, the agreement was wider (mean bias −0.58, LoA −5.5 to +4.3), with 20% of intervals showing differences exceeding 3 breaths/min [10]. The Equivital chest belt reported bias of 0.2 breaths/min with LoA of −2.2 to +2.6 breaths/min under controlled laboratory conditions.
@@ -200,7 +199,7 @@ For RespiraSense, NICE MIB299 reported mean bias of −0.41 breaths/min versus E
 For EarlySense, NICE MIB49 summarized accuracy rates from manufacturer-submitted studies rather than Bland-Altman metrics: adult sleep lab accuracy 93.1%, ICU accuracy 82% versus end-tidal CO₂, and 75% versus manual counting [9]. The varying definitions of "accuracy" across these source studies preclude direct comparison with Bland-Altman data from other devices.
 
 ### Non-contact radar (Neteera)
-The Neteera 130H/131H received FDA 510(k) clearance with reported accuracy of approximately 93% (within 10% or 2 breaths/min of reference) based on clinical validation in ~170 subjects [25]. The manufacturer's website claims 95% accuracy; the basis for this discrepancy is unclear.
+The Neteera 130H/131H received FDA 510(k) clearance with reported accuracy of approximately 93% (within 10% or 2 breaths/min of reference) based on clinical validation in ~170 subjects [24]. The manufacturer's website claims 95% accuracy; the basis for this discrepancy is unclear.
 
 ---
 
@@ -273,7 +272,7 @@ Break-even thresholds under simultaneous variation of all assumption parameters.
 | Base case | 550.9 | 476,420 | 11.4 | 1.16 |
 | Worst case (device disfavored) | 1,778.6 | 300,000 | 48.7 | 5.93 |
 
-*Negative break-even in the best case indicates that the device scenario is less expensive than manual counting even without crediting any avoided adverse events; under such conditions, automated monitoring is dominant on cost alone. The worst-case threshold (5.93 events per 1,000 patient-days) remains within the published range of ward deterioration rates (2–10 per 1,000 patient-days [18, 22]).*
+*Negative break-even in the best case indicates that the device scenario is less expensive than manual counting even without crediting any avoided adverse events; under such conditions, automated monitoring is dominant on cost alone. The worst-case threshold (5.93 events per 1,000 patient-days) remains within the published range of ward deterioration rates (2–10 per 1,000 patient-days [17, 21]).*
 
 ---
 

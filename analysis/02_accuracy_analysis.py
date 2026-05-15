@@ -47,8 +47,20 @@ ba_data["loa_upper_bpm"] = pd.to_numeric(ba_data["loa_upper_bpm"], errors="coerc
 # Keep rows with at least bias
 ba_data = ba_data.dropna(subset=["bias_bpm"]).copy()
 
-# Create label (use a fallback for studies whose device_id is generic / not in device table)
-ba_data["device_name"] = ba_data["device_name"].fillna("Telemetry impedance (generic)")
+# Device-name fallback map for accuracy studies whose device_id is a placeholder
+# or NA (i.e., devices not represented as a row in device_characteristics.csv).
+# Keys correspond to (study_id) → (device_name, category).
+fallback_map = {
+    "ACC03": ("Nellcor CNRRS",                "Pulse oximetry derived"),  # Bergese 2017 — Medtronic Nellcor pulse-ox-derived RR (not Masimo Rad-G)
+    "ACC10": ("IPG (impedance plethysmography)", "Bedside monitor (impedance)"),  # van Loon 2018 — generic IPG, not specifically PVM-4000
+    "ACC11": ("Telemetry impedance (generic)", "Bedside monitor (impedance)"),  # Lee 2024 — ED telemetry monitor
+}
+for sid, (devname, cat) in fallback_map.items():
+    mask = ba_data["study_id"] == sid
+    ba_data.loc[mask, "device_name"] = devname
+    ba_data.loc[mask, "category"] = cat
+
+ba_data["device_name"] = ba_data["device_name"].fillna("Unspecified device")
 ba_data["category"] = ba_data["category"].fillna("Bedside monitor (impedance)")
 ba_data["label"] = (ba_data["device_name"].str.replace(r"\s*\(.*?\)", "", regex=True)
                     + "\n" + ba_data["first_author"] + " " + ba_data["year"].astype(str))
@@ -113,9 +125,6 @@ legend_a = [
 ]
 ax1.legend(handles=legend_a, fontsize=7, loc="lower right")
 
-
-fig.suptitle("Figure 2. Accuracy of Automated Respiratory Rate Monitoring Devices",
-             fontsize=12, fontweight="bold", y=0.98)
 
 plt.tight_layout(rect=[0, 0, 1, 0.95])
 fig.savefig(FIGURES / "fig1_accuracy_comparison.pdf", dpi=300, bbox_inches="tight")
