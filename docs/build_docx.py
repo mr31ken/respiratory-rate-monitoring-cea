@@ -233,16 +233,35 @@ add_para(doc, "in General Hospital Wards:",
          bold=True, alignment=WD_ALIGN_PARAGRAPH.CENTER, space_after=0)
 add_para(doc, "A Deterministic Cost-Minimization and Break-Even Modeling Study",
          bold=True, alignment=WD_ALIGN_PARAGRAPH.CENTER, space_after=24)
-add_para(doc, "[Author names to be confirmed]",
-         alignment=WD_ALIGN_PARAGRAPH.CENTER, space_after=6)
-add_para(doc, "[Institutional affiliations]",
-         alignment=WD_ALIGN_PARAGRAPH.CENTER, space_after=24)
-add_para(doc, "Corresponding Author:", bold=True,
-         alignment=WD_ALIGN_PARAGRAPH.CENTER, space_after=0)
-add_para(doc, "[Name, address, email, telephone]",
-         alignment=WD_ALIGN_PARAGRAPH.CENTER, space_after=24)
+
+# Pull Authors section content from parsed sections (single source of truth: manuscript_20260405.md)
+authors_section = next(((h, c) for h, c in sections if h == "Authors"), None)
+if authors_section is not None:
+    author_lines = [l.strip() for l in authors_section[1] if l.strip()]
+    # First non-empty line: author names with superscripts
+    # Subsequent lines starting with superscript char: affiliations
+    # Last line(s): "Corresponding author: ..." block (starts with **)
+    for line in author_lines:
+        if line.startswith("**Corresponding author:**"):
+            # Render bold label + rest, full-width, centered
+            rest = line.replace("**Corresponding author:**", "").strip()
+            # Strip markdown link syntax [text](url) → text
+            rest = re.sub(r'\[([^\]]+)\]\([^)]+\)', r'\1', rest)
+            add_mixed(doc, [("Corresponding author: ", True, False),
+                            (rest, False, False)],
+                      alignment=WD_ALIGN_PARAGRAPH.CENTER, space_before=12, space_after=24)
+        elif line and line[0] in "¹²³⁴⁵⁶⁷⁸⁹":
+            # Affiliation line — centered, no indent
+            add_para(doc, line, alignment=WD_ALIGN_PARAGRAPH.CENTER, space_after=0)
+        else:
+            # Author name line — centered, slightly larger feel via spacing
+            add_para(doc, line, alignment=WD_ALIGN_PARAGRAPH.CENTER, space_after=6)
+else:
+    add_para(doc, "[Authors section missing in manuscript_20260405.md]",
+             alignment=WD_ALIGN_PARAGRAPH.CENTER, space_after=24)
+
 add_para(doc, "Tables: 3  |  Figures: 6  |  References: 25",
-         alignment=WD_ALIGN_PARAGRAPH.CENTER, space_after=0)
+         alignment=WD_ALIGN_PARAGRAPH.CENTER, space_before=24, space_after=0)
 add_para(doc, "Supplementary Materials: 10 sections",
          alignment=WD_ALIGN_PARAGRAPH.CENTER, space_after=24)
 add_para(doc, "Target Journal: Journal of Clinical Monitoring and Computing",
