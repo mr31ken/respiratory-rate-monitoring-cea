@@ -1,12 +1,15 @@
 # Economic Evaluation of Automated Respiratory Rate Monitoring in General Hospital Wards: A Deterministic Cost-Minimization and Break-Even Modeling Study
 
 ## Authors
-Kenichi Saito¹,²
+Kenichi Saito¹,²; Kazumasa Kishimoto³,⁴,⁵; Naoki Ishizuka¹; Kaori Kusuda¹; Tomohiro Kuroda³,⁴,⁵
 
-¹ Center for Medical DX Education and Research, Graduate School of Medicine, Kyoto University, Kyoto, Japan
+¹ Center for Digital Transformation of Healthcare, Kyoto University Graduate School of Medicine, Kyoto, Japan
 ² Graduate School of Medicine, Osaka Metropolitan University, Osaka, Japan
+³ Division of Medical Information Technology and Administration Planning, Kyoto University Hospital, Kyoto, Japan
+⁴ Graduate School of Medicine, Kyoto University, Kyoto, Japan
+⁵ Graduate School of Informatics, Kyoto University, Kyoto, Japan
 
-**Corresponding author:** Kenichi Saito, Center for Medical DX Education and Research, Graduate School of Medicine, Kyoto University, 53 Kawahara-cho, Shogoin, Sakyo-ku, Kyoto 606-8507, Japan. Tel: +81-75-751-4836. E-mail: mr31ken@kuhp.kyoto-u.ac.jp. ORCID: [0000-0003-2301-706X](https://orcid.org/0000-0003-2301-706X).
+**Corresponding author:** Kenichi Saito, Center for Digital Transformation of Healthcare, Kyoto University Graduate School of Medicine, 53 Kawahara-cho, Shogoin, Sakyo-ku, Kyoto 606-8507, Japan. Tel: +81-75-751-4836. E-mail: mr31ken@kuhp.kyoto-u.ac.jp. ORCID: [0000-0003-2301-706X](https://orcid.org/0000-0003-2301-706X).
 
 ## Target Journal
 Journal of Clinical Monitoring and Computing (Springer)
@@ -275,15 +278,20 @@ This study constructed a deterministic cost-minimization and break-even model co
 
 ## Declarations
 
-**Funding:** This research received no specific grant from any funding agency in the public, commercial, or not-for-profit sectors.
+**Funding:** [TO BE CONFIRMED with each coauthor. Draft template: "This research received no specific grant from any funding agency in the public, commercial, or not-for-profit sectors."]
 
-**Conflicts of interest:** The author declares no conflicts of interest. No device manufacturer was involved in study design, data collection, analysis, interpretation, or manuscript preparation.
+**Conflicts of interest:** [TO BE COMPLETED — each coauthor's declaration required. Draft template: "The authors declare no conflicts of interest. No device manufacturer was involved in study design, data collection, analysis, interpretation, or manuscript preparation."]
 
 **Ethics approval:** Not applicable. This study used only published aggregate data and did not involve human participants, human tissue, or animals.
 
 **Consent to participate:** Not applicable.
 
-**Author contributions:** Kenichi Saito: Conceptualization, methodology, data curation, formal analysis, software, validation, visualization, writing—original draft, writing—review and editing.
+**Author contributions:** [TO BE FINALIZED with each coauthor — CRediT taxonomy. Draft proposal:]
+- **Kenichi Saito**: Conceptualization, methodology, data curation, formal analysis, software, validation, visualization, writing—original draft, writing—review and editing.
+- **Kazumasa Kishimoto**: [Conceptualization, methodology, supervision, writing—review and editing — to be confirmed]
+- **Naoki Ishizuka**: [Methodology, validation, writing—review and editing — to be confirmed]
+- **Kaori Kusuda**: [Methodology, validation, writing—review and editing — to be confirmed]
+- **Tomohiro Kuroda**: [Conceptualization, supervision, project administration, writing—review and editing — to be confirmed]
 
 **Data availability:** The complete dataset, analysis code (Python 3.x), and data dictionary supporting this study are publicly available at https://github.com/mr31ken/respiratory-rate-monitoring-cea. An archived snapshot (release v1.0.1-jcmc-submission) is deposited at Zenodo with DOI [10.5281/zenodo.20176683](https://doi.org/10.5281/zenodo.20176683). The repository contains: (1) all input CSV files with source attribution; (2) Python scripts that programmatically generate all figures and tables; (3) complete parameter sets in machine-readable format for institutional adaptation. No patient-level data were used; all inputs derive from published aggregate statistics.
 

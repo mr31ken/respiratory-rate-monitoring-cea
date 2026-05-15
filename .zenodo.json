@@ -5,7 +5,23 @@
     {
       "name": "Saito, Kenichi",
       "orcid": "0000-0003-2301-706X",
-      "affiliation": "Center for Medical DX Education and Research, Graduate School of Medicine, Kyoto University, Kyoto, Japan"
+      "affiliation": "Center for Digital Transformation of Healthcare, Kyoto University Graduate School of Medicine, Kyoto, Japan"
+    },
+    {
+      "name": "Kishimoto, Kazumasa",
+      "affiliation": "Division of Medical Information Technology and Administration Planning, Kyoto University Hospital, Kyoto, Japan"
+    },
+    {
+      "name": "Ishizuka, Naoki",
+      "affiliation": "Center for Digital Transformation of Healthcare, Kyoto University Graduate School of Medicine, Kyoto, Japan"
+    },
+    {
+      "name": "Kusuda, Kaori",
+      "affiliation": "Center for Digital Transformation of Healthcare, Kyoto University Graduate School of Medicine, Kyoto, Japan"
+    },
+    {
+      "name": "Kuroda, Tomohiro",
+      "affiliation": "Division of Medical Information Technology and Administration Planning, Kyoto University Hospital, Kyoto, Japan"
     }
   ],
   "upload_type": "software",

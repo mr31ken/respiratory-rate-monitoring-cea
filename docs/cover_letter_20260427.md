@@ -35,10 +35,16 @@ Thank you for considering our manuscript. We look forward to your editorial asse
 
 Sincerely,
 
-Kenichi Saito, MD
-Center for Medical DX Education and Research, Graduate School of Medicine, Kyoto University
+Kenichi Saito, MD (Corresponding author, on behalf of all coauthors)
+Center for Digital Transformation of Healthcare, Kyoto University Graduate School of Medicine
 Graduate School of Medicine, Osaka Metropolitan University
 Postal address: 53 Kawahara-cho, Shogoin, Sakyo-ku, Kyoto 606-8507, Japan
 Telephone: +81-75-751-4836
 E-mail: mr31ken@kuhp.kyoto-u.ac.jp
 ORCID: https://orcid.org/0000-0003-2301-706X
+
+**Coauthors:**
+- Kazumasa Kishimoto (Division of Medical Information Technology and Administration Planning, Kyoto University Hospital; Graduate School of Medicine, Kyoto University; Graduate School of Informatics, Kyoto University)
+- Naoki Ishizuka (Center for Digital Transformation of Healthcare, Kyoto University Graduate School of Medicine)
+- Kaori Kusuda (Center for Digital Transformation of Healthcare, Kyoto University Graduate School of Medicine)
+- Tomohiro Kuroda (Division of Medical Information Technology and Administration Planning, Kyoto University Hospital; Graduate School of Medicine, Kyoto University; Graduate School of Informatics, Kyoto University)
