@@ -149,7 +149,7 @@ mx, mw = 0.37, 0.245
 # Comparator
 comp_y = 0.72
 draw_box(ax, mx, comp_y, mw, 0.12,
-         "Comparator\n\nManual RR Counting\nvs 6 Automated Scenarios",
+         "Comparator\n\nManual RR Counting\nvs 5 Automated Scenarios",
          edgecolor=COL_MODEL, fontsize=7)
 
 # Arrow down
