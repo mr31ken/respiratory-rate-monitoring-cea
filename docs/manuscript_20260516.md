@@ -23,7 +23,7 @@ Display items: 6 figures, 3 tables (main text) + 4 supplementary tables
 
 **Purpose:** To develop a reproducible break-even model determining the conditions under which automated respiratory rate (RR) monitoring achieves cost-neutrality on general hospital wards, across four national healthcare systems.
 
-**Methods:** A deterministic decision-analytic model (hospital perspective, 1-year horizon, CHEERS 2022-compliant) compared manual RR counting with six automated monitoring scenarios. Model parameters—device accuracy, costs, and adverse event costs from Japan, UK, Australia, and USA—were identified through comprehensive searches of PubMed, NICE Evidence, FDA 510(k), and government statistics (2010–2025). Nine devices across five technology categories were identified. Costs were converted to Japanese yen at 2024 mid-year exchange rates. One-way sensitivity, multi-way scenario, and cross-country break-even analyses were performed.
+**Methods:** A deterministic decision-analytic model (hospital perspective, 1-year horizon, CHEERS 2022-compliant) compared manual RR counting with five automated monitoring scenarios. Model parameters—device accuracy, costs, and adverse event costs from Japan, UK, Australia, and USA—were identified through comprehensive searches of PubMed, NICE Evidence, FDA 510(k), and government statistics (2010–2025). Nine devices across five technology categories were identified. Costs were converted to Japanese yen at 2024 mid-year exchange rates. One-way sensitivity, multi-way scenario, and cross-country break-even analyses were performed.
 
 **Results:** Manual RR counting cost ¥350/patient-day (Japan base case). Incremental costs of automated monitoring ranged from ¥106 (radar) to ¥1,900 (capnography) per patient-day. Non-contact sensors (radar and under-mattress) required avoidance of only 0.07–0.82 deterioration events per 1,000 patient-days for cost-neutrality, depending on device type and national adverse event cost (¥476,420–¥1,605,000). Even under worst-case multi-way assumptions, the break-even threshold (5.93/1,000 patient-days) remained within published ward deterioration rates (2–10/1,000 patient-days). Adverse event cost and device unit cost were the dominant parameters.
 
@@ -43,7 +43,7 @@ Automated RR monitoring technologies have emerged across multiple technological 
 
 Existing economic analyses are limited in scope. Blike et al. estimated operating margin impacts from the single-institution Dartmouth-Hitchcock program [8], while the NICE Medtech Innovation Briefings for EarlySense [9] and RespiraSense [10] provided device-specific assessments without cross-technology or cross-country comparison. No published study has constructed a unified, reproducible economic model that compares multiple monitoring technologies across diverse healthcare systems using explicitly documented and sensitivity-tested parameters.
 
-The purpose of this study is to develop a unified, multi-technology, cross-country economic model with transparent and reproducible parameters. Specifically, we aim to: (1) construct a transparent, deterministic cost-minimization and break-even model comparing manual RR counting with six automated monitoring scenarios from the hospital perspective; (2) parameterize this model using device accuracy and cost data identified through comprehensive literature search; and (3) evaluate the robustness of break-even thresholds through sensitivity analysis, multi-way scenario analysis, and cross-country comparisons across Japan, UK, Australia, and USA. This study provides a threshold analysis framework—identifying the conditions under which device adoption achieves cost-neutrality—rather than a definitive cost-effectiveness conclusion, since the clinical effectiveness of automated monitoring (i.e., the actual rate of adverse event avoidance) has not been established in randomized trials.
+The purpose of this study is to develop a unified, multi-technology, cross-country economic model with transparent and reproducible parameters. Specifically, we aim to: (1) construct a transparent, deterministic cost-minimization and break-even model comparing manual RR counting with five automated monitoring scenarios from the hospital perspective; (2) parameterize this model using device accuracy and cost data identified through comprehensive literature search; and (3) evaluate the robustness of break-even thresholds through sensitivity analysis, multi-way scenario analysis, and cross-country comparisons across Japan, UK, Australia, and USA. This study provides a threshold analysis framework—identifying the conditions under which device adoption achieves cost-neutrality—rather than a definitive cost-effectiveness conclusion, since the clinical effectiveness of automated monitoring (i.e., the actual rate of adverse event avoidance) has not been established in randomized trials.
 
 ## Methods
 
@@ -77,7 +77,7 @@ For accuracy data, we extracted Bland-Altman bias and 95% limits of agreement (o
 
 ### Cost-Effectiveness Model
 
-**Structure:** A deterministic decision-analytic model comparing manual RR counting (standard care) with six automated monitoring scenarios: (1) under-mattress sensor, (2) bedside monitor with impedance RR, (3) capnography, (4) wearable patch, (5) radar sensor, and (6) pulse-oximetry-derived RR with notification system.
+**Structure:** A deterministic decision-analytic model comparing manual RR counting (standard care) with five automated monitoring scenarios: (1) under-mattress sensor, (2) bedside monitor with impedance RR, (3) capnography, (4) wearable patch, and (5) radar sensor. Pulse-oximetry-derived RR with notification system was excluded from the cost model because publicly available pricing data for the integrated alarm-notification platform were not identified within the scope of our literature search; this technology is discussed qualitatively in the Discussion section.
 
 **Perspective and time horizon:** Hospital perspective (direct costs borne by the hospital for monitoring equipment, consumables, maintenance, and staff time; excludes societal costs, patient out-of-pocket costs, and downstream outpatient care); 1-year time horizon (chosen because device procurement and ward-level cost accounting in acute care settings typically operate on annual budget cycles, and because the clinical evidence base [6, 7] reports outcomes over periods of months to years without time-preference discounting). No discounting was applied given the 1-year horizon.
 
@@ -229,7 +229,7 @@ This threshold analysis yields three principal findings. First, the per-patient-
 
 The Dartmouth-Hitchcock Medical Center program provides the most extensive body of evidence for the economic and clinical impact of continuous monitoring on general wards. Taenzer et al. reported a before-and-after study on a single 36-bed orthopedic unit over approximately 21 months, in which pulse-oximetry surveillance was associated with a 48% reduction in ICU transfers (5.6 to 2.9 per 1,000 patient-days) and a 65% reduction in rescue events [6]. Separately, McGrath et al. conducted a 10-year retrospective review (December 2007 to November 2017) encompassing 111,488 discharges on monitored units, finding zero deaths or severe morbidity from opioid-induced respiratory depression while surveillance monitoring was in active use; three deaths occurred on unmonitored units during the implementation rollout period [7]. The financial analysis by Blike et al. evaluated 31,993 patients over 3.5 years, estimating approximately $10,700 in operating margin improvement per ICU transfer avoided and $5,500 per rescue event avoided, projecting annual savings of ~$759,000 for 200 monitored beds [8].
 
-Our model extends this evidence base in three ways. First, we compare six device scenarios rather than a single technology, revealing that cost structures differ markedly (consumable-dominated vs. capital-dominated). Second, by incorporating adverse event costs from four national systems, we demonstrate that the economic case is robust across healthcare contexts with very different cost structures. Third, by providing all parameters in machine-readable format with explicit sensitivity ranges, we enable institutional adaptation—a feature absent from prior analyses.
+Our model extends this evidence base in three ways. First, we compare five device scenarios rather than a single technology, revealing that cost structures differ markedly (consumable-dominated vs. capital-dominated). Second, by incorporating adverse event costs from four national systems, we demonstrate that the economic case is robust across healthcare contexts with very different cost structures. Third, by providing all parameters in machine-readable format with explicit sensitivity ranges, we enable institutional adaptation—a feature absent from prior analyses.
 
 The $10,700 per ICU transfer avoided estimated by Blike et al. [8] is broadly consistent with the Australian estimate of A$14,134 per deterioration episode by Curtis et al. [17] when accounting for healthcare system cost differences. Our model's break-even thresholds (0.07–0.82 events per 1,000 patient-days for non-contact sensors) are conservative compared to published deterioration rates. Curtis et al. reported that approximately 1,600 of 71,000 admissions (2.3%) experienced clinical deterioration within 72 hours [17], suggesting that even modest detection improvements could exceed break-even.
 
@@ -272,11 +272,63 @@ Three research priorities emerge from this analysis. First, pragmatic comparativ
 
 ## Conclusions
 
-This study constructed a deterministic cost-minimization and break-even model comparing manual respiratory rate counting with six automated monitoring scenarios across four national healthcare systems, and demonstrated that break-even thresholds (0.07–3.99 deterioration events avoided per 1,000 patient-days across device technologies and country adverse-event-cost scenarios; up to 5.93/1,000 under multi-way worst-case assumptions) are clinically achievable on general wards with moderate-to-high acuity. The economic case for device adoption rests on avoidance of downstream deterioration costs; whether devices actually deliver the required event reduction in specific institutional contexts remains to be established through prospective comparative studies. Hospitals considering automated RR monitoring should use this openly available framework—with institution-specific deterioration rates, adverse event costs, and device procurement prices—to perform local threshold analyses before adoption decisions.
+This study constructed a deterministic cost-minimization and break-even model comparing manual respiratory rate counting with five automated monitoring scenarios across four national healthcare systems, and demonstrated that break-even thresholds (0.07–3.99 deterioration events avoided per 1,000 patient-days across device technologies and country adverse-event-cost scenarios; up to 5.93/1,000 under multi-way worst-case assumptions) are clinically achievable on general wards with moderate-to-high acuity. The economic case for device adoption rests on avoidance of downstream deterioration costs; whether devices actually deliver the required event reduction in specific institutional contexts remains to be established through prospective comparative studies. Hospitals considering automated RR monitoring should use this openly available framework—with institution-specific deterioration rates, adverse event costs, and device procurement prices—to perform local threshold analyses before adoption decisions.
 
 ---
 
-## Declarations
+## References
+
+[1] Royal College of Physicians. National Early Warning Score (NEWS) 2. London: RCP; 2017. Available from: https://www.rcp.ac.uk/media/a4ibkkbf/news2-final-report_0_0.pdf
+
+[2] Cretikos MA, Bellomo R, Hillman K, Chen J, Finfer S, Flabouris A. Respiratory rate: the neglected vital sign. Med J Aust. 2008;188(11):657-659. https://doi.org/10.5694/j.1326-5377.2008.tb01825.x
+
+[3] Kallioinen N, Hill A, Christofidis MJ, Horswill MS, Watson MO. Quantitative systematic review: Sources of inaccuracy in manually measured adult respiratory rate data. J Adv Nurs. 2021;77(1):98-124. https://doi.org/10.1111/jan.14584
+
+[4] Philip KEJ, Pack E, Cambiano V, et al. The accuracy of respiratory rate assessment by doctors in a London teaching hospital: a cross-sectional study. J Clin Monit Comput. 2015;29:455-460. https://doi.org/10.1007/s10877-014-9621-3
+
+[5] Pankhurst T, Sapey E, Gyves H, Evison F, Gallier S, Gkoutos G, Ball S. Evaluation of NEWS2 response thresholds in a retrospective observational study from a UK acute hospital. BMJ Open. 2022;12(2):e054027. https://doi.org/10.1136/bmjopen-2021-054027
+
+[6] Taenzer AH, Pyke JB, McGrath SP, Blike GT. Impact of pulse oximetry surveillance on rescue events and intensive care unit transfers. Anesthesiology. 2010;112:282-287. https://doi.org/10.1097/ALN.0b013e3181ca7a9b
+
+[7] McGrath SP, McGovern KM, Perreard IM, Huang V, Moss LB, Blike GT. Inpatient respiratory arrest associated with sedative and analgesic medications: impact of continuous monitoring on patient mortality and severe morbidity. J Patient Saf. 2021;17(8):557-561. https://doi.org/10.1097/PTS.0000000000000696
+
+[8] Blike G, McGrath S, Perreard I, McGovern K. Estimating the financial impact of surveillance monitoring in the general care setting. J Patient Saf. 2025;21(8):e169-e175. https://doi.org/10.1097/PTS.0000000000001392
+
+[9] NICE. EarlySense for heart and respiratory monitoring and predicting patient deterioration. Medtech innovation briefing MIB49. London: NICE; 2016.
+
+[10] NICE. RespiraSense for continuously monitoring respiratory rate. Medtech innovation briefing MIB299. London: NICE; 2022.
+
+[11] Husereau D, Drummond M, Augustovski F, et al. Consolidated Health Economic Evaluation Reporting Standards 2022 (CHEERS 2022) statement: updated reporting guidance for health economic evaluations. BMJ. 2022;376:e067975. https://doi.org/10.1136/bmj-2021-067975
+
+[12] van Loon K, Peelen LM, van de Vlasakker EC, Kalkman CJ, van Wolfswinkel L, van Zaane B. Accuracy of remote continuous respiratory rate monitoring technologies intended for low care clinical settings: a prospective observational study. Can J Anaesth. 2018;65(12):1324-1332. https://doi.org/10.1007/s12630-018-1214-z
+
+[13] Lee JH, Nathanson LA, Burke RC, Anthony BW, Shapiro NI, Dagan AS. Assessment of respiratory rate monitoring in the emergency department. J Am Coll Emerg Physicians Open. 2024;5(3):e13154. https://doi.org/10.1002/emp2.13154
+
+[14] Ministry of Health, Labour and Welfare (Japan). 社会医療診療行為別統計 2021年. Available from: https://www.mhlw.go.jp/toukei/saikin/hw/sinryo/tyosa21/dl/gaikyou2021.pdf
+
+[15] Ohbe H, Kudo D, Kushimoto S, et al. National cost of intensive care in Japan from 2018 to 2022. J Intensive Care. 2026;14(1):36. https://doi.org/10.1186/s40560-026-00868-5
+
+[16] UK Parliament. Written Question 165361: Hospital Beds Costs (2020/21 NCC data). March 2023. Available from: https://www.theyworkforyou.com/wrans/?id=2023-03-14.165361.h
+
+[17] Curtis K, Sivabalan P, Bedford DS, et al. Treatment costs associated with inpatient clinical deterioration. Resuscitation. 2021;166:49-54. https://doi.org/10.1016/j.resuscitation.2021.07.022
+
+[18] Toften S, Kjellstadli JT, Kværness J, et al. Contactless and continuous monitoring of respiratory rate in a hospital ward: a clinical validation study. Front Physiol. 2024;15:1502413. https://doi.org/10.3389/fphys.2024.1502413
+
+[19] Hillrom (Baxter). Hillrom announces acquisition of contact-free continuous monitoring technology from EarlySense. Press release. February 2021.
+
+[20] Bergese SD, Mestek ML, Kelley SD, et al. Multicenter study validating accuracy of a continuous respiratory rate measurement derived from pulse oximetry: a comparison with capnography. Anesth Analg. 2017;124:1153-1159. https://doi.org/10.1213/ANE.0000000000001852
+
+[21] Vlayen A, Verelst S, Bekkering GE, et al. Exploring unplanned ICU admissions: a systematic review. JBI Libr Syst Rev. 2011;9(25):925-959. https://doi.org/10.11124/01938924-201109250-00001
+
+[22] NICE. Acutely ill adults in hospital: recognising and responding to deterioration. Clinical guideline CG50. London: NICE; 2007.
+
+[23] Subbe CP, Kinsella S. Continuous monitoring of respiratory rate in emergency admissions: evaluation of the RespiraSense sensor in acute care. Sensors. 2018;18:2700. https://doi.org/10.3390/s18082700
+
+[24] US Food and Drug Administration. 510(k) Premarket Notification K212143: Neteera 130H/131H. September 2022. Available from: https://www.accessdata.fda.gov/cdrh_docs/pdf21/K212143.pdf
+
+---
+
+## Statements and Declarations
 
 **Funding:** [TO BE CONFIRMED with each coauthor. Draft template: "This research received no specific grant from any funding agency in the public, commercial, or not-for-profit sectors."]
 
@@ -299,61 +351,9 @@ All authors read and approved the final manuscript and meet the four ICMJE autho
 
 ---
 
-## References
-
-[1] Royal College of Physicians. National Early Warning Score (NEWS) 2. London: RCP; 2017. Available from: https://www.rcp.ac.uk/media/a4ibkkbf/news2-final-report_0_0.pdf
-
-[2] Cretikos MA, Bellomo R, Hillman K, et al. Respiratory rate: the neglected vital sign. Med J Aust. 2008;188:657-659.
-
-[3] Kallioinen N, Hill A, Horswill MS, Christofidis MJ, Watson MO. Sources of inaccuracy in the measurement of adult patients' respiratory rate. J Adv Nurs. 2021;77(1):98-124. doi:10.1111/jan.14584
-
-[4] Philip KEJ, Pack E, Cambiano V, et al. The accuracy of respiratory rate assessment by doctors in a London teaching hospital: a cross-sectional study. J Clin Monit Comput. 2015;29:455-460. doi:10.1007/s10877-014-9621-3
-
-[5] Pankhurst T, Sapey E, Gyves H, Evison F, Gallier S, Gkoutos G, Ball S. Evaluation of NEWS2 response thresholds in a retrospective observational study from a UK acute hospital. BMJ Open. 2022;12(2):e054027. doi:10.1136/bmjopen-2021-054027
-
-[6] Taenzer AH, Pyke JB, McGrath SP, Blike GT. Impact of pulse oximetry surveillance on rescue events and intensive care unit transfers. Anesthesiology. 2010;112:282-287. doi:10.1097/ALN.0b013e3181ca7a9b
-
-[7] McGrath SP, McGovern KM, Perreard IM, Huang V, Moss LB, Blike GT. Inpatient respiratory arrest associated with sedative and analgesic medications: impact of continuous monitoring on patient mortality and severe morbidity. J Patient Saf. 2021;17(8):557-561. doi:10.1097/PTS.0000000000000696
-
-[8] Blike G, McGrath S, Perreard I, McGovern K. Estimating the financial impact of surveillance monitoring in the general care setting. J Patient Saf. 2025;21(8):e169-e175. doi:10.1097/PTS.0000000000001392
-
-[9] NICE. EarlySense for heart and respiratory monitoring and predicting patient deterioration. Medtech innovation briefing MIB49. London: NICE; 2016.
-
-[10] NICE. RespiraSense for continuously monitoring respiratory rate. Medtech innovation briefing MIB299. London: NICE; 2022.
-
-[11] Husereau D, Drummond M, Augustovski F, et al. Consolidated Health Economic Evaluation Reporting Standards 2022 (CHEERS 2022) statement: updated reporting guidance for health economic evaluations. BMJ. 2022;376:e067975. doi:10.1136/bmj-2021-067975
-
-[12] van Loon K, Peelen LM, van de Vlasakker EC, Kalkman CJ, van Wolfswinkel L, van Zaane B. Accuracy of remote continuous respiratory rate monitoring technologies intended for low care clinical settings: a prospective observational study. Can J Anaesth. 2018;65(12):1324-1332. doi:10.1007/s12630-018-1214-z
-
-[13] Lee JH, Nathanson LA, Burke RC, Anthony BW, Shapiro NI, Dagan AS. Assessment of respiratory rate monitoring in the emergency department. J Am Coll Emerg Physicians Open. 2024;5(3):e13154. doi:10.1002/emp2.13154
-
-[14] Ministry of Health, Labour and Welfare (Japan). 社会医療診療行為別統計 2021年. Available from: https://www.mhlw.go.jp/toukei/saikin/hw/sinryo/tyosa21/dl/gaikyou2021.pdf
-
-[15] Ohbe H, Kudo D, Kushimoto S, et al. National cost of intensive care in Japan from 2018 to 2022. J Intensive Care. 2026;14(1):36. doi:10.1186/s40560-026-00868-5
-
-[16] UK Parliament. Written Question 165361: Hospital Beds Costs (2020/21 NCC data). March 2023. Available from: https://www.theyworkforyou.com/wrans/?id=2023-03-14.165361.h
-
-[17] Curtis K, Sivabalan P, Bedford DS, et al. Treatment costs associated with inpatient clinical deterioration. Resuscitation. 2021;166:49-54. doi:10.1016/j.resuscitation.2021.07.022
-
-[18] Toften S, Kjellstadli JT, Kværness J, et al. Contactless and continuous monitoring of respiratory rate in a hospital ward: a clinical validation study. Front Physiol. 2024;15:1502413. doi:10.3389/fphys.2024.1502413
-
-[19] Hillrom (Baxter). Hillrom announces acquisition of contact-free continuous monitoring technology from EarlySense. Press release. February 2021.
-
-[20] Bergese SD, Mestek ML, Kelley SD, et al. Multicenter study validating accuracy of a continuous respiratory rate measurement derived from pulse oximetry: a comparison with capnography. Anesth Analg. 2017;124:1153-1159. doi:10.1213/ANE.0000000000001852
-
-[21] Vlayen A, Verelst S, Bekkering GE, et al. Exploring unplanned ICU admissions: a systematic review. JBI Libr Syst Rev. 2011;9(25):925-959. doi:10.11124/01938924-201109250-00001
-
-[22] NICE. Acutely ill adults in hospital: recognising and responding to deterioration. Clinical guideline CG50. London: NICE; 2007.
-
-[23] Subbe CP, Kinsella S. Continuous monitoring of respiratory rate in emergency admissions: evaluation of the RespiraSense sensor in acute care. Sensors. 2018;18:2700. doi:10.3390/s18082700
-
-[24] US Food and Drug Administration. 510(k) Premarket Notification K212143: Neteera 130H/131H. September 2022. Available from: https://www.accessdata.fda.gov/cdrh_docs/pdf21/K212143.pdf
-
----
-
 ## Figure Legends
 
-**Figure 1.** Study overview. Schematic representation of the study design showing the literature search strategy, model construction, and analytical framework. The model compares manual respiratory rate counting with six automated monitoring scenarios, parameterized using data from four national healthcare systems.
+**Figure 1.** Study overview. Schematic representation of the study design showing the literature search strategy, model construction, and analytical framework. The model compares manual respiratory rate counting with five automated monitoring scenarios, parameterized using data from four national healthcare systems.
 
 **Figure 2.** Accuracy of automated respiratory rate monitoring devices: Bland-Altman bias (circles) and 95% limits of agreement (horizontal bars) versus reference standards. Red dashed lines indicate the ±3 breaths/min clinical acceptance threshold. Where 98.9% LoA are reported (van Loon et al. [12]), this is noted. Only studies reporting Bland-Altman statistics or equivalent are shown. Detailed accuracy metrics including sample sizes, settings, and reference standard for each study are provided in Table 2.
 

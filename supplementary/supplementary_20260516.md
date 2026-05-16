@@ -37,7 +37,7 @@ This study was preceded by two preliminary reports generated through LLM-assiste
 | "72% of recorded RR were inaccurate" (DOCX draft) | **Clarified**: Philip et al. 2015 [4] is a perception survey (72% of doctors rated RR records as only "sometimes accurate"), not a direct accuracy measurement. |
 | UK critical care £1,173/bed-day | **Verified but outdated**: From 2012-13 NHS reference costs [16]. Acknowledged as limitation. |
 | Neteera "95% accuracy rate" | **Partially verified**: Website claims 95%; FDA 510(k) data show ~93%. Discrepancy noted. |
-| Blike et al. 2025 citation | **Corrected**: Full citation: Blike G, McGrath S, Perreard I, McGovern K. J Patient Saf. 2025;21(8):e169-e175. doi:10.1097/PTS.0000000000001392 |
+| Blike et al. 2025 citation | **Corrected**: Full citation: Blike G, McGrath S, Perreard I, McGovern K. J Patient Saf. 2025;21(8):e169-e175. https://doi.org/10.1097/PTS.0000000000001392 |
 
 ---
 
@@ -187,13 +187,13 @@ This section provides detailed accuracy findings for each device category, suppl
 The Vitalthings Guardian M10 was validated against respiratory inductance plethysmography (Nox T3s) in 32 emergency ward patients (1,112 paired measurements). Bland-Altman analysis showed bias of 0.1 breaths/min (stationary) and 0.0 breaths/min (mobile), with 95% LoA of −1.09 to +1.19 and −1.07 to +1.07 breaths/min, respectively [18]. This represents the narrowest LoA among devices evaluated in a hospital setting.
 
 ### Pulse-oximetry-derived RR
-The Medtronic Nellcor Continuous RR (CNRRS) was validated against clinician-overscored capnography in a multicenter study of 79 subjects (23,243 paired observations). Overall bias was 0.18 breaths/min with 95% LoA of −3.06 to +3.42 (RMSD 1.35 breaths/min). Among 53 hospitalized patients, bias was 0.07 breaths/min with wider LoA of −3.84 to +3.97 [20]. Separately, Masimo Rad-G (pulse-oximetry plethysmographic RR) showed sensitivity of 95% and specificity of 94% for detecting abnormal RR, though Bland-Altman data were not reported in the available study.
+The Medtronic Nellcor Continuous RR (CNRRS) was validated against clinician-overscored capnography in a multicenter study of 79 subjects (23,243 paired observations). Overall bias was 0.18 breaths/min with 95% LoA of −3.06 to +3.42 (RMSD 1.35 breaths/min). Among 53 hospitalized patients, bias was 0.07 breaths/min with wider LoA of −3.84 to +3.97 [20]. For the Masimo Rad-G (pulse-oximetry plethysmographic RR), peer-reviewed adult-ward accuracy data (Bland-Altman bias, limits of agreement, or sensitivity/specificity) were not identified within the scope of our literature search.
 
 ### Thoracic impedance
 Transthoracic impedance (TTI) showed the poorest agreement across multiple studies. Van Loon et al. reported impedance plethysmography (IPG) bias of −1.9 breaths/min with 98.9% LoA of −13.1 to +9.2 in 20 PACU patients [12]; notably, these are 98.9% LoA (using ±2.63×SD with repeated-measures correction), and 95% LoA would be somewhat narrower. In a recent ED study, telemetry-based impedance showed bias of 0.2 breaths/min but LoA of −6.2 to +6.6 against capnography [13]. In the same study, manual nurse-documented RR showed bias of −0.6 with LoA of −13.5 to +12.3 against capnography, illustrating the magnitude of manual measurement error [13].
 
 ### Wearable patches
-For RespiraSense, NICE MIB299 reported mean bias of −0.41 breaths/min versus ECG-derived RR with 95% LoA of −3.9 to +3.1 [10]. Against nurse manual counting, the agreement was wider (mean bias −0.58, LoA −5.5 to +4.3), with 20% of intervals showing differences exceeding 3 breaths/min [10]. The Equivital chest belt reported bias of 0.2 breaths/min with LoA of −2.2 to +2.6 breaths/min under controlled laboratory conditions.
+For RespiraSense, NICE MIB299 reported mean bias of −0.41 breaths/min versus ECG-derived RR with 95% LoA of −3.9 to +3.1 [10]. Against nurse manual counting, the agreement was wider (mean bias −0.58, LoA −5.5 to +4.3), with 20% of intervals showing differences exceeding 3 breaths/min [10]. The Equivital chest belt has primarily been validated in non-clinical exercise and occupational settings rather than in adult hospital wards; peer-reviewed ward-based accuracy data within the scope of this review were not identified.
 
 ### Under-mattress sensors
 For EarlySense, NICE MIB49 summarized accuracy rates from manufacturer-submitted studies rather than Bland-Altman metrics: adult sleep lab accuracy 93.1%, ICU accuracy 82% versus end-tidal CO₂, and 75% versus manual counting [9]. The varying definitions of "accuracy" across these source studies preclude direct comparison with Bland-Altman data from other devices.
@@ -227,7 +227,7 @@ Characteristics of commercially available automated respiratory rate monitoring 
 
 ### Supplementary Table S2. Per-Patient-Day Cost Comparison (Japan Base Case)
 
-Per-patient-day cost decomposition for manual respiratory rate counting versus six automated monitoring scenarios. Japan base case: 30-bed ward, 90% occupancy, nurse hourly cost ¥3,500, 4.5 observations/patient-day. Full machine-readable data: `tables/table3_cost_per_patient_day.csv`.
+Per-patient-day cost decomposition for manual respiratory rate counting versus five automated monitoring scenarios. Japan base case: 30-bed ward, 90% occupancy, nurse hourly cost ¥3,500, 4.5 observations/patient-day. Full machine-readable data: `tables/table3_cost_per_patient_day.csv`.
 
 | Scenario | Device depreciation (¥/pd) | Maintenance (¥/pd) | Consumables (¥/pd) | Staff time (¥/pd) | Total (¥/pd) | Incremental vs manual (¥/pd) | Annual total (¥) | Staff time (min/pd) |
 |----------|---------------------------:|-------------------:|-------------------:|------------------:|-------------:|------------------------------:|------------------:|--------------------:|
@@ -288,7 +288,7 @@ Completed checklist per Husereau et al. (BMJ 2022;376:e067975) [11].
 | 4 | Health economic analysis plan | Methods: Study Design and Reporting (CHEERS 2022 compliance stated) |
 | 5 | Study population | Methods: Eligibility Criteria; Results: Identified Technologies |
 | 6 | Setting and location | Methods: Cost-Effectiveness Model (Japan base case; multi-country) |
-| 7 | Comparators | Methods: Cost-Effectiveness Model (manual counting vs 6 automated scenarios) |
+| 7 | Comparators | Methods: Cost-Effectiveness Model (manual counting vs 5 automated scenarios) |
 | 8 | Perspective | Methods: Cost-Effectiveness Model ("Hospital perspective") |
 | 9 | Time horizon | Methods: Cost-Effectiveness Model ("1-year time horizon") |
 | 10 | Discount rate | Not applicable (1-year time horizon; no discounting required) |

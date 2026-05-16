@@ -430,12 +430,12 @@ for heading, content_lines in sections:
 # ══════════════════════════════════════════════════════════════════════
 
 figure_files = [
-    ("fig0_study_overview.png", "Figure 1"),
-    ("fig1_accuracy_comparison.png", "Figure 2"),
-    ("fig2_cost_comparison.png", "Figure 3"),
-    ("fig3_breakeven.png", "Figure 4"),
-    ("fig4_tornado.png", "Figure 5"),
-    ("fig5_scenario_analysis.png", "Figure 6"),
+    ("fig1_study_overview.png", "Figure 1"),
+    ("fig2_accuracy.png", "Figure 2"),
+    ("fig3_cost.png", "Figure 3"),
+    ("fig4_breakeven.png", "Figure 4"),
+    ("fig5_tornado.png", "Figure 5"),
+    ("fig6_scenario.png", "Figure 6"),
 ]
 
 for fname, label in figure_files:

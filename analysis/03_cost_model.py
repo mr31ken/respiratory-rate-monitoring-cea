@@ -15,8 +15,8 @@ Model Structure:
 Outputs:
   ../tables/table3_cost_per_patient_day.csv
   ../tables/table4_breakeven_analysis.csv
-  ../figures/fig2_cost_comparison.pdf
-  ../figures/fig2_cost_comparison.png
+  ../figures/fig3_cost.pdf
+  ../figures/fig3_cost.png
 """
 
 import os, pathlib
@@ -237,7 +237,7 @@ print(f"\nTable 4 saved: {TABLES / 'table4_breakeven_analysis.csv'}")
 
 
 # ══════════════════════════════════════════════════════════════════════
-# Figure 2: Cost Comparison (stacked bar)
+# Figure 3: Cost Comparison (stacked bar)
 # ══════════════════════════════════════════════════════════════════════
 fig, ax = plt.subplots(figsize=(10, 6))
 
@@ -261,8 +261,7 @@ for col, (color, label) in colors_stack.items():
 ax.set_xticks(x)
 ax.set_xticklabels(categories, fontsize=8, rotation=15, ha="right")
 ax.set_ylabel("Cost per patient-day (JPY)", fontsize=10)
-ax.set_title("Manual RR Measurement vs. Automated Monitoring Devices",
-             fontsize=11, fontweight="bold")
+# Title removed per JCMC requirements (no chart titles inside figures)
 ax.legend(fontsize=8, loc="upper left")
 
 # Add total cost labels
@@ -281,10 +280,10 @@ ax.text(0.02, -0.18,
         transform=ax.transAxes, fontsize=7, color="gray", wrap=True)
 
 plt.tight_layout()
-fig.savefig(FIGURES / "fig2_cost_comparison.pdf", dpi=300, bbox_inches="tight")
-fig.savefig(FIGURES / "fig2_cost_comparison.png", dpi=300, bbox_inches="tight")
+fig.savefig(FIGURES / "fig3_cost.pdf", dpi=300, bbox_inches="tight")
+fig.savefig(FIGURES / "fig3_cost.png", dpi=300, bbox_inches="tight")
 plt.close()
-print(f"\nFigure 2 saved to {FIGURES}")
+print(f"\nFigure 3 saved to {FIGURES}")
 
 if __name__ == "__main__":
     print("\n=== 03_cost_model.py complete ===")

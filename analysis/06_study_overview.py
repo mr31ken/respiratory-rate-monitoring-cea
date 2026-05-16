@@ -2,15 +2,12 @@
 """
 06_study_overview.py
 --------------------
-Generate Figure 0: Study Overview — a flow-diagram summarising the
+Generate Figure 1: Study Overview — a flow-diagram summarising the
 study methodology (literature search, model construction, analysis).
 
-This becomes Figure 1 in the manuscript, shifting all subsequent
-figures up by one.
-
 Outputs:
-  ../figures/fig0_study_overview.pdf
-  ../figures/fig0_study_overview.png
+  ../figures/fig1_study_overview.pdf
+  ../figures/fig1_study_overview.png
 """
 
 import pathlib
@@ -233,7 +230,7 @@ ax.text(
 fig.tight_layout(pad=0.3)
 
 for ext in ("pdf", "png"):
-    fpath = FIGURES / f"fig0_study_overview.{ext}"
+    fpath = FIGURES / f"fig1_study_overview.{ext}"
     fig.savefig(fpath, dpi=300, bbox_inches="tight",
                 facecolor="white", edgecolor="none")
     print(f"Saved: {fpath}")

@@ -5,10 +5,12 @@
 One-way sensitivity analysis and break-even visualization.
 
 Outputs:
-  ../figures/fig3_breakeven.pdf
-  ../figures/fig3_breakeven.png
-  ../figures/fig4_tornado.pdf
-  ../figures/fig4_tornado.png
+  ../figures/fig4_breakeven.pdf
+  ../figures/fig4_breakeven.png
+  ../figures/fig5_tornado.pdf
+  ../figures/fig5_tornado.png
+  ../figures/fig6_scenario.pdf
+  ../figures/fig6_scenario.png
   ../tables/table5_sensitivity.csv
 """
 
@@ -145,7 +147,7 @@ print(f"\nTable 5 saved: {TABLES / 'table5_sensitivity.csv'}")
 
 
 # ══════════════════════════════════════════════════════════════════════
-# Figure 3: Break-even Analysis (multi-country)
+# Figure 4: Break-even Analysis (multi-country)
 # ══════════════════════════════════════════════════════════════════════
 # For each device type, show break-even events using different country AE costs
 device_types = {
@@ -213,9 +215,7 @@ ax.set_xticks(x)
 ax.set_xticklabels([k.replace("\n", "\n") for k in device_types.keys()],
                    fontsize=8, ha="center")
 ax.set_ylabel("Break-even: adverse events avoided\n(per 1,000 patient-days)", fontsize=9)
-ax.set_title("Break-Even Analysis: Adverse Events to Avoid\n"
-             "for Cost-Neutral Automated RR Monitoring",
-             fontsize=11, fontweight="bold")
+# Title removed per JCMC requirements (no chart titles inside figures)
 ax.legend(fontsize=7, loc="upper right", ncol=2)
 ax.spines["top"].set_visible(False)
 ax.spines["right"].set_visible(False)
@@ -229,20 +229,27 @@ ax.text(0.02, -0.15,
         transform=ax.transAxes, fontsize=7, color="gray", wrap=True)
 
 plt.tight_layout()
-fig.savefig(FIGURES / "fig3_breakeven.pdf", dpi=300, bbox_inches="tight")
-fig.savefig(FIGURES / "fig3_breakeven.png", dpi=300, bbox_inches="tight")
+fig.savefig(FIGURES / "fig4_breakeven.pdf", dpi=300, bbox_inches="tight")
+fig.savefig(FIGURES / "fig4_breakeven.png", dpi=300, bbox_inches="tight")
 plt.close()
-print(f"\nFigure 3 saved to {FIGURES}")
+print(f"\nFigure 4 saved to {FIGURES}")
 
 
 # ══════════════════════════════════════════════════════════════════════
-# Figure 4: Tornado Diagram
+# Figure 5: Tornado Diagram
 # ══════════════════════════════════════════════════════════════════════
 tornado_df = pd.DataFrame(tornado_data).sort_values("range", ascending=True)
 
-fig, ax = plt.subplots(figsize=(9, 6))
+# Increased height ~30% (6 -> 7.8) to reduce vertical crowding of labels
+fig, ax = plt.subplots(figsize=(9, 7.8))
 
 y = np.arange(len(tornado_df))
+# Compute x-range to position outside-bar labels with a small offset
+x_min_data = min(tornado_df["be_at_low"].min(), tornado_df["be_at_high"].min())
+x_max_data = max(tornado_df["be_at_low"].max(), tornado_df["be_at_high"].max())
+x_span = x_max_data - x_min_data
+label_offset = x_span * 0.015
+
 for i, (_, row) in enumerate(tornado_df.iterrows()):
     low_val = min(row["be_at_low"], row["be_at_high"])
     high_val = max(row["be_at_low"], row["be_at_high"])
@@ -254,19 +261,21 @@ for i, (_, row) in enumerate(tornado_df.iterrows()):
     ax.barh(i, high_val - base_be, left=base_be, height=0.6,
             color="#E53935", alpha=0.7)
 
-    # Labels
-    ax.text(low_val - 0.3, i, f'{row["low_value"]}',
+    # Labels — placed OUTSIDE the bars (past the bar edge) to avoid overlap
+    ax.text(low_val - label_offset, i, f'{row["low_value"]}',
             ha="right", va="center", fontsize=7, color="#1976D2")
-    ax.text(high_val + 0.3, i, f'{row["high_value"]}',
+    ax.text(high_val + label_offset, i, f'{row["high_value"]}',
             ha="left", va="center", fontsize=7, color="#E53935")
 
 ax.axvline(base_be, color="black", linewidth=1.2, linestyle="--", alpha=0.7)
 ax.set_yticks(y)
-ax.set_yticklabels(tornado_df["parameter"], fontsize=9)
+# Slightly smaller font for y-tick labels to reduce overlap with bar values
+ax.set_yticklabels(tornado_df["parameter"], fontsize=8)
 ax.set_xlabel("Break-even: adverse events avoided per year", fontsize=10)
-ax.set_title("Tornado Diagram: One-Way Sensitivity Analysis\n"
-             "(Under-Mattress Sensor vs. Manual RR Counting, Japan)",
-             fontsize=11, fontweight="bold")
+# Title removed per JCMC requirements (no chart titles inside figures)
+
+# Extend x-limits so the outside-bar value labels are not clipped
+ax.set_xlim(x_min_data - x_span * 0.10, x_max_data + x_span * 0.10)
 
 # Legend
 from matplotlib.patches import Patch
@@ -281,11 +290,13 @@ ax.text(0.02, -0.08,
 
 ax.spines["top"].set_visible(False)
 ax.spines["right"].set_visible(False)
-plt.tight_layout()
-fig.savefig(FIGURES / "fig4_tornado.pdf", dpi=300, bbox_inches="tight")
-fig.savefig(FIGURES / "fig4_tornado.png", dpi=300, bbox_inches="tight")
+# Increase left margin so long y-axis parameter labels (e.g. "Adverse event cost (¥)")
+# are not clipped; also give a bit of bottom room for the caption text.
+plt.subplots_adjust(left=0.28, right=0.96, top=0.95, bottom=0.15)
+fig.savefig(FIGURES / "fig5_tornado.pdf", dpi=300, bbox_inches="tight")
+fig.savefig(FIGURES / "fig5_tornado.png", dpi=300, bbox_inches="tight")
 plt.close()
-print(f"\nFigure 4 saved to {FIGURES}")
+print(f"\nFigure 5 saved to {FIGURES}")
 
 # ══════════════════════════════════════════════════════════════════════
 # Multi-Way Scenario Analysis (Best / Base / Worst)
@@ -346,7 +357,7 @@ scenario_df.to_csv(TABLES / "table6_scenario_analysis.csv", index=False)
 print(f"\nTable 6 (scenario analysis) saved: {TABLES / 'table6_scenario_analysis.csv'}")
 print(scenario_df.to_string(index=False))
 
-# ── Figure 5: Scenario comparison bar chart ──────────────────────────
+# ── Figure 6: Scenario comparison bar chart ──────────────────────────
 fig, ax = plt.subplots(figsize=(8, 5))
 
 sc_labels = [s.replace("\n", " ") for s in scenarios.keys()]
@@ -363,9 +374,7 @@ for i, (bar, val) in enumerate(zip(bars, be_values)):
 ax.set_xticks(range(len(sc_labels)))
 ax.set_xticklabels(sc_labels, fontsize=10)
 ax.set_ylabel("Break-even: adverse events avoided\n(per 1,000 patient-days)", fontsize=10)
-ax.set_title("Multi-Way Scenario Analysis:\n"
-             "Break-Even Under Simultaneous Parameter Variation",
-             fontsize=11, fontweight="bold")
+# Title removed per JCMC requirements (no chart titles inside figures)
 
 # Reference line: typical deterioration rate range
 ax.axhline(y=2, color="orange", linestyle="--", linewidth=1, alpha=0.7)
@@ -385,10 +394,10 @@ ax.text(0.02, -0.15,
         transform=ax.transAxes, fontsize=7, color="gray")
 
 plt.tight_layout()
-fig.savefig(FIGURES / "fig5_scenario_analysis.pdf", dpi=300, bbox_inches="tight")
-fig.savefig(FIGURES / "fig5_scenario_analysis.png", dpi=300, bbox_inches="tight")
+fig.savefig(FIGURES / "fig6_scenario.pdf", dpi=300, bbox_inches="tight")
+fig.savefig(FIGURES / "fig6_scenario.png", dpi=300, bbox_inches="tight")
 plt.close()
-print(f"\nFigure 5 saved to {FIGURES}")
+print(f"\nFigure 6 saved to {FIGURES}")
 
 if __name__ == "__main__":
     print("\n=== 04_sensitivity.py complete ===")

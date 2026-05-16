@@ -2,11 +2,11 @@
 """
 02_accuracy_analysis.py
 -----------------------
-Produce Figure 1: Bland-Altman forest-style plot of all devices.
+Produce Figure 2: Bland-Altman forest-style plot of all devices.
 
 Outputs:
-  ../figures/fig1_accuracy_comparison.pdf
-  ../figures/fig1_accuracy_comparison.png
+  ../figures/fig2_accuracy.pdf
+  ../figures/fig2_accuracy.png
 """
 
 import os, pathlib
@@ -31,7 +31,7 @@ dev = pd.read_csv(DATA / "device_characteristics.csv")
 acc_full = acc.merge(dev[["device_id", "device_name", "category"]], on="device_id", how="left")
 
 # ══════════════════════════════════════════════════════════════════════
-# Figure 1: Bland-Altman forest-style plot
+# Figure 2: Bland-Altman forest-style plot
 # ══════════════════════════════════════════════════════════════════════
 
 fig, ax1 = plt.subplots(1, 1, figsize=(8, 7))
@@ -108,8 +108,7 @@ ax1.axvline(0, color="black", linestyle="--", linewidth=0.8, alpha=0.5)
 ax1.axvline(-3, color="red", linestyle=":", linewidth=0.8, alpha=0.3)
 ax1.axvline(3, color="red", linestyle=":", linewidth=0.8, alpha=0.3)
 ax1.set_xlabel("Bias and 95% Limits of Agreement (breaths/min)", fontsize=9)
-ax1.set_title("Bland-Altman Agreement with Reference Standards",
-              fontsize=10, fontweight="bold", loc="left")
+# Title removed per JCMC requirements (no chart titles inside figures)
 ax1.set_xlim(-10, 12)
 ax1.spines["top"].set_visible(False)
 ax1.spines["right"].set_visible(False)
@@ -127,10 +126,10 @@ ax1.legend(handles=legend_a, fontsize=7, loc="lower right")
 
 
 plt.tight_layout(rect=[0, 0, 1, 0.95])
-fig.savefig(FIGURES / "fig1_accuracy_comparison.pdf", dpi=300, bbox_inches="tight")
-fig.savefig(FIGURES / "fig1_accuracy_comparison.png", dpi=300, bbox_inches="tight")
+fig.savefig(FIGURES / "fig2_accuracy.pdf", dpi=300, bbox_inches="tight")
+fig.savefig(FIGURES / "fig2_accuracy.png", dpi=300, bbox_inches="tight")
 plt.close()
-print(f"Figure 1 saved to {FIGURES}")
+print(f"Figure 2 saved to {FIGURES}")
 print(f"  {len(ba_data)} studies with bias data")
 
 if __name__ == "__main__":
