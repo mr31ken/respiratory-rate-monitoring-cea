@@ -191,7 +191,7 @@ All intermediate outputs are regenerated from source data. No manual data manipu
 
 ---
 
-## S8. Device-by-Device Accuracy Data (Detail)
+## S7. Device-by-Device Accuracy Data (Detail)
 
 This section provides detailed accuracy findings for each device category, supplementing the summary in the main text (Results: Technology Landscape).
 
@@ -215,7 +215,7 @@ The Neteera 130H/131H received FDA 510(k) clearance with reported accuracy of ap
 
 ---
 
-## S9. Supplementary Tables (Moved from Main Text)
+## S8. Supplementary Tables (Moved from Main Text)
 
 ### Supplementary Table S1. Device Characteristics
 
@@ -288,7 +288,7 @@ Break-even thresholds under simultaneous variation of all assumption parameters.
 
 ---
 
-## S10. CHEERS 2022 Reporting Checklist
+## S9. CHEERS 2022 Reporting Checklist
 
 Completed checklist per Husereau et al. (BMJ 2022;376:e067975) [11].
 

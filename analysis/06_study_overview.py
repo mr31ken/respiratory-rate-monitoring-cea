@@ -137,7 +137,7 @@ draw_box(ax, bx, res_y, bw, BOX_H,
 # Technology categories annotation
 cat_y = res_y - 0.13
 draw_box(ax, bx, cat_y, bw, 0.12,
-         "Bioacoustics | Bioimpedance\nPiezoelectric | Radar\nCapnography",
+         "Pulse-oximetry | Impedance\nCapnography | Non-contact\n(radar / under-mattress) | Wearable",
          edgecolor=COL_LIT, fontsize=6.5)
 draw_arrow(ax, bx + bw/2, res_y, bx + bw/2, cat_y + 0.12 + 0.005)
 
@@ -218,13 +218,7 @@ draw_arrow(ax, 0.29 + 0.005, arr1_y, mx - 0.005, arr1_y)
 arr2_y = 0.50
 draw_arrow(ax, mx + mw + 0.005, arr2_y, 0.695 - 0.005, arr2_y)
 
-# ── Title ───────────────────────────────────────────────────────────
-ax.text(
-    0.50, 0.97,
-    "Study Overview: Cost-Minimization Analysis of Automated Respiratory Rate Monitoring",
-    ha="center", va="top", fontsize=10, fontweight="bold",
-    color=COL_TEXT,
-)
+# ── Title removed per JCMC convention (figure titles belong in manuscript text only) ─
 
 # ── Save ────────────────────────────────────────────────────────────
 fig.tight_layout(pad=0.3)
