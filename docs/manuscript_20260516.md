@@ -353,17 +353,17 @@ All authors read and approved the final manuscript and meet the four ICMJE autho
 
 ## Figure Legends
 
-**Fig. 1** Study overview. Schematic representation of the study design showing the literature search strategy, model construction, and analytical framework. The model compares manual respiratory rate counting with five automated monitoring scenarios, parameterized using data from four national healthcare systems.
+**Fig. 1** Study overview. Schematic representation of the study design showing the literature search strategy, model construction, and analytical framework. The model compares manual respiratory rate counting with five automated monitoring scenarios, parameterized using data from four national healthcare systems
 
-**Fig. 2** Accuracy of automated respiratory rate monitoring devices: Bland-Altman bias (circles) and 95% limits of agreement (horizontal bars) versus reference standards. Red dashed lines indicate the ±3 breaths/min clinical acceptance threshold. Where 98.9% LoA are reported (van Loon et al. [12]), this is noted. Only studies reporting Bland-Altman statistics or equivalent are shown. Detailed accuracy metrics including sample sizes, settings, and reference standard for each study are provided in Table 2.
+**Fig. 2** Accuracy of automated respiratory rate monitoring devices: Bland-Altman bias (circles) and 95% limits of agreement (horizontal bars) versus reference standards. Red dashed lines indicate the ±3 breaths/min clinical acceptance threshold. Where 98.9% LoA are reported (van Loon et al. [12]), this is noted. Only studies reporting Bland-Altman statistics or equivalent are shown. Detailed accuracy metrics including sample sizes, settings, and reference standard for each study are provided in Table 2
 
-**Fig. 3** Per-patient-day cost comparison of manual respiratory rate counting versus automated monitoring scenarios. Stacked bars show cost components: device depreciation, maintenance, consumables, and staff time. Japan base case: 30-bed ward, 90% occupancy, nurse cost ¥3,500/hour.
+**Fig. 3** Per-patient-day cost comparison of manual respiratory rate counting versus automated monitoring scenarios. Stacked bars show cost components: device depreciation, maintenance, consumables, and staff time. Japan base case: 30-bed ward, 90% occupancy, nurse cost ¥3,500/hour
 
-**Fig. 4** Break-even analysis showing the number of adverse events (deterioration episodes) that must be avoided per 1,000 patient-days for each device scenario to achieve cost-neutrality, across five adverse event cost assumptions derived from Japan, UK, Australia, and USA data.
+**Fig. 4** Break-even analysis showing the number of adverse events (deterioration episodes) that must be avoided per 1,000 patient-days for each device scenario to achieve cost-neutrality, across five adverse event cost assumptions derived from Japan, UK, Australia, and USA data
 
-**Fig. 5** Tornado diagram for one-way sensitivity analysis of a representative non-contact (EarlySense-type) device scenario (Japan; base incremental ¥550.9/patient-day, base break-even 11.4 events/year). Bars represent the change in break-even threshold (adverse events avoided per year) when each parameter is varied across its plausible range. Parameters classified as "Assumption" in Table 1 are marked with an asterisk.
+**Fig. 5** Tornado diagram for one-way sensitivity analysis of a representative non-contact (EarlySense-type) device scenario (Japan; base incremental ¥550.9/patient-day, base break-even 11.4 events/year). Bars represent the change in break-even threshold (adverse events avoided per year) when each parameter is varied across its plausible range. Parameters classified as "Assumption" in Table 1 are marked with an asterisk
 
-**Fig. 6** Multi-way scenario analysis showing break-even thresholds when all assumption parameters are simultaneously varied. Best case: all parameters set to values favoring device adoption; worst case: all parameters set to values disfavoring adoption. Orange dashed lines indicate the published range of deterioration events (2–10 per 1,000 patient-days [17, 21]).
+**Fig. 6** Multi-way scenario analysis showing break-even thresholds when all assumption parameters are simultaneously varied. Best case: all parameters set to values favoring device adoption; worst case: all parameters set to values disfavoring adoption. Orange dashed lines indicate the published range of deterioration events (2–10 per 1,000 patient-days [17, 21])
 
 ---
 

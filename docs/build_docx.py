@@ -260,9 +260,9 @@ else:
     add_para(doc, "[Authors section missing in manuscript_20260516.md]",
              alignment=WD_ALIGN_PARAGRAPH.CENTER, space_after=24)
 
-add_para(doc, "Tables: 3  |  Figures: 6  |  References: 25",
+add_para(doc, "Tables: 3  |  Figures: 6  |  References: 24",
          alignment=WD_ALIGN_PARAGRAPH.CENTER, space_before=24, space_after=0)
-add_para(doc, "Supplementary Materials: 10 sections",
+add_para(doc, "Supplementary Materials: 9 sections (S1–S9)",
          alignment=WD_ALIGN_PARAGRAPH.CENTER, space_after=24)
 add_page_break(doc)
 
