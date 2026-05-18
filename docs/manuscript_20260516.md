@@ -81,7 +81,7 @@ For accuracy data, we extracted Bland-Altman bias and 95% limits of agreement (o
 
 **Perspective and time horizon:** Hospital perspective (direct costs borne by the hospital for monitoring equipment, consumables, maintenance, and staff time; excludes societal costs, patient out-of-pocket costs, and downstream outpatient care); 1-year time horizon (chosen because device procurement and ward-level cost accounting in acute care settings typically operate on annual budget cycles, and because the clinical evidence base [6, 7] reports outcomes over periods of months to years without time-preference discounting). No discounting was applied given the 1-year horizon.
 
-**Base-case parameters (Japan):** All model input parameters, their values, sources, and sensitivity ranges are presented in Table 1 and in the supplementary data file (data/cost_parameters.csv). Key base-case assumptions: 30-bed ward, 90% occupancy (9,855 patient-days/year), standard monitoring frequency of 4.5 observations/patient-day [5], manual RR counting time of 80 seconds/observation (60-second count + 20-second documentation; sensitivity range 60–120 seconds), nurse full-cost hourly rate of ¥3,500 (includes salary, social insurance, and institutional overhead; sensitivity range ¥2,800–¥4,200).
+**Base-case parameters (Japan):** All model input parameters, their values, sources, and sensitivity ranges are presented in Table 1 and in the supplementary data file (data/cost_parameters.csv). Key base-case assumptions: 30-bed ward, 90% occupancy (9,855 patient-days/year), standard monitoring frequency of 4.5 observations/patient-day [5] (a value consistent with the NICE Clinical Guideline CG50 minimum of 12-hourly monitoring for acutely ill adults [22], with higher frequencies typical in modern UK practice), manual RR counting time of 80 seconds/observation (60-second count + 20-second documentation; sensitivity range 60–120 seconds), nurse full-cost hourly rate of ¥3,500 (includes salary, social insurance, and institutional overhead; sensitivity range ¥2,800–¥4,200).
 
 Device costs were derived from published sources where available: EarlySense £35,000/10 beds (NICE MIB49 [9]); RespiraSense £35/patch (NICE MIB299 [10]); Masimo Rad-G €795 (retail); Nihon Kohden PVM-4000 ¥1,350,000 (press release). Where published prices were unavailable (Neteera, Guardian M10), costs were estimated as model assumptions and clearly flagged in the parameter table (Supplementary S2).
 
@@ -141,7 +141,7 @@ All data inputs, analysis scripts (Python 3.x), and generated outputs are public
 
 ## Results
 
-An overview of the study design, data sources, and analytical framework is presented in Figure 1.
+An overview of the study design, data sources, and analytical framework is presented in Fig. 1.
 
 ### Technology Landscape: Identified Devices and Accuracy Characteristics
 
@@ -149,7 +149,7 @@ The literature search identified 24 primary sources used to parameterize the mod
 
 **Regulatory status:** Seven of nine devices hold FDA 510(k) clearance, and all nine are CE-marked. Regarding Japanese regulatory status, the Nihon Kohden PVM-4000 series holds PMDA approval as a general medical device (一般医療機器) for the Japanese market; the Masimo Rad-G and Capnostream 35 are available in Japan through authorized distributors but formal PMDA device approval numbers were not identified in our search; the remaining devices (Neteera, Guardian M10, RespiraSense, Equivital) do not currently hold PMDA approval. The Vitalthings Guardian M10 achieved CE MDR Class IIb certification in 2024 but has not yet received FDA or PMDA clearance as of this writing [18]. The EarlySense under-mattress sensor, while widely cited in the literature, is no longer independently available; EarlySense's contact-free monitoring technology and intellectual property were acquired by Hillrom (now Baxter International) in February 2021 [19].
 
-**Accuracy data (Figure 2; Table 2):** Accuracy data were available for seven of nine devices, derived from eight studies or regulatory assessments. Direct comparison across devices is fundamentally limited by heterogeneity in reference standards (capnography, respiratory inductance plethysmography, manual counting, ECG-derived RR), patient populations, clinical settings, and statistical reporting conventions (95% vs. 98.9% LoA) (Table 2; Supplementary S5 and S7). Device-by-device accuracy findings are detailed in Supplementary S7; key results are summarized here.
+**Accuracy data (Fig. 2; Table 2):** Accuracy data were available for seven of nine devices, derived from eight studies or regulatory assessments. Direct comparison across devices is fundamentally limited by heterogeneity in reference standards (capnography, respiratory inductance plethysmography, manual counting, ECG-derived RR), patient populations, clinical settings, and statistical reporting conventions (95% vs. 98.9% LoA) (Table 2; Supplementary S5 and S7). Device-by-device accuracy findings are detailed in Supplementary S7; key results are summarized here.
 
 Limits of agreement (LoA) ranged from ±1.1 breaths/min (radar-based Guardian M10 vs. respiratory inductance plethysmography [18]) to >±6 breaths/min (thoracic impedance vs. capnography across multiple studies [12–13]). Pulse-oximetry-derived RR showed intermediate LoA of ±3.1–4.0 breaths/min against capnography [20]. For context, manual nurse-documented RR showed LoA of −13.5 to +12.3 against capnography [13], illustrating the magnitude of the baseline measurement problem.
 
@@ -180,13 +180,13 @@ Table 1 presents the complete parameter set used in the cost-effectiveness model
 
 *Note: Costs are expressed in the price year of the original source (2019–2024) and converted to ¥ at 2024 mid-year rates. No inflation adjustment across price years (see Methods: Currency, price year, and conversion).*
 
-#### Per-Patient-Day Costs (Figure 3; Supplementary Table S2)
+#### Per-Patient-Day Costs (Fig. 3; Supplementary Table S2)
 
 In the Japan base case, manual RR counting at 4.5 observations/patient-day costs ¥350/patient-day in nurse time alone. Automated monitoring scenarios ranged from ¥456 (radar sensor) to ¥2,250 (capnography) per patient-day, yielding incremental costs of ¥106 to ¥1,900 versus manual counting.
 
 The cost structure differs markedly across technologies. For capnography, consumables (disposable sampling lines at ~¥1,500/day) dominate. For bedside monitors, device depreciation is the primary cost driver. Non-contact sensors (radar, under-mattress) have lower per-patient-day costs because they require no consumables and minimal staff interaction. Wearable patches occupy an intermediate position, with patch replacement costs (~¥950/day) partially offset by the absence of capital equipment.
 
-#### Break-Even Analysis (Figure 4; Table 3)
+#### Break-Even Analysis (Fig. 4; Table 3)
 
 The economic viability of automated monitoring depends critically on the cost attributed to each adverse event avoided. Using the under-mattress sensor (incremental cost ¥389/patient-day) as the representative non-contact scenario:
 
@@ -202,7 +202,7 @@ The economic viability of automated monitoring depends critically on the cost at
 
 For context, general medical wards typically report deterioration event rates of 2–10 per 1,000 patient-days depending on case mix and definitions [17, 21]. Post-surgical wards and units with high opioid use have higher rates. Thus, the break-even threshold is plausibly achievable in most acute care settings, particularly with targeted deployment.
 
-#### Sensitivity Analysis (Figure 5; Supplementary Table S3)
+#### Sensitivity Analysis (Fig. 5; Supplementary Table S3)
 
 One-way sensitivity analysis was performed on a representative non-contact (EarlySense-type) device scenario whose base incremental cost is ¥550.9 per patient-day (slightly higher than the ¥388.9 in Table 3 because the sensitivity scenario explicitly accounts for annual sensor-replacement expense of approximately ¥90,250/year on top of the base device price; see Supplementary S3 note). The analysis identified the cost per adverse event and device unit cost as the most influential parameters on the break-even threshold. Over the tested ranges:
 
@@ -213,7 +213,7 @@ One-way sensitivity analysis was performed on a representative non-contact (Earl
 
 The model was relatively insensitive to maintenance rate, device useful life, and occupancy rate within tested ranges.
 
-#### Multi-Way Scenario Analysis (Figure 6; Supplementary Table S4)
+#### Multi-Way Scenario Analysis (Fig. 6; Supplementary Table S4)
 
 To assess model robustness under simultaneous parameter variation, we constructed three multi-way scenarios: a best case (all assumption parameters set to values favoring device adoption), a base case (30-bed ward, 90% occupancy, nurse cost ¥3,500/hr, 80-second manual counting time, 4.5 observations/day, device cost ¥700,000/bed, 7-year useful life, 8% maintenance, 5 min/patient-day device staff time, adverse event cost ¥476,420), and a worst case (all assumption parameters simultaneously set to values disfavoring adoption). In the best-case scenario (high nurse cost ¥4,200/hr, long manual counting time 120s, high monitoring frequency 6/day, cheap device ¥400,000, long life 10 years, low maintenance 5%, minimal device staff time 1 min/pd, high adverse event cost ¥2,000,000), the incremental cost of automated monitoring was actually negative (−¥337/patient-day), indicating that under optimistic but plausible conditions, the device scenario is less expensive than manual counting even before accounting for adverse event avoidance.
 
@@ -353,17 +353,17 @@ All authors read and approved the final manuscript and meet the four ICMJE autho
 
 ## Figure Legends
 
-**Figure 1.** Study overview. Schematic representation of the study design showing the literature search strategy, model construction, and analytical framework. The model compares manual respiratory rate counting with five automated monitoring scenarios, parameterized using data from four national healthcare systems.
+**Fig. 1** Study overview. Schematic representation of the study design showing the literature search strategy, model construction, and analytical framework. The model compares manual respiratory rate counting with five automated monitoring scenarios, parameterized using data from four national healthcare systems.
 
-**Figure 2.** Accuracy of automated respiratory rate monitoring devices: Bland-Altman bias (circles) and 95% limits of agreement (horizontal bars) versus reference standards. Red dashed lines indicate the ±3 breaths/min clinical acceptance threshold. Where 98.9% LoA are reported (van Loon et al. [12]), this is noted. Only studies reporting Bland-Altman statistics or equivalent are shown. Detailed accuracy metrics including sample sizes, settings, and reference standard for each study are provided in Table 2.
+**Fig. 2** Accuracy of automated respiratory rate monitoring devices: Bland-Altman bias (circles) and 95% limits of agreement (horizontal bars) versus reference standards. Red dashed lines indicate the ±3 breaths/min clinical acceptance threshold. Where 98.9% LoA are reported (van Loon et al. [12]), this is noted. Only studies reporting Bland-Altman statistics or equivalent are shown. Detailed accuracy metrics including sample sizes, settings, and reference standard for each study are provided in Table 2.
 
-**Figure 3.** Per-patient-day cost comparison of manual respiratory rate counting versus automated monitoring scenarios. Stacked bars show cost components: device depreciation, maintenance, consumables, and staff time. Japan base case: 30-bed ward, 90% occupancy, nurse cost ¥3,500/hour.
+**Fig. 3** Per-patient-day cost comparison of manual respiratory rate counting versus automated monitoring scenarios. Stacked bars show cost components: device depreciation, maintenance, consumables, and staff time. Japan base case: 30-bed ward, 90% occupancy, nurse cost ¥3,500/hour.
 
-**Figure 4.** Break-even analysis showing the number of adverse events (deterioration episodes) that must be avoided per 1,000 patient-days for each device scenario to achieve cost-neutrality, across five adverse event cost assumptions derived from Japan, UK, Australia, and USA data.
+**Fig. 4** Break-even analysis showing the number of adverse events (deterioration episodes) that must be avoided per 1,000 patient-days for each device scenario to achieve cost-neutrality, across five adverse event cost assumptions derived from Japan, UK, Australia, and USA data.
 
-**Figure 5.** Tornado diagram for one-way sensitivity analysis of a representative non-contact (EarlySense-type) device scenario (Japan; base incremental ¥550.9/patient-day, base break-even 11.4 events/year). Bars represent the change in break-even threshold (adverse events avoided per year) when each parameter is varied across its plausible range. Parameters classified as "Assumption" in Table 1 are marked with an asterisk.
+**Fig. 5** Tornado diagram for one-way sensitivity analysis of a representative non-contact (EarlySense-type) device scenario (Japan; base incremental ¥550.9/patient-day, base break-even 11.4 events/year). Bars represent the change in break-even threshold (adverse events avoided per year) when each parameter is varied across its plausible range. Parameters classified as "Assumption" in Table 1 are marked with an asterisk.
 
-**Figure 6.** Multi-way scenario analysis showing break-even thresholds when all assumption parameters are simultaneously varied. Best case: all parameters set to values favoring device adoption; worst case: all parameters set to values disfavoring adoption. Orange dashed lines indicate the published range of deterioration events (2–10 per 1,000 patient-days [17, 21]).
+**Fig. 6** Multi-way scenario analysis showing break-even thresholds when all assumption parameters are simultaneously varied. Best case: all parameters set to values favoring device adoption; worst case: all parameters set to values disfavoring adoption. Orange dashed lines indicate the published range of deterioration events (2–10 per 1,000 patient-days [17, 21]).
 
 ---
 

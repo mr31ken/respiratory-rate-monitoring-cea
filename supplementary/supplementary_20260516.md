@@ -311,9 +311,9 @@ Completed checklist per Husereau et al. (BMJ 2022;376:e067975) [11].
 | 15 | Currency, price date, and conversion | Methods: Currency, price year, and conversion (¥ at 2024 mid-year rates; price years 2019–2024; no inflation adjustment with rationale); Table 1 note |
 | 16 | Rationale for and description of model | Methods: Cost-Effectiveness Model, Structure subsection; Model Validation (face validity, extreme value, cross-validation) |
 | 17 | Analytics and assumptions | Methods: Cost-Effectiveness Model; Table 1 (Published/Assumption classification); Supplementary S2 |
-| 18 | Characterizing heterogeneity | Results: Multi-country break-even analysis (Figure 4); Supplementary S3 |
+| 18 | Characterizing heterogeneity | Results: Multi-country break-even analysis (Fig. 4); Supplementary S3 |
 | 19 | Characterizing distributional effects | Not performed (deterministic model); see Limitations paragraph 1 |
-| 20 | Characterizing uncertainty | Results: Sensitivity Analysis (Figure 5); Multi-Way Scenario Analysis (Figure 6) |
+| 20 | Characterizing uncertainty | Results: Sensitivity Analysis (Fig. 5); Multi-Way Scenario Analysis (Fig. 6) |
 | 21 | Approach to engagement with patients and others affected | Not applicable (no patient engagement in model construction) |
 | 22 | Study parameters | Table 1 (complete parameter set with sources and ranges) |
 | 23 | Summary of main results | Results: Break-Even Analysis; Discussion: Principal Findings |

@@ -207,6 +207,38 @@ add_para(doc, "in General Hospital Wards:",
          bold=True, alignment=WD_ALIGN_PARAGRAPH.CENTER, space_after=0)
 add_para(doc, "A Deterministic Cost-Minimization and Break-Even Modeling Study",
          bold=True, alignment=WD_ALIGN_PARAGRAPH.CENTER, space_after=24)
+
+# JCMC requires each SI file to include article title, journal, authors,
+# affiliations, and corresponding author contact. Extract this block from the
+# markdown (it sits as the body of the long-title heading section).
+title_heading = ("Economic Evaluation of Automated Respiratory Rate Monitoring "
+                 "in General Hospital Wards: A Deterministic Cost-Minimization "
+                 "and Break-Even Modeling Study")
+header_block = next((c for h, c in sections_list if h == title_heading), None)
+if header_block:
+    for line in header_block:
+        s = line.strip()
+        if not s or s == "---":
+            continue
+        # Strip markdown link syntax [text](url) -> text
+        s_clean = re.sub(r'\[([^\]]+)\]\([^)]+\)', r'\1', s)
+        # Bold label "**Label:** value" pattern (Target Journal / Authors /
+        # Corresponding author)
+        m = re.match(r'^\*\*(.+?):\*\*\s*(.*)', s_clean)
+        if m:
+            add_mixed(doc,
+                      [(m.group(1) + ": ", True, False),
+                       (m.group(2), False, False)],
+                      alignment=WD_ALIGN_PARAGRAPH.CENTER,
+                      space_before=4, space_after=4)
+        elif s_clean[0] in "¹²³⁴⁵⁶⁷⁸⁹":
+            # Affiliation lines
+            add_para(doc, s_clean,
+                     alignment=WD_ALIGN_PARAGRAPH.CENTER, space_after=0)
+        else:
+            add_para(doc, s_clean,
+                     alignment=WD_ALIGN_PARAGRAPH.CENTER, space_after=2)
+
 doc.add_page_break()
 
 # ══════════════════════════════════════════════════════════════════════
