@@ -222,31 +222,31 @@ def add_equation_paragraph(doc, equation_key):
     """Add a paragraph containing native Word OMML math for `equation_key`,
     placed inline in document flow at the current position.
 
-    Strategy: add a real <w:p> paragraph via python-docx (so it sits in the
-    proper document body sequence, before sectPr), then inject the
-    <m:oMathPara> element into that paragraph's underlying XML using parse_xml.
+    Compatibility note: Word for Mac (and stricter validators) rejects
+    <m:oMathPara> as a direct child of <w:body>. We instead wrap an inline
+    <m:oMath> element inside a regular <w:p> paragraph with center
+    justification. This is the most portable OOXML pattern.
     """
     inner = _equation_xml(equation_key)
+    # A <w:p> hosting an inline <m:oMath>, centered.
     xml = (
-        f"<m:oMathPara {_MATH_NS}>"
-        "<m:oMathParaPr><m:jc m:val=\"center\"/></m:oMathParaPr>"
-        f"<m:oMath>{inner}</m:oMath>"
-        "</m:oMathPara>"
+        f'<w:p {_MATH_NS}>'
+        '<w:pPr>'
+        '<w:jc w:val="center"/>'
+        '<w:spacing w:before="120" w:after="120"/>'
+        '</w:pPr>'
+        f'<m:oMath>{inner}</m:oMath>'
+        '</w:p>'
     )
-    omml_element = parse_xml(xml)
+    p_element = parse_xml(xml)
 
-    # Create a host paragraph at the current document position. We do NOT
-    # add a run with text — the paragraph exists only to anchor the OMML.
-    # NOTE: an <m:oMathPara> at the body level is itself a block-level
-    # math element. Word accepts it as a sibling of <w:p>. So instead of
-    # nesting inside <w:p>, insert it directly into the body BEFORE sectPr.
     body = doc.element.body
     sectPr = body.find(qn("w:sectPr"))
     if sectPr is not None:
-        sectPr.addprevious(omml_element)
+        sectPr.addprevious(p_element)
     else:
-        body.append(omml_element)
-    return omml_element
+        body.append(p_element)
+    return p_element
 
 
 # ── Parse markdown and build document ────────────────────────────────
