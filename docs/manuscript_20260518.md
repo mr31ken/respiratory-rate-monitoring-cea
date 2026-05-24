@@ -330,9 +330,9 @@ This study constructed a deterministic cost-minimization and break-even model co
 
 ## Statements and Declarations
 
-**Funding:** [TO BE CONFIRMED with each coauthor. Draft template: "This research received no specific grant from any funding agency in the public, commercial, or not-for-profit sectors."]
+**Funding:** This research received no specific grant from any funding agency in the public, commercial, or not-for-profit sectors.
 
-**Conflicts of interest:** [TO BE COMPLETED — each coauthor's declaration required. Draft template: "The authors declare no conflicts of interest. No device manufacturer was involved in study design, data collection, analysis, interpretation, or manuscript preparation."]
+**Conflicts of interest:** The authors declare no conflicts of interest. No device manufacturer was involved in study design, data collection, analysis, interpretation, or manuscript preparation.
 
 **Ethics approval:** Not applicable. This study used only published aggregate data and did not involve human participants, human tissue, or animals.
 
