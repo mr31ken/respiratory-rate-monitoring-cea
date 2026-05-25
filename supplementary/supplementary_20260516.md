@@ -174,17 +174,18 @@ These reporting differences preclude a formal meta-analysis and require caution 
 
 ## S6. Reproducibility Statement
 
-All analyses in this paper are fully reproducible. The complete repository includes:
+All analyses in this paper are fully reproducible. The analysis environment used is **Python 3.9** (tested with 3.9.6) with pandas 2.3.3, numpy 2.0.2, matplotlib 3.9.4, and scipy 1.13.1; minimum-version constraints (`pandas≥2.0`, `numpy≥1.24`, `matplotlib≥3.7`, `scipy≥1.10`) are encoded in `requirements.txt`. The complete repository includes:
 - `data/`: All input data with documented sources (CSV format with source attribution)
 - `data/DATA_DICTIONARY.md`: Complete variable definitions for all data files
 - `analysis/`: Python scripts that generate all figures and tables
+- `requirements.txt`: pinned dependency list
 - `supplementary/`: This document
 
 To reproduce:
 ```bash
+pip install -r requirements.txt
 cd analysis/
-pip install pandas numpy matplotlib scipy
-python 05_generate_all.py
+python3 05_generate_all.py
 ```
 
 All intermediate outputs are regenerated from source data. No manual data manipulation is performed outside the documented scripts. Parameters classified as "Assumption" in `data/cost_parameters.csv` are explicitly flagged and tested in sensitivity analysis.

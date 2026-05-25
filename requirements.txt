@@ -1,3 +1,7 @@
+# Tested with Python 3.9 (specifically 3.9.6); should also work on 3.10–3.12.
+# Tested versions: pandas 2.3.3, numpy 2.0.2, matplotlib 3.9.4, scipy 1.13.1.
+# Below are minimum-version constraints used during development; later
+# minor versions within the same major are expected to work.
 pandas>=2.0
 numpy>=1.24
 matplotlib>=3.7
