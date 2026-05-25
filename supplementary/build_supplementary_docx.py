@@ -52,12 +52,21 @@ def add_para(doc, text="", bold=False, italic=False, alignment=None,
 
 
 def add_mixed(doc, parts, alignment=None, first_line_indent=None,
-              left_indent=None, space_before=None, space_after=None):
-    """parts: list of (text, bold, italic)"""
+              left_indent=None, space_before=None, space_after=None,
+              hanging_indent=None):
+    """parts: list of (text, bold, italic) OR (text, bold, italic, code)."""
     p = doc.add_paragraph()
-    for text, bold, italic in parts:
+    for part in parts:
+        if len(part) == 4:
+            text, bold, italic, code = part
+        else:
+            text, bold, italic = part
+            code = False
         run = p.add_run(text)
-        set_run_font(run, bold=bold, italic=italic)
+        if code:
+            set_run_font(run, name="Consolas", size=10, bold=bold, italic=italic)
+        else:
+            set_run_font(run, bold=bold, italic=italic)
     fmt = p.paragraph_format
     fmt.line_spacing_rule = LINE_SPACING
     if alignment:
@@ -66,10 +75,107 @@ def add_mixed(doc, parts, alignment=None, first_line_indent=None,
         fmt.first_line_indent = Inches(first_line_indent)
     if left_indent is not None:
         fmt.left_indent = Inches(left_indent)
+    if hanging_indent is not None:
+        fmt.first_line_indent = Inches(-hanging_indent)
     if space_before is not None:
         fmt.space_before = Pt(space_before)
     if space_after is not None:
         fmt.space_after = Pt(space_after)
+    return p
+
+
+# ── Inline markdown parser ───────────────────────────────────────────
+_INLINE_RE = re.compile(
+    r"(`[^`\n]+`)"
+    r"|(\*\*[^*\n]+?\*\*)"
+    r"|(\*(?=\S)[^*\n]+?(?<=\S)\*)"
+)
+
+
+def _split_inline_md(text):
+    if not text:
+        return []
+    out = []
+    pos = 0
+    for m in _INLINE_RE.finditer(text):
+        if m.start() > pos:
+            out.append((text[pos:m.start()], False, False, False))
+        token = m.group(0)
+        if token.startswith("`"):
+            out.append((token[1:-1], False, False, True))
+        elif token.startswith("**"):
+            out.append((token[2:-2], True, False, False))
+        else:
+            out.append((token[1:-1], False, True, False))
+        pos = m.end()
+    if pos < len(text):
+        out.append((text[pos:], False, False, False))
+    merged = []
+    for seg in out:
+        if merged and not (seg[1] or seg[2] or seg[3]) and not (merged[-1][1] or merged[-1][2] or merged[-1][3]):
+            merged[-1] = (merged[-1][0] + seg[0], False, False, False)
+        else:
+            merged.append(seg)
+    return merged
+
+
+def _add_styled_runs(paragraph, segments, base_bold=False, base_italic=False):
+    for seg in segments:
+        if len(seg) == 4:
+            text, bold, italic, code = seg
+        else:
+            text, bold, italic = seg
+            code = False
+        if not text:
+            continue
+        run = paragraph.add_run(text)
+        if code:
+            set_run_font(run, name="Consolas", size=10,
+                         bold=bold or base_bold, italic=italic or base_italic)
+        else:
+            set_run_font(run, bold=bold or base_bold,
+                         italic=italic or base_italic)
+    return paragraph
+
+
+def add_inline(doc, text, alignment=None, first_line_indent=None,
+               left_indent=None, hanging_indent=None,
+               space_before=None, space_after=None,
+               base_bold=False, base_italic=False):
+    p = doc.add_paragraph()
+    segments = _split_inline_md(text)
+    if not segments:
+        run = p.add_run("")
+        set_run_font(run, bold=base_bold, italic=base_italic)
+    else:
+        _add_styled_runs(p, segments, base_bold=base_bold, base_italic=base_italic)
+    fmt = p.paragraph_format
+    fmt.line_spacing_rule = LINE_SPACING
+    if alignment:
+        fmt.alignment = alignment
+    if first_line_indent is not None:
+        fmt.first_line_indent = Inches(first_line_indent)
+    if left_indent is not None:
+        fmt.left_indent = Inches(left_indent)
+    if hanging_indent is not None:
+        fmt.first_line_indent = Inches(-hanging_indent)
+    if space_before is not None:
+        fmt.space_before = Pt(space_before)
+    if space_after is not None:
+        fmt.space_after = Pt(space_after)
+    return p
+
+
+def add_bullet(doc, text, level_indent=0.4):
+    segments = _split_inline_md(text)
+    p = doc.add_paragraph()
+    bullet_run = p.add_run("• ")
+    set_run_font(bullet_run)
+    _add_styled_runs(p, segments)
+    fmt = p.paragraph_format
+    fmt.line_spacing_rule = LINE_SPACING
+    fmt.left_indent = Inches(level_indent)
+    fmt.first_line_indent = Inches(-0.25)
     return p
 
 
@@ -93,6 +199,31 @@ def add_body(doc, text, indent=True):
     return add_para(doc, text, first_line_indent=0.4 if indent else None)
 
 
+def _add_cell_styled(cell, text, base_bold=False, size=9):
+    """Render markdown-inline text into a table cell as styled runs."""
+    cell.text = ""
+    para = cell.paragraphs[0]
+    segments = _split_inline_md(text)
+    if not segments:
+        run = para.add_run("")
+        set_run_font(run, bold=base_bold, size=size)
+        return
+    for seg in segments:
+        if len(seg) == 4:
+            t, b, i, code = seg
+        else:
+            t, b, i = seg
+            code = False
+        if not t:
+            continue
+        run = para.add_run(t)
+        if code:
+            set_run_font(run, name="Consolas", size=size,
+                         bold=b or base_bold, italic=i)
+        else:
+            set_run_font(run, bold=b or base_bold, italic=i, size=size)
+
+
 def flush_table(doc, rows):
     if not rows:
         return
@@ -109,17 +240,11 @@ def flush_table(doc, rows):
     table.style = "Table Grid"
     # Header row
     for j, h in enumerate(headers):
-        cell = table.rows[0].cells[j]
-        cell.text = ""
-        run = cell.paragraphs[0].add_run(h)
-        set_run_font(run, bold=True, size=9)
+        _add_cell_styled(table.rows[0].cells[j], h, base_bold=True, size=9)
     # Data rows
     for i, row_data in enumerate(data):
         for j in range(min(len(row_data), ncols)):
-            cell = table.rows[i + 1].cells[j]
-            cell.text = ""
-            run = cell.paragraphs[0].add_run(row_data[j])
-            set_run_font(run, size=9)
+            _add_cell_styled(table.rows[i + 1].cells[j], row_data[j], size=9)
 
 
 # ── Read markdown ────────────────────────────────────────────────────
@@ -270,52 +395,54 @@ for heading, content_lines in sections_list:
             return
         text = text.strip()
 
-        # Bold label pattern
-        bold_match = re.match(r'\*\*(.+?)\*\*\s*(.*)', text)
-        if bold_match:
-            label = bold_match.group(1)
-            rest = bold_match.group(2)
-            if re.match(r'^\d+\.', label):
-                add_mixed(doc, [(label, True, False), (" " + rest, False, False)],
-                         left_indent=0.4)
-            elif ":" in label:
-                add_mixed(doc, [(label, True, False),
-                               (" " + rest if rest else "", False, False)])
-            else:
-                add_mixed(doc, [(label, True, False),
-                               (" " + rest if rest else "", False, False)])
-        elif text.startswith("- **"):
-            m = re.match(r'- \*\*(.+?)\*\*\s*(.*)', text)
-            if m:
-                add_mixed(doc, [(m.group(1), True, False),
-                               (" " + m.group(2), False, False)],
-                         left_indent=0.4)
-            else:
-                add_body(doc, text.lstrip("- "))
-        elif text.startswith("- "):
-            add_body(doc, text[2:], indent=False)
-        elif text.startswith("[") and "]" in text:
-            add_body(doc, text, indent=False)
-        else:
-            ref_match = re.match(r'^\[(\d+)\]\s+(.*)', text)
-            if ref_match:
-                p = doc.add_paragraph()
-                run = p.add_run(text)
-                set_run_font(run)
-                fmt = p.paragraph_format
-                fmt.line_spacing_rule = LINE_SPACING
-                fmt.left_indent = Inches(0.4)
-                fmt.first_line_indent = Inches(-0.4)
-            elif re.match(r'^\d+\.\s+\*\*', text):
-                m = re.match(r'^(\d+\.\s+)\*\*(.+?)\*\*\s*(.*)', text)
-                if m:
-                    add_mixed(doc, [(m.group(1) + m.group(2), True, False),
-                                   (" " + m.group(3), False, False)],
-                             left_indent=0.4)
-                else:
-                    add_body(doc, text)
-            else:
-                add_body(doc, text, indent=True)
+        # Italic-only standalone line: render fully italic
+        if (text.startswith("*") and text.endswith("*")
+                and not text.startswith("**") and not text.endswith("**")
+                and text.count("*") == 2):
+            inner = text[1:-1]
+            add_inline(doc, inner, base_italic=True)
+            return
+
+        # Bullet line — render with inline md parsing
+        if text.startswith("- "):
+            add_bullet(doc, text[2:], level_indent=0.4)
+            return
+
+        # Reference line "[1] Author. Title..." — hanging indent
+        ref_match = re.match(r'^\[(\d+)\]\s+(.*)', text)
+        if ref_match:
+            p = doc.add_paragraph()
+            label_run = p.add_run(f"[{ref_match.group(1)}] ")
+            set_run_font(label_run)
+            _add_styled_runs(p, _split_inline_md(ref_match.group(2)))
+            fmt = p.paragraph_format
+            fmt.line_spacing_rule = LINE_SPACING
+            fmt.left_indent = Inches(0.4)
+            fmt.first_line_indent = Inches(-0.4)
+            return
+
+        # Numbered list with bold label
+        m_numbold = re.match(r'^(\d+\.\s+)\*\*(.+?)\*\*\s*(.*)', text)
+        if m_numbold:
+            num = m_numbold.group(1)
+            label = m_numbold.group(2)
+            rest = m_numbold.group(3)
+            p = doc.add_paragraph()
+            run = p.add_run(num + label)
+            set_run_font(run, bold=True)
+            if rest:
+                rest_prefix = p.add_run(" ")
+                set_run_font(rest_prefix)
+                _add_styled_runs(p, _split_inline_md(rest))
+            fmt = p.paragraph_format
+            fmt.line_spacing_rule = LINE_SPACING
+            fmt.left_indent = Inches(0.4)
+            return
+
+        first_indent = 0.4
+        if text.startswith("**"):
+            first_indent = None
+        add_inline(doc, text, first_line_indent=first_indent)
 
     for line in content_lines:
         stripped = line.strip()
@@ -367,6 +494,14 @@ for heading, content_lines in sections_list:
             if paragraph_buffer:
                 flush_paragraph(doc, paragraph_buffer)
                 paragraph_buffer = ""
+            continue
+
+        # Bullet line: flush buffer first so bullets are their own paragraphs
+        if stripped.startswith("- "):
+            if paragraph_buffer:
+                flush_paragraph(doc, paragraph_buffer)
+                paragraph_buffer = ""
+            flush_paragraph(doc, stripped)
             continue
 
         # Accumulate

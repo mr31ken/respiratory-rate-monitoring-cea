@@ -3,7 +3,7 @@
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20363806.svg)](https://doi.org/10.5281/zenodo.20363806)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-A reproducible, deterministic cost-minimization and break-even modeling study comparing manual respiratory rate (RR) counting with six automated monitoring scenarios across four national healthcare systems (Japan, UK, Australia, USA).
+A reproducible, deterministic cost-minimization and break-even modeling study comparing manual respiratory rate (RR) counting with five automated monitoring scenarios across four national healthcare systems (Japan, UK, Australia, USA).
 
 This repository contains all data, analysis code, and documentation accompanying the manuscript submitted to the *Journal of Clinical Monitoring and Computing*.
 
@@ -17,7 +17,7 @@ This repository contains all data, analysis code, and documentation accompanying
 ├── data/               # Input CSV files with source attribution
 ├── tables/             # Generated CSV tables (regenerable from analysis/)
 ├── figures/            # Generated PNG/PDF figures (regenerable from analysis/)
-├── supplementary/      # Supplementary materials (S1–S10)
+├── supplementary/      # Supplementary materials (S1–S9)
 ├── docs/               # Main manuscript and cover letter (markdown sources)
 ├── requirements.txt    # Python dependencies
 ├── CITATION.cff        # Citation metadata

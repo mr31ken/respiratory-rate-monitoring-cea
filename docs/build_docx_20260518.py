@@ -51,12 +51,24 @@ def add_para(doc, text="", bold=False, italic=False, alignment=None,
 
 
 def add_mixed(doc, parts, alignment=None, first_line_indent=None, left_indent=None,
-              space_before=None, space_after=None):
-    """parts: list of (text, bold, italic)"""
+              space_before=None, space_after=None, hanging_indent=None):
+    """parts: list of (text, bold, italic) OR (text, bold, italic, code).
+
+    Each tuple may include a 4th element ``code`` (bool) — if True, the run is
+    rendered in a monospace font at 10pt to represent inline backtick code.
+    """
     p = doc.add_paragraph()
-    for text, bold, italic in parts:
+    for part in parts:
+        if len(part) == 4:
+            text, bold, italic, code = part
+        else:
+            text, bold, italic = part
+            code = False
         run = p.add_run(text)
-        set_run_font(run, bold=bold, italic=italic)
+        if code:
+            set_run_font(run, name="Consolas", size=10, bold=bold, italic=italic)
+        else:
+            set_run_font(run, bold=bold, italic=italic)
     fmt = p.paragraph_format
     fmt.line_spacing_rule = WD_LINE_SPACING.DOUBLE
     if alignment:
@@ -65,10 +77,137 @@ def add_mixed(doc, parts, alignment=None, first_line_indent=None, left_indent=No
         fmt.first_line_indent = Inches(first_line_indent)
     if left_indent is not None:
         fmt.left_indent = Inches(left_indent)
+    if hanging_indent is not None:
+        # hanging indent: positive value, applied as negative first_line_indent
+        fmt.first_line_indent = Inches(-hanging_indent)
     if space_before is not None:
         fmt.space_before = Pt(space_before)
     if space_after is not None:
         fmt.space_after = Pt(space_after)
+    return p
+
+
+# ── Inline markdown parser ───────────────────────────────────────────
+#
+# Splits a string into styled segments: (text, bold, italic, code).
+# Priority: backticks `...` → bold **...** → italic *...*.
+# Designed so that bare * mid-word (e.g., used as multiplication) does
+# not trigger italic — italic markers must wrap at least one character
+# and start with a non-space char.
+
+_INLINE_RE = re.compile(
+    r"(`[^`\n]+`)"                  # 1) `code`
+    r"|(\*\*[^*\n]+?\*\*)"          # 2) **bold**
+    r"|(\*(?=\S)[^*\n]+?(?<=\S)\*)" # 3) *italic*  (no spaces just inside *)
+)
+
+
+def _split_inline_md(text):
+    """Return a list of (text, bold, italic, code) tuples.
+
+    Splits ``text`` on inline markdown markers. Plain segments come back as
+    ``(s, False, False, False)``. Markers are stripped from the styled
+    segments. Bare ``*`` characters that don't pair correctly are left as
+    literal text (so multiplication "a * b" survives unchanged).
+    """
+    if not text:
+        return []
+    out = []
+    pos = 0
+    for m in _INLINE_RE.finditer(text):
+        if m.start() > pos:
+            out.append((text[pos:m.start()], False, False, False))
+        token = m.group(0)
+        if token.startswith("`"):
+            out.append((token[1:-1], False, False, True))
+        elif token.startswith("**"):
+            out.append((token[2:-2], True, False, False))
+        else:
+            out.append((token[1:-1], False, True, False))
+        pos = m.end()
+    if pos < len(text):
+        out.append((text[pos:], False, False, False))
+    # Merge adjacent plain segments (cosmetic; harmless if skipped)
+    merged = []
+    for seg in out:
+        if merged and not (seg[1] or seg[2] or seg[3]) and not (merged[-1][1] or merged[-1][2] or merged[-1][3]):
+            merged[-1] = (merged[-1][0] + seg[0], False, False, False)
+        else:
+            merged.append(seg)
+    return merged
+
+
+def _add_styled_runs(paragraph, segments, base_bold=False, base_italic=False):
+    """Append runs to ``paragraph`` for each (text, bold, italic, code) seg.
+
+    ``base_bold`` / ``base_italic`` are OR'd into every segment, so the
+    caller can force-bold a prefix (e.g., a bullet label) and still let
+    inline ``*italic*`` inside that prefix render correctly.
+    """
+    for seg in segments:
+        if len(seg) == 4:
+            text, bold, italic, code = seg
+        else:
+            text, bold, italic = seg
+            code = False
+        if not text:
+            continue
+        run = paragraph.add_run(text)
+        if code:
+            set_run_font(run, name="Consolas", size=10,
+                         bold=bold or base_bold, italic=italic or base_italic)
+        else:
+            set_run_font(run, bold=bold or base_bold,
+                         italic=italic or base_italic)
+    return paragraph
+
+
+def add_inline(doc, text, alignment=None, first_line_indent=None,
+               left_indent=None, hanging_indent=None,
+               space_before=None, space_after=None,
+               base_bold=False, base_italic=False):
+    """Add a paragraph with inline markdown parsed into styled runs."""
+    p = doc.add_paragraph()
+    segments = _split_inline_md(text)
+    if not segments:
+        # Preserve empty paragraph
+        run = p.add_run("")
+        set_run_font(run, bold=base_bold, italic=base_italic)
+    else:
+        _add_styled_runs(p, segments, base_bold=base_bold, base_italic=base_italic)
+    fmt = p.paragraph_format
+    fmt.line_spacing_rule = WD_LINE_SPACING.DOUBLE
+    if alignment:
+        fmt.alignment = alignment
+    if first_line_indent is not None:
+        fmt.first_line_indent = Inches(first_line_indent)
+    if left_indent is not None:
+        fmt.left_indent = Inches(left_indent)
+    if hanging_indent is not None:
+        fmt.first_line_indent = Inches(-hanging_indent)
+    if space_before is not None:
+        fmt.space_before = Pt(space_before)
+    if space_after is not None:
+        fmt.space_after = Pt(space_after)
+    return p
+
+
+def add_bullet(doc, text, level_indent=0.5):
+    """Render a bullet line. ``text`` is the bullet body (no leading '- ').
+
+    Uses left_indent + hanging indent + a leading "• " character so the
+    bullet glyph is visible without relying on Word's list style machinery.
+    Inline markdown inside the text is rendered via _split_inline_md.
+    """
+    segments = _split_inline_md(text)
+    p = doc.add_paragraph()
+    bullet_run = p.add_run("• ")
+    set_run_font(bullet_run)
+    _add_styled_runs(p, segments)
+    fmt = p.paragraph_format
+    fmt.line_spacing_rule = WD_LINE_SPACING.DOUBLE
+    fmt.left_indent = Inches(level_indent)
+    fmt.first_line_indent = Inches(-0.25)
     return p
 
 
@@ -315,6 +454,31 @@ table_rows = []
 skip_metadata = True  # Skip lines until after first ---
 
 # Helper to flush table
+def _add_cell_styled(cell, text, base_bold=False, size=9):
+    """Render markdown-inline text into a table cell as styled runs."""
+    cell.text = ""
+    para = cell.paragraphs[0]
+    segments = _split_inline_md(text)
+    if not segments:
+        run = para.add_run("")
+        set_run_font(run, bold=base_bold, size=size)
+        return
+    for seg in segments:
+        if len(seg) == 4:
+            t, b, i, code = seg
+        else:
+            t, b, i = seg
+            code = False
+        if not t:
+            continue
+        run = para.add_run(t)
+        if code:
+            set_run_font(run, name="Consolas", size=size,
+                         bold=b or base_bold, italic=i)
+        else:
+            set_run_font(run, bold=b or base_bold, italic=i, size=size)
+
+
 def flush_table(doc, rows):
     if not rows:
         return
@@ -334,18 +498,12 @@ def flush_table(doc, rows):
 
     # Header row
     for j, h in enumerate(headers):
-        cell = table.rows[0].cells[j]
-        cell.text = ""
-        run = cell.paragraphs[0].add_run(h)
-        set_run_font(run, bold=True, size=9)
+        _add_cell_styled(table.rows[0].cells[j], h, base_bold=True, size=9)
 
     # Data rows
     for i, row_data in enumerate(data):
         for j in range(min(len(row_data), ncols)):
-            cell = table.rows[i + 1].cells[j]
-            cell.text = ""
-            run = cell.paragraphs[0].add_run(row_data[j])
-            set_run_font(run, size=9)
+            _add_cell_styled(table.rows[i + 1].cells[j], row_data[j], size=9)
 
 
 i = 0
@@ -455,62 +613,67 @@ for heading, content_lines in sections:
             return
         text = text.strip()
 
-        # OMML equation placeholder: inject native Word math
+        # OMML equation placeholder: inject native Word math (do NOT parse md)
         if text in ("[OMML_EQ_1]", "[OMML_EQ_2]", "[OMML_EQ_3]", "[OMML_EQ_4]"):
             key = text[1:-1].replace("OMML_", "")  # → EQ_1 etc.
             add_equation_paragraph(doc, key)
             return
 
-        # Handle **bold label:** pattern at start
-        bold_match = re.match(r'\*\*(.+?)\*\*\s*(.*)', text)
-        if bold_match:
-            label = bold_match.group(1)
-            rest = bold_match.group(2)
-            # Check if it's a list item (starts with number or bullet)
-            if re.match(r'^\d+\.', label):
-                add_mixed(doc, [(label, True, False), (" " + rest, False, False)],
-                         left_indent=0.5)
-            elif ":" in label:
-                add_mixed(doc, [(label, True, False), (" " + rest if rest else "", False, False)],
-                         first_line_indent=0.5 if not rest else None)
-            else:
-                add_mixed(doc, [(label, True, False), (" " + rest if rest else "", False, False)])
-        elif text.startswith("- **"):
-            # Bullet with bold label
-            m = re.match(r'- \*\*(.+?)\*\*\s*(.*)', text)
-            if m:
-                add_mixed(doc, [(m.group(1), True, False), (" " + m.group(2), False, False)],
-                         left_indent=0.5)
-            else:
-                add_body(doc, text.lstrip("- "))
-        elif text.startswith("- "):
-            add_body(doc, text[2:], indent=False)
-        elif text.startswith("[") and text.endswith(")"):
-            # Reference line - skip markdown links
-            add_body(doc, text, indent=False)
-        else:
-            # Check if starts with a number (numbered list or reference)
-            ref_match = re.match(r'^\[(\d+)\]\s+(.*)', text)
-            if ref_match:
-                # Reference
-                p = doc.add_paragraph()
-                run = p.add_run(text)
-                set_run_font(run)
-                fmt = p.paragraph_format
-                fmt.line_spacing_rule = WD_LINE_SPACING.DOUBLE
-                fmt.left_indent = Inches(0.5)
-                fmt.first_line_indent = Inches(-0.5)
-            elif re.match(r'^\d+\.\s+\*\*', text):
-                # Numbered list with bold
-                m = re.match(r'^(\d+\.\s+)\*\*(.+?)\*\*\s*(.*)', text)
-                if m:
-                    add_mixed(doc, [(m.group(1) + m.group(2), True, False),
-                                   (" " + m.group(3), False, False)],
-                             left_indent=0.5)
-                else:
-                    add_body(doc, text)
-            else:
-                add_body(doc, text, indent=True)
+        # Italic-only standalone marker (whole line wrapped in single *): render
+        # the inner content italic. Used for equation captions like
+        # "*Equation 1 — Manual counting cost per patient-day:*".
+        if (text.startswith("*") and text.endswith("*")
+                and not text.startswith("**") and not text.endswith("**")
+                and text.count("*") == 2):
+            inner = text[1:-1]
+            add_inline(doc, inner, base_italic=True)
+            return
+
+        # Bullet line — render as bulleted paragraph with inline md parsing
+        if text.startswith("- "):
+            add_bullet(doc, text[2:], level_indent=0.5)
+            return
+
+        # Reference line "[1] Author. Title..." — hanging indent, no md parse
+        # for the leading [N] (it isn't markdown). Inline md inside body still
+        # gets parsed.
+        ref_match = re.match(r'^\[(\d+)\]\s+(.*)', text)
+        if ref_match:
+            p = doc.add_paragraph()
+            label_run = p.add_run(f"[{ref_match.group(1)}] ")
+            set_run_font(label_run)
+            _add_styled_runs(p, _split_inline_md(ref_match.group(2)))
+            fmt = p.paragraph_format
+            fmt.line_spacing_rule = WD_LINE_SPACING.DOUBLE
+            fmt.left_indent = Inches(0.5)
+            fmt.first_line_indent = Inches(-0.5)
+            return
+
+        # Numbered list with bold label "1. **Title:** rest"
+        m_numbold = re.match(r'^(\d+\.\s+)\*\*(.+?)\*\*\s*(.*)', text)
+        if m_numbold:
+            num = m_numbold.group(1)
+            label = m_numbold.group(2)
+            rest = m_numbold.group(3)
+            p = doc.add_paragraph()
+            run = p.add_run(num + label)
+            set_run_font(run, bold=True)
+            if rest:
+                rest_run_prefix = p.add_run(" ")
+                set_run_font(rest_run_prefix)
+                _add_styled_runs(p, _split_inline_md(rest))
+            fmt = p.paragraph_format
+            fmt.line_spacing_rule = WD_LINE_SPACING.DOUBLE
+            fmt.left_indent = Inches(0.5)
+            return
+
+        # Default: parse full inline markdown and emit a regular body paragraph
+        first_indent = 0.5
+        # Suppress first-line indent for paragraphs that lead with a bold label
+        # ("**Outcomes:** ...") so the label aligns flush-left as a sub-heading.
+        if text.startswith("**"):
+            first_indent = None
+        add_inline(doc, text, first_line_indent=first_indent)
 
     for line in content_lines:
         stripped = line.strip()
@@ -571,6 +734,15 @@ for heading, content_lines in sections:
             if paragraph_buffer:
                 flush_paragraph(doc, paragraph_buffer)
                 paragraph_buffer = ""
+            continue
+
+        # Bullet line: flush prior buffer first so bullets become their own
+        # paragraphs (don't get glued onto the preceding intro line).
+        if stripped.startswith("- "):
+            if paragraph_buffer:
+                flush_paragraph(doc, paragraph_buffer)
+                paragraph_buffer = ""
+            flush_paragraph(doc, stripped)
             continue
 
         # Accumulate paragraph
