@@ -66,7 +66,7 @@ The data dictionary (`data/DATA_DICTIONARY.md`) defines every variable.
 
 ## Reporting Standard
 
-Reporting follows the **Consolidated Health Economic Evaluation Reporting Standards 2022 (CHEERS 2022)**. The completed 28-item checklist is in Supplementary S10.
+Reporting follows the **Consolidated Health Economic Evaluation Reporting Standards 2022 (CHEERS 2022)**. The completed 28-item checklist is in Supplementary S8.
 
 ---
 
@@ -74,7 +74,7 @@ Reporting follows the **Consolidated Health Economic Evaluation Reporting Standa
 
 If you use this repository or adapt the model, please cite:
 
-> [Author(s)]. *Economic Evaluation of Automated Respiratory Rate Monitoring in General Hospital Wards: A Deterministic Cost-Minimization and Break-Even Modeling Study.* Journal of Clinical Monitoring and Computing. [Year]; [Volume:Pages]. doi:[TBD]
+> Saito K, Kishimoto K, Ishizuka N, Kusuda K, Kuroda T. *Economic Evaluation of Automated Respiratory Rate Monitoring in General Hospital Wards: A Deterministic Cost-Minimization and Break-Even Modeling Study.* Submitted to the *Journal of Clinical Monitoring and Computing*; manuscript under peer review. Repository archive: Zenodo, doi:[10.5281/zenodo.20363806](https://doi.org/10.5281/zenodo.20363806). The journal DOI of the published article will be added upon acceptance.
 
 Machine-readable citation metadata is in `CITATION.cff`.
 
