@@ -1,6 +1,6 @@
 # Economic Evaluation of Automated Respiratory Rate Monitoring in General Hospital Wards
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20407861.svg)](https://doi.org/10.5281/zenodo.20407861)
+[![Concept DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20176682.svg)](https://doi.org/10.5281/zenodo.20176682)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 A reproducible, deterministic cost-minimization and break-even modeling study comparing manual respiratory rate (RR) counting with five automated monitoring scenarios across four national healthcare systems (Japan, UK, Australia, USA).
@@ -74,7 +74,7 @@ Reporting follows the **Consolidated Health Economic Evaluation Reporting Standa
 
 If you use this repository or adapt the model, please cite:
 
-> Saito K, Kishimoto K, Ishizuka N, Kusuda K, Kuroda T. *Economic Evaluation of Automated Respiratory Rate Monitoring in General Hospital Wards: A Deterministic Cost-Minimization and Break-Even Modeling Study.* Submitted to the *Journal of Clinical Monitoring and Computing*; manuscript under peer review. Repository archive: Zenodo, doi:[10.5281/zenodo.20407861](https://doi.org/10.5281/zenodo.20407861). The journal DOI of the published article will be added upon acceptance.
+> Saito K, Kishimoto K, Ishizuka N, Kusuda K, Kuroda T. *Economic Evaluation of Automated Respiratory Rate Monitoring in General Hospital Wards: A Deterministic Cost-Minimization and Break-Even Modeling Study.* Submitted to the *Journal of Clinical Monitoring and Computing*; manuscript under peer review. Repository archive: Zenodo, concept DOI [10.5281/zenodo.20176682](https://doi.org/10.5281/zenodo.20176682) (stable identifier resolving to the latest archived release). The journal DOI of the published article will be added upon acceptance.
 
 Machine-readable citation metadata is in `CITATION.cff`.
 
