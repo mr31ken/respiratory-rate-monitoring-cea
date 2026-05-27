@@ -1,6 +1,6 @@
 # Economic Evaluation of Automated Respiratory Rate Monitoring in General Hospital Wards
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20363806.svg)](https://doi.org/10.5281/zenodo.20363806)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20407861.svg)](https://doi.org/10.5281/zenodo.20407861)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 A reproducible, deterministic cost-minimization and break-even modeling study comparing manual respiratory rate (RR) counting with five automated monitoring scenarios across four national healthcare systems (Japan, UK, Australia, USA).
@@ -17,7 +17,7 @@ This repository contains all data, analysis code, and documentation accompanying
 ├── data/               # Input CSV files with source attribution
 ├── tables/             # Generated CSV tables (regenerable from analysis/)
 ├── figures/            # Generated PNG/PDF figures (regenerable from analysis/)
-├── supplementary/      # Supplementary materials (S1–S9)
+├── supplementary/      # Supplementary materials (S1–S8)
 ├── docs/               # Main manuscript and cover letter (markdown sources)
 ├── requirements.txt    # Python dependencies
 ├── CITATION.cff        # Citation metadata
@@ -59,8 +59,8 @@ The data dictionary (`data/DATA_DICTIONARY.md`) defines every variable.
 ## Data Provenance
 
 - Input CSVs in `data/` cite primary sources (NICE MIBs, FDA 510(k) summaries, peer-reviewed clinical validation studies, MHLW/NHS/AIHW/CMS government statistics, manufacturer disclosures).
-- Parameters are explicitly classified as **Published** (cited source) or **Assumption** (model parameter requiring sensitivity testing); see Supplementary S2.
-- All values were independently verified against primary sources; the verification log is in Supplementary S1.
+- Parameters are explicitly classified as **Published** (cited source) or **Assumption** (model parameter requiring sensitivity testing); see Supplementary S1.
+- All values were independently verified against primary sources (full citation list provided in the manuscript reference list).
 
 ---
 
@@ -74,7 +74,7 @@ Reporting follows the **Consolidated Health Economic Evaluation Reporting Standa
 
 If you use this repository or adapt the model, please cite:
 
-> Saito K, Kishimoto K, Ishizuka N, Kusuda K, Kuroda T. *Economic Evaluation of Automated Respiratory Rate Monitoring in General Hospital Wards: A Deterministic Cost-Minimization and Break-Even Modeling Study.* Submitted to the *Journal of Clinical Monitoring and Computing*; manuscript under peer review. Repository archive: Zenodo, doi:[10.5281/zenodo.20363806](https://doi.org/10.5281/zenodo.20363806). The journal DOI of the published article will be added upon acceptance.
+> Saito K, Kishimoto K, Ishizuka N, Kusuda K, Kuroda T. *Economic Evaluation of Automated Respiratory Rate Monitoring in General Hospital Wards: A Deterministic Cost-Minimization and Break-Even Modeling Study.* Submitted to the *Journal of Clinical Monitoring and Computing*; manuscript under peer review. Repository archive: Zenodo, doi:[10.5281/zenodo.20407861](https://doi.org/10.5281/zenodo.20407861). The journal DOI of the published article will be added upon acceptance.
 
 Machine-readable citation metadata is in `CITATION.cff`.
 

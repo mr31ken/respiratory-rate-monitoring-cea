@@ -137,7 +137,7 @@ A large language model (LLM; Anthropic Claude) was used during the drafting and 
 
 ### Reproducibility and Data Availability
 
-All data inputs, analysis scripts, and generated outputs are publicly available in the project repository at https://github.com/mr31ken/respiratory-rate-monitoring-cea. Analyses were performed in Python 3.9 (tested with 3.9.6) using pandas, numpy, matplotlib, and scipy; the full pinned dependency list is provided as `requirements.txt` in the repository. All figures and tables are programmatically generated from the input CSV files. The complete parameter set is provided in machine-readable format (data/cost_parameters.csv) to enable institutional adaptation with local cost data. A snapshot of the repository (release v1.0.2-jcmc-submission) is archived at Zenodo with DOI [10.5281/zenodo.20363806](https://doi.org/10.5281/zenodo.20363806).
+All data inputs, analysis scripts, and generated outputs are publicly available in the project repository at https://github.com/mr31ken/respiratory-rate-monitoring-cea. Analyses were performed in Python 3.9 (tested with 3.9.6) using pandas, numpy, matplotlib, and scipy; the full pinned dependency list is provided as `requirements.txt` in the repository. All figures and tables are programmatically generated from the input CSV files. The complete parameter set is provided in machine-readable format (data/cost_parameters.csv) to enable institutional adaptation with local cost data. A snapshot of the repository (release v1.0.3-jcmc-submission) is archived at Zenodo with DOI [10.5281/zenodo.20407861](https://doi.org/10.5281/zenodo.20407861).
 
 ## Results
 
@@ -170,7 +170,7 @@ Table 1 presents the complete parameter set used in the cost-effectiveness model
 | Nurse hourly cost (Japan) | ¥3,500 | ¥2,800–4,200 | Assumption (salary + overhead) |
 | General ward bed-day (Japan) | ¥37,102 | — | MHLW 2021 [14] |
 | ICU bed-day (Japan) | ¥96,970 | — | MHLW 2021 [14] (Specific Intensive Care Unit Management Fee categories 3–4; 9,697 points × ¥10) |
-| Adverse event cost (Japan, conservative) | ¥476,420 | ¥300,000–2,000,000 | Derived (see S4) |
+| Adverse event cost (Japan, conservative) | ¥476,420 | ¥300,000–2,000,000 | Derived (see S3) |
 | Adverse event cost (UK, 2020/21 NCC) | £7,368 | — | Parliament WQ 165361 [16] |
 | Adverse event cost (Australia) | A$14,134 | — | Curtis 2021 [17] |
 | Adverse event cost (USA) | $10,700 | — | Blike 2025 [8] |
@@ -347,7 +347,7 @@ This study constructed a deterministic cost-minimization and break-even model co
 
 All authors read and approved the final manuscript and meet the four ICMJE authorship criteria.
 
-**Data availability:** The complete dataset, analysis code (Python 3.9; tested with 3.9.6), and data dictionary supporting this study are publicly available at https://github.com/mr31ken/respiratory-rate-monitoring-cea. An archived snapshot (release v1.0.2-jcmc-submission) is deposited at Zenodo with DOI [10.5281/zenodo.20363806](https://doi.org/10.5281/zenodo.20363806). The repository contains: (1) all input CSV files with source attribution; (2) Python scripts that programmatically generate all figures and tables; (3) complete parameter sets in machine-readable format for institutional adaptation. No patient-level data were used; all inputs derive from published aggregate statistics.
+**Data availability:** The complete dataset, analysis code (Python 3.9; tested with 3.9.6), and data dictionary supporting this study are publicly available at https://github.com/mr31ken/respiratory-rate-monitoring-cea. An archived snapshot (release v1.0.3-jcmc-submission) is deposited at Zenodo with DOI [10.5281/zenodo.20407861](https://doi.org/10.5281/zenodo.20407861). The repository contains: (1) all input CSV files with source attribution; (2) Python scripts that programmatically generate all figures and tables; (3) complete parameter sets in machine-readable format for institutional adaptation. No patient-level data were used; all inputs derive from published aggregate statistics.
 
 ---
 
