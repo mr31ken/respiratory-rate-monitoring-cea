@@ -1,8 +1,7 @@
 cff-version: 1.2.0
 title: >-
-  Economic Evaluation of Automated Respiratory Rate Monitoring in General
-  Hospital Wards: A Deterministic Cost-Minimization and Break-Even Modeling
-  Study
+  Automated Respiratory Rate Monitoring in General Hospital Wards: A
+  Deterministic Break-Even Threshold Analysis
 message: >-
   If you use this software or adapt the model, please cite the accompanying
   manuscript.
@@ -36,16 +35,15 @@ license: MIT
 keywords:
   - respiratory rate
   - continuous monitoring
-  - cost-minimization analysis
   - break-even analysis
-  - patient deterioration
+  - threshold analysis
+  - clinical deterioration
   - health economic modeling
 preferred-citation:
   type: article
   title: >-
-    Economic Evaluation of Automated Respiratory Rate Monitoring in General
-    Hospital Wards: A Deterministic Cost-Minimization and Break-Even Modeling
-    Study
+    Automated Respiratory Rate Monitoring in General Hospital Wards: A
+    Deterministic Break-Even Threshold Analysis
   authors:
     - given-names: "Kenichi"
       family-names: "Saito"

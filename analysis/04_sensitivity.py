@@ -2,402 +2,345 @@
 """
 04_sensitivity.py
 -----------------
-One-way sensitivity analysis and break-even visualization.
+Break-even visualisation, one-way sensitivity, released-time and
+alarm-burden scenarios, two-way threshold analysis, required avoidable
+fraction, and an all-extremes stress test. Uses the same cost function as
+03_cost_model.py (model_core.py).
 
 Outputs:
-  ../figures/fig4_breakeven.pdf
-  ../figures/fig4_breakeven.png
-  ../figures/fig5_tornado.pdf
-  ../figures/fig5_tornado.png
-  ../figures/fig6_scenario.pdf
-  ../figures/fig6_scenario.png
+  ../figures/fig4_breakeven.pdf / .png
+  ../figures/fig5_tornado.pdf / .png
+  ../figures/fig6_required_fraction.pdf / .png
   ../tables/table5_sensitivity.csv
+  ../tables/table6_scenario_analysis.csv
+  ../tables/table7_two_way.csv
+  ../tables/table8_stress_test.csv
 """
 
-import os, pathlib
+import pathlib
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib
+from matplotlib.patches import Patch
 matplotlib.rcParams["font.family"] = "DejaVu Sans"
 matplotlib.rcParams["pdf.fonttype"] = 42
 
+from model_core import (BASE, DEVICES, REPRESENTATIVE, I_REF, FULL_COUNT_SEC,
+                        device_components, incremental, device_price_jpy,
+                        event_values, breakeven_per_1000, q_required)
+
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-DATA = ROOT / "data"
 TABLES = ROOT / "tables"
 FIGURES = ROOT / "figures"
 TABLES.mkdir(exist_ok=True)
 FIGURES.mkdir(exist_ok=True)
 
-params = pd.read_csv(DATA / "cost_parameters.csv")
+EV = event_values()
+B_JP = EV["Japan, fee schedule"]["value"]
+B_JP_CLAIMS = EV["Japan, claims-based ICU charges"]["value"]
+B_UK = EV["UK, NHS cost collection"]["value"]
+REP = REPRESENTATIVE
+REP_PRICE = device_price_jpy(DEVICES[REP], BASE)
 
-def get_param(pid):
-    row = params[params["parameter_id"] == pid]
-    return float(row["value"].iloc[0])
+base_inc = incremental(REP)
+base_be = breakeven_per_1000(base_inc, B_JP)
+print(f"Representative device: {REP}")
+print(f"  Incremental cost: ¥{base_inc:,.1f}/patient-day")
+print(f"  Break-even (Japan, fee schedule): {base_be:.2f}/1,000 patient-days; "
+      f"q_required at I={I_REF}: {q_required(base_be):.1%}")
 
-# ══════════════════════════════════════════════════════════════════════
-# Base-case parameters (Japan)
-# ══════════════════════════════════════════════════════════════════════
-BASE = {
-    "nurse_hourly": get_param("COST_JP03"),         # 3500 JPY
-    "obs_time_sec": get_param("MODEL01"),            # 80 s
-    "obs_frequency": get_param("MODEL02"),           # 4.5/day
-    "occupancy": get_param("MODEL04"),               # 0.90
-    "ward_beds": get_param("MODEL03"),               # 30
-    "device_life": get_param("MODEL05"),             # 7 yr
-    "maint_rate": get_param("MODEL07"),              # 0.08
-    "device_cost_per_bed": 665000,                   # EarlySense-type in JPY
-    "sensor_replace_annual": 475 * get_param("FX02"),# annual sensor cost JPY
-    "consumable_pd": 0,
-    "staff_min_device": 3,                           # min/patient-day for device
-    "ae_cost": (get_param("COST_JP02") * 3 + get_param("COST_JP01") * 5),
-}
 
-def compute_incremental(p):
-    """Compute incremental cost/patient-day of device vs manual (JPY)."""
-    pd_per_bed = p["occupancy"] * 365
-
-    # Manual cost
-    manual_pd = (p["nurse_hourly"] * p["obs_time_sec"] / 3600) * p["obs_frequency"]
-
-    # Device cost
-    device_annual = p["device_cost_per_bed"] / p["device_life"]
-    maint_annual = p["device_cost_per_bed"] * p["maint_rate"] + p["sensor_replace_annual"]
-    device_pd = (device_annual + maint_annual) / pd_per_bed
-    consumable = p["consumable_pd"]
-    staff_device = (p["staff_min_device"] / 60) * p["nurse_hourly"]
-    device_total = device_pd + consumable + staff_device
-
-    incremental = device_total - manual_pd
-    return incremental
-
-def compute_breakeven_events(incremental, ae_cost, patient_days_year):
-    """Break-even adverse events per year."""
-    if ae_cost <= 0:
-        return float("inf")
-    return (incremental * patient_days_year) / ae_cost
-
-base_inc = compute_incremental(BASE)
-base_pd_year = BASE["ward_beds"] * BASE["occupancy"] * 365
-base_be = compute_breakeven_events(base_inc, BASE["ae_cost"], base_pd_year)
-
-print(f"Base case incremental cost: ¥{base_inc:,.1f}/patient-day")
-print(f"Base case break-even: {base_be:.1f} events/year")
+def evaluate(p, b=B_JP, name=REP, staff_min=None):
+    inc = incremental(name, p, staff_min)
+    be = breakeven_per_1000(inc, b)
+    return inc, be
 
 
 # ══════════════════════════════════════════════════════════════════════
-# One-Way Sensitivity Analysis
+# One-way sensitivity (representative device, Japan fee-schedule B)
 # ══════════════════════════════════════════════════════════════════════
-sensitivity_ranges = {
-    "Nurse hourly cost (JPY)": ("nurse_hourly", 2800, 4200),
-    "Manual obs time (sec)": ("obs_time_sec", 60, 120),
-    "Monitoring frequency (obs/day)": ("obs_frequency", 2, 8),
-    "Ward occupancy": ("occupancy", 0.75, 0.95),
-    "Device cost/bed (JPY)": ("device_cost_per_bed", 400000, 1000000),
-    "Device useful life (yr)": ("device_life", 5, 10),
-    "Maintenance rate (%)": ("maint_rate", 0.05, 0.12),
-    "Staff time for device (min/pd)": ("staff_min_device", 1, 8),
-    "Adverse event cost (JPY)": ("ae_cost", 300000, 2000000),
-}
+# (label, key, low, high, kind)
+ONE_WAY = [
+    ("Nurse hourly cost (JPY)", "nurse_hourly", 2800, 4200, "p"),
+    ("Nurse time released per observation (s)", "released_sec", 0,
+     FULL_COUNT_SEC, "p"),
+    ("Monitoring frequency (obs/day)", "obs_frequency", 2, 8, "p"),
+    ("Ward occupancy", "occupancy", 0.75, 0.95, "p"),
+    ("Device price per bed (JPY)", "price", 400_000, 1_000_000, "price"),
+    ("Device useful life (yr)", "life_monitor", 5, 10, "p"),
+    ("General maintenance rate", "maint_rate", 0.05, 0.12, "p"),
+    ("Device-related staff time incl. alarms (min/pd)", "staff", 1, 8, "staff"),
+    ("GBP/JPY exchange rate (±15%)", "fx_gbp", BASE["fx_gbp"] * 0.85,
+     BASE["fx_gbp"] * 1.15, "p"),
+    ("Event value, Japan (fee schedule → claims-based ICU charges)", "b",
+     B_JP, B_JP_CLAIMS, "b"),
+]
 
-tornado_data = []
-sensitivity_rows = []
-for label, (key, low, high) in sensitivity_ranges.items():
-    # Low value
-    p_low = BASE.copy()
-    p_low[key] = low
-    inc_low = compute_incremental(p_low)
-    pd_year_low = p_low["ward_beds"] * p_low["occupancy"] * 365
-    ae_low = p_low["ae_cost"]
-    be_low = compute_breakeven_events(inc_low, ae_low, pd_year_low)
 
-    # High value
-    p_high = BASE.copy()
-    p_high[key] = high
-    inc_high = compute_incremental(p_high)
-    pd_year_high = p_high["ward_beds"] * p_high["occupancy"] * 365
-    ae_high = p_high["ae_cost"]
-    be_high = compute_breakeven_events(inc_high, ae_high, pd_year_high)
+def run_one(key, val, kind):
+    p = BASE.copy()
+    b, staff = B_JP, None
+    if kind == "p":
+        p[key] = val
+    elif kind == "price":
+        p["price_scale"] = val / REP_PRICE
+    elif kind == "staff":
+        staff = val
+    elif kind == "b":
+        b = val
+    return evaluate(p, b, staff_min=staff)
 
-    tornado_data.append({
-        "parameter": label,
-        "low_value": low,
-        "high_value": high,
-        "be_at_low": be_low,
-        "be_at_high": be_high,
-        "range": abs(be_high - be_low)
-    })
 
-    sensitivity_rows.append({
-        "parameter": label,
-        "base_value": BASE[key],
-        "low_value": low,
-        "high_value": high,
-        "incremental_at_low": round(inc_low, 1),
-        "incremental_at_high": round(inc_high, 1),
-        "breakeven_at_low": round(be_low, 1),
-        "breakeven_at_high": round(be_high, 1),
+sens_rows = []
+for label, key, low, high, kind in ONE_WAY:
+    inc_lo, be_lo = run_one(key, low, kind)
+    inc_hi, be_hi = run_one(key, high, kind)
+    base_val = {"price": REP_PRICE, "staff": DEVICES[REP]["staff_min"],
+                "b": B_JP}.get(kind, BASE.get(key))
+    sens_rows.append({
+        "parameter": label, "base_value": round(base_val, 3),
+        "low_value": round(low, 3), "high_value": round(high, 3),
+        "incremental_at_low": round(inc_lo, 1),
+        "incremental_at_high": round(inc_hi, 1),
+        "breakeven_per_1000pd_at_low": round(be_lo, 2),
+        "breakeven_per_1000pd_at_high": round(be_hi, 2),
+        "q_required_pct_at_low": round(q_required(be_lo) * 100, 1),
+        "q_required_pct_at_high": round(q_required(be_hi) * 100, 1),
         "base_incremental": round(base_inc, 1),
-        "base_breakeven": round(base_be, 1)
+        "base_breakeven_per_1000pd": round(base_be, 2),
+        "range": abs(be_hi - be_lo),
     })
-
-sens_df = pd.DataFrame(sensitivity_rows)
-sens_df.to_csv(TABLES / "table5_sensitivity.csv", index=False)
+sens_df = pd.DataFrame(sens_rows)
+sens_df.drop(columns="range").to_csv(TABLES / "table5_sensitivity.csv",
+                                     index=False)
 print(f"\nTable 5 saved: {TABLES / 'table5_sensitivity.csv'}")
 
 
 # ══════════════════════════════════════════════════════════════════════
-# Figure 4: Break-even Analysis (multi-country)
+# Figure 4: Break-even by device and event value (ICU-transfer endpoint)
 # ══════════════════════════════════════════════════════════════════════
-# For each device type, show break-even events using different country AE costs
-device_types = {
-    "Under-mattress\n(EarlySense-type)": {"inc_jpd": None},  # filled from table3
-    "Bedside monitor\n(impedance)": {"inc_jpd": None},
-    "Capnography\n(Capnostream-type)": {"inc_jpd": None},
-    "Wearable patch\n(RespiraSense-type)": {"inc_jpd": None},
-    "Radar sensor\n(Guardian M10-type)": {"inc_jpd": None},
-}
-
-# Load table3 for incremental costs
-try:
-    t3 = pd.read_csv(TABLES / "table3_cost_per_patient_day.csv")
-    mapping = {
-        "Under-mattress sensor (EarlySense-type)": "Under-mattress\n(EarlySense-type)",
-        "Bedside monitor (impedance RR)": "Bedside monitor\n(impedance)",
-        "Capnography (Capnostream-type)": "Capnography\n(Capnostream-type)",
-        "Wearable patch (RespiraSense-type)": "Wearable patch\n(RespiraSense-type)",
-        "Radar sensor (Guardian M10-type)": "Radar sensor\n(Guardian M10-type)"
-    }
-    for t3_name, fig_name in mapping.items():
-        row = t3[t3["scenario"] == t3_name]
-        if not row.empty:
-            device_types[fig_name]["inc_jpd"] = row["incremental_vs_manual_jpd"].iloc[0]
-except Exception as e:
-    print(f"Warning: Could not load table3: {e}")
-    # Use base-case estimate for all
-    for k in device_types:
-        device_types[k]["inc_jpd"] = base_inc
-
-FX_GBP_JPY = get_param("FX02")
-FX_AUD_JPY = get_param("FX04")
-FX_USD_JPY = get_param("FX01")
-
-country_ae_costs_jpy = {
-    "Japan\n(bed-day)": get_param("COST_JP02") * 3 + get_param("COST_JP01") * 5,
-    "Japan\n(w/ procedures)": 1_000_000,
-    "UK\n(2020-21 NCC)": (1881 * 3 + 345 * 5) * FX_GBP_JPY,
-    "Australia\n(Curtis 2021)": 14134 * FX_AUD_JPY,
-    "USA\n(Blike 2025)": 10700 * FX_USD_JPY,
-}
-
+fig_ev = [k for k, e in EV.items() if e["role"] != "separate"]
 fig, ax = plt.subplots(figsize=(10, 6))
-
-x = np.arange(len(device_types))
-n_countries = len(country_ae_costs_jpy)
-bar_width = 0.15
-country_colors = ["#1565C0", "#42A5F5", "#E65100", "#66BB6A", "#AB47BC"]
-
-for i, (country, ae_cost) in enumerate(country_ae_costs_jpy.items()):
-    be_values = []
-    for dev_name, dev_data in device_types.items():
-        inc = dev_data["inc_jpd"]
-        if inc is not None and inc > 0:
-            be = (inc / ae_cost) * 1000  # per 1000 patient-days
-        else:
-            be = 0
-        be_values.append(be)
-
-    offset = (i - n_countries / 2 + 0.5) * bar_width
-    ax.bar(x + offset, be_values, bar_width, label=country.replace("\n", " "),
-           color=country_colors[i], alpha=0.85, edgecolor="white", linewidth=0.5)
-
+x = np.arange(len(DEVICES))
+bw = 0.25
+colors = ["#1565C0", "#E65100", "#90CAF9"]
+for i, ev_name in enumerate(fig_ev):
+    vals = [breakeven_per_1000(incremental(n), EV[ev_name]["value"])
+            for n in DEVICES]
+    lab = ev_name + (" (variant)" if EV[ev_name]["role"] == "variant" else "")
+    ax.bar(x + (i - 1) * bw, vals, bw, label=lab, color=colors[i],
+           edgecolor="white", linewidth=0.5)
 ax.set_xticks(x)
-ax.set_xticklabels([k.replace("\n", "\n") for k in device_types.keys()],
-                   fontsize=8, ha="center")
-ax.set_ylabel("Break-even: adverse events avoided\n(per 1,000 patient-days)", fontsize=9)
-# Title removed per JCMC requirements (no chart titles inside figures)
-ax.legend(fontsize=7, loc="upper right", ncol=2)
+ax.set_xticklabels([DEVICES[n]["short"] for n in DEVICES], fontsize=9)
+ax.set_ylabel("Break-even: unplanned ICU transfers averted\n"
+              "per 1,000 patient-days", fontsize=9)
+ax.legend(fontsize=8, loc="upper left")
 ax.spines["top"].set_visible(False)
 ax.spines["right"].set_visible(False)
-
-ward_beds = int(BASE["ward_beds"])
-occupancy = BASE["occupancy"]
-ax.text(0.02, -0.15,
-        f"Base case: {ward_beds}-bed ward, {occupancy:.0%} occupancy. "
-        "Values represent the minimum number of deterioration events that must be "
-        "avoided per 1,000 patient-days for the monitoring investment to break even.",
+ax.text(0.02, -0.13,
+        "Values are thresholds (events that must be averted), not event rates. "
+        "Australian and US values use a different endpoint or construct and "
+        "are reported separately (Table 3).",
         transform=ax.transAxes, fontsize=7, color="gray", wrap=True)
-
 plt.tight_layout()
 fig.savefig(FIGURES / "fig4_breakeven.pdf", dpi=300, bbox_inches="tight")
 fig.savefig(FIGURES / "fig4_breakeven.png", dpi=300, bbox_inches="tight")
 plt.close()
-print(f"\nFigure 4 saved to {FIGURES}")
+print(f"Figure 4 saved to {FIGURES}")
 
 
 # ══════════════════════════════════════════════════════════════════════
-# Figure 5: Tornado Diagram
+# Figure 5: Tornado (representative device, Japan fee-schedule B)
 # ══════════════════════════════════════════════════════════════════════
-tornado_df = pd.DataFrame(tornado_data).sort_values("range", ascending=True)
-
-# Increased height ~30% (6 -> 7.8) to reduce vertical crowding of labels
+tdf = sens_df.sort_values("range", ascending=True).reset_index(drop=True)
 fig, ax = plt.subplots(figsize=(9, 7.8))
+lo_all = tdf[["breakeven_per_1000pd_at_low", "breakeven_per_1000pd_at_high"]].min(axis=1)
+hi_all = tdf[["breakeven_per_1000pd_at_low", "breakeven_per_1000pd_at_high"]].max(axis=1)
+span = hi_all.max() - lo_all.min()
+off = span * 0.015
 
-y = np.arange(len(tornado_df))
-# Compute x-range to position outside-bar labels with a small offset
-x_min_data = min(tornado_df["be_at_low"].min(), tornado_df["be_at_high"].min())
-x_max_data = max(tornado_df["be_at_low"].max(), tornado_df["be_at_high"].max())
-x_span = x_max_data - x_min_data
-label_offset = x_span * 0.015
 
-for i, (_, row) in enumerate(tornado_df.iterrows()):
-    low_val = min(row["be_at_low"], row["be_at_high"])
-    high_val = max(row["be_at_low"], row["be_at_high"])
+def fmt(v):
+    return f"{v:,.0f}" if abs(v) >= 100 else (f"{v:g}")
 
-    # Bar from low to base
-    ax.barh(i, base_be - low_val, left=low_val, height=0.6,
-            color="#1976D2", alpha=0.7)
-    # Bar from base to high
-    ax.barh(i, high_val - base_be, left=base_be, height=0.6,
-            color="#E53935", alpha=0.7)
 
-    # Labels — placed OUTSIDE the bars (past the bar edge) to avoid overlap
-    ax.text(low_val - label_offset, i, f'{row["low_value"]}',
-            ha="right", va="center", fontsize=7, color="#1976D2")
-    ax.text(high_val + label_offset, i, f'{row["high_value"]}',
-            ha="left", va="center", fontsize=7, color="#E53935")
-
+for i, r in tdf.iterrows():
+    lo_be, hi_be = r["breakeven_per_1000pd_at_low"], r["breakeven_per_1000pd_at_high"]
+    left, right = min(lo_be, hi_be), max(lo_be, hi_be)
+    lo_lab = r["low_value"] if lo_be <= hi_be else r["high_value"]
+    hi_lab = r["high_value"] if lo_be <= hi_be else r["low_value"]
+    ax.barh(i, base_be - left, left=left, height=0.6, color="#1976D2", alpha=0.7)
+    ax.barh(i, right - base_be, left=base_be, height=0.6, color="#E53935", alpha=0.7)
+    if left < base_be:
+        ax.text(left - off, i, fmt(lo_lab), ha="right", va="center", fontsize=7,
+                color="#1976D2")
+    if right > base_be:
+        ax.text(right + off, i, fmt(hi_lab), ha="left", va="center", fontsize=7,
+                color="#E53935")
 ax.axvline(base_be, color="black", linewidth=1.2, linestyle="--", alpha=0.7)
-ax.set_yticks(y)
-# Slightly smaller font for y-tick labels to reduce overlap with bar values
-ax.set_yticklabels(tornado_df["parameter"], fontsize=8)
-ax.set_xlabel("Break-even: adverse events avoided per year", fontsize=10)
-# Title removed per JCMC requirements (no chart titles inside figures)
-
-# Extend x-limits so the outside-bar value labels are not clipped
-ax.set_xlim(x_min_data - x_span * 0.10, x_max_data + x_span * 0.10)
-
-# Legend
-from matplotlib.patches import Patch
-legend_elements = [Patch(facecolor="#1976D2", alpha=0.7, label="Low parameter value"),
-                   Patch(facecolor="#E53935", alpha=0.7, label="High parameter value")]
-ax.legend(handles=legend_elements, fontsize=8, loc="lower right")
-
-ax.text(0.02, -0.08,
-        f"Vertical dashed line: base-case break-even ({base_be:.1f} events/year). "
-        "Numbers at bar ends show parameter values tested.",
+ax.set_yticks(range(len(tdf)))
+ax.set_yticklabels(tdf["parameter"], fontsize=8)
+ax.set_xlabel("Break-even: unplanned ICU transfers averted per 1,000 patient-days",
+              fontsize=10)
+ax.set_xlim(lo_all.min() - span * 0.12, hi_all.max() + span * 0.12)
+ax.legend(handles=[Patch(facecolor="#1976D2", alpha=0.7, label="Lower threshold"),
+                   Patch(facecolor="#E53935", alpha=0.7, label="Higher threshold")],
+          fontsize=8, loc="lower right")
+ax.text(0.02, -0.11,
+        f"Dashed line: base case ({base_be:.2f} per 1,000 patient-days). "
+        "Numbers at bar ends show the parameter values tested.",
         transform=ax.transAxes, fontsize=7, color="gray")
-
 ax.spines["top"].set_visible(False)
 ax.spines["right"].set_visible(False)
-# Increase left margin so long y-axis parameter labels (e.g. "Adverse event cost (¥)")
-# are not clipped; also give a bit of bottom room for the caption text.
-plt.subplots_adjust(left=0.28, right=0.96, top=0.95, bottom=0.15)
+plt.subplots_adjust(left=0.36, right=0.96, top=0.95, bottom=0.15)
 fig.savefig(FIGURES / "fig5_tornado.pdf", dpi=300, bbox_inches="tight")
 fig.savefig(FIGURES / "fig5_tornado.png", dpi=300, bbox_inches="tight")
 plt.close()
-print(f"\nFigure 5 saved to {FIGURES}")
+print(f"Figure 5 saved to {FIGURES}")
+
 
 # ══════════════════════════════════════════════════════════════════════
-# Multi-Way Scenario Analysis (Best / Base / Worst)
+# Released-time and alarm-burden scenarios (all devices, primary B)
 # ══════════════════════════════════════════════════════════════════════
-# Simultaneously vary ALL assumption parameters to produce
-# best-case, base-case, and worst-case break-even thresholds.
-
-scenarios = {
-    "Best case\n(device favored)": {
-        "nurse_hourly": 4200,        # high → manual more expensive
-        "obs_time_sec": 120,         # long manual obs → more expensive
-        "obs_frequency": 6,          # high frequency → more manual cost
-        "occupancy": 0.95,           # high occupancy → more patient-days to amortize
-        "device_cost_per_bed": 400000,  # cheap device
-        "device_life": 10,           # long life
-        "maint_rate": 0.05,          # low maintenance
-        "staff_min_device": 1,       # minimal device staff time
-        "ae_cost": 2_000_000,        # high AE cost → fewer events needed
-        "ward_beds": BASE["ward_beds"],
-        "sensor_replace_annual": BASE["sensor_replace_annual"],
-        "consumable_pd": BASE["consumable_pd"],
-    },
-    "Base case": {k: v for k, v in BASE.items()},
-    "Worst case\n(device disfavored)": {
-        "nurse_hourly": 2800,        # low → manual cheaper
-        "obs_time_sec": 60,          # quick manual obs
-        "obs_frequency": 2,          # low frequency → low manual cost
-        "occupancy": 0.75,           # low occupancy → fewer pt-days to amortize
-        "device_cost_per_bed": 1000000,  # expensive device
-        "device_life": 5,            # short life
-        "maint_rate": 0.12,          # high maintenance
-        "staff_min_device": 8,       # high device staff time
-        "ae_cost": 300_000,          # low AE cost → many events needed
-        "ward_beds": BASE["ward_beds"],
-        "sensor_replace_annual": BASE["sensor_replace_annual"],
-        "consumable_pd": BASE["consumable_pd"],
-    },
+SCENARIOS = {
+    "Base case (20 s released)": {},
+    "No nurse time released (0 s)": {"released_sec": 0},
+    "Full counting time released (80 s)": {"released_sec": FULL_COUNT_SEC},
+    "Alarm handling +5 min/patient-day": {"alarm_extra_min": 5},
 }
+sc_rows = []
+for name in DEVICES:
+    for sc, change in SCENARIOS.items():
+        p = BASE.copy()
+        p.update(change)
+        inc = incremental(name, p)
+        for ev_name in ("Japan, fee schedule", "UK, NHS cost collection"):
+            be = breakeven_per_1000(inc, EV[ev_name]["value"])
+            sc_rows.append({
+                "device_scenario": name, "scenario": sc,
+                "event_value_scenario": ev_name,
+                "incremental_cost_jpd": round(inc, 1),
+                "breakeven_per_1000pd": round(be, 2),
+                "q_required_pct_at_ref_rate": round(q_required(be) * 100, 1),
+            })
+    # Additional alarm-handling time at which q_required reaches 100% at I_REF
+    for ev_name in ("Japan, fee schedule", "UK, NHS cost collection"):
+        b = EV[ev_name]["value"]
+        extra = (I_REF * b / 1000 - incremental(name)) * 60 / BASE["nurse_hourly"]
+        sc_rows.append({
+            "device_scenario": name,
+            "scenario": "Alarm handling time (min/pd) at which q_required = 100%",
+            "event_value_scenario": ev_name,
+            "incremental_cost_jpd": np.nan,
+            "breakeven_per_1000pd": I_REF,
+            "q_required_pct_at_ref_rate": 100.0,
+            "threshold_extra_alarm_min_per_pd": round(extra, 1),
+        })
+sc_df = pd.DataFrame(sc_rows)
+sc_df.to_csv(TABLES / "table6_scenario_analysis.csv", index=False)
+print(f"Table 6 saved: {TABLES / 'table6_scenario_analysis.csv'}")
 
-scenario_results = []
-for sc_name, sc_params in scenarios.items():
-    inc = compute_incremental(sc_params)
-    pd_year = sc_params["ward_beds"] * sc_params["occupancy"] * 365
-    ae = sc_params["ae_cost"]
-    be = compute_breakeven_events(inc, ae, pd_year)
-    be_per_1000 = (inc / ae) * 1000 if ae > 0 else float("inf")
 
-    scenario_results.append({
-        "scenario": sc_name.replace("\n", " "),
-        "incremental_cost_jpd": round(inc, 1),
-        "ae_cost_jpy": round(ae),
-        "breakeven_events_year": round(be, 1),
-        "breakeven_per_1000pd": round(be_per_1000, 2),
+# ══════════════════════════════════════════════════════════════════════
+# Two-way threshold analysis: released time x device staff time
+# ══════════════════════════════════════════════════════════════════════
+tw_rows = []
+for sec in (0, 20, 40, 60, 80):
+    for minutes in (1, 3, 5, 8):
+        p = BASE.copy()
+        p["released_sec"] = sec
+        inc = incremental(REP, p, staff_min=minutes)
+        row = {"released_sec": sec, "device_staff_min_per_pd": minutes,
+               "incremental_cost_jpd": round(inc, 1)}
+        for tag, b in (("japan_fee_schedule", B_JP), ("uk_cost_collection", B_UK)):
+            be = breakeven_per_1000(inc, b)
+            row[f"breakeven_per_1000pd_{tag}"] = round(be, 2)
+            row[f"q_required_pct_{tag}"] = round(q_required(be) * 100, 1)
+        tw_rows.append(row)
+pd.DataFrame(tw_rows).to_csv(TABLES / "table7_two_way.csv", index=False)
+print(f"Table 7 saved: {TABLES / 'table7_two_way.csv'}")
+
+
+# ══════════════════════════════════════════════════════════════════════
+# Stress test: all one-way ranges at their extremes simultaneously.
+# Reported for transparency only; this joint state is not plausible and is
+# not used as evidence of robustness.
+# ══════════════════════════════════════════════════════════════════════
+def corner(favour):
+    p = BASE.copy()
+    hi = favour  # True = values favouring the device
+    p.update({
+        # The nurse wage enters both device staff time (a cost) and released time
+        # (a saving). With 80 s released and 1 min staff time a higher wage
+        # favours the device; with 0 s released and 8 min it disfavours it, so
+        # ¥4,200 is the extreme value in both corners.
+        "nurse_hourly": 4200,
+        "released_sec": FULL_COUNT_SEC if hi else 0,
+        "obs_frequency": 8 if hi else 2,
+        "occupancy": 0.95 if hi else 0.75,
+        # Price endpoints are expressed at the base exchange rate; the ±15%
+        # exchange-rate extreme is applied on top (effective ¥340,000 and
+        # ¥1,150,000 per bed), as stated in Supplementary S2.
+        "price_scale": (400_000 if hi else 1_000_000) / REP_PRICE,
+        "life_monitor": 10 if hi else 5,
+        "maint_rate": 0.05 if hi else 0.12,
+        "fx_gbp": BASE["fx_gbp"] * (0.85 if hi else 1.15),
     })
+    b = B_JP_CLAIMS if hi else B_JP
+    inc = incremental(REP, p, staff_min=1 if hi else 8)
+    return inc, b
 
-scenario_df = pd.DataFrame(scenario_results)
-scenario_df.to_csv(TABLES / "table6_scenario_analysis.csv", index=False)
-print(f"\nTable 6 (scenario analysis) saved: {TABLES / 'table6_scenario_analysis.csv'}")
-print(scenario_df.to_string(index=False))
 
-# ── Figure 6: Scenario comparison bar chart ──────────────────────────
-fig, ax = plt.subplots(figsize=(8, 5))
+st_rows = []
+for label, fav in (("All values favouring the device", True),
+                   ("All values disfavouring the device", False)):
+    inc, b = corner(fav)
+    be = breakeven_per_1000(inc, b)
+    # ΔC <= 0: no events need to be averted; a threshold is not defined
+    st_rows.append({"stress_test": label, "incremental_cost_jpd": round(inc, 1),
+                    "event_value_jpy": round(b),
+                    "breakeven_per_1000pd": round(be, 2) if inc > 0 else np.nan,
+                    "q_required_pct_at_ref_rate":
+                        round(q_required(be) * 100, 1) if inc > 0 else np.nan,
+                    "note": "" if inc > 0 else "Incremental cost <= 0; no threshold"})
+pd.DataFrame(st_rows).to_csv(TABLES / "table8_stress_test.csv", index=False)
+print(f"Table 8 saved: {TABLES / 'table8_stress_test.csv'}")
 
-sc_labels = [s.replace("\n", " ") for s in scenarios.keys()]
-be_values = [r["breakeven_per_1000pd"] for r in scenario_results]
-colors_sc = ["#4CAF50", "#2196F3", "#E53935"]
 
-bars = ax.bar(range(len(sc_labels)), be_values, color=colors_sc, width=0.5,
-              edgecolor="white", linewidth=1.5)
-
-for i, (bar, val) in enumerate(zip(bars, be_values)):
-    ax.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.05,
-            f"{val:.2f}", ha="center", va="bottom", fontsize=11, fontweight="bold")
-
-ax.set_xticks(range(len(sc_labels)))
-ax.set_xticklabels(sc_labels, fontsize=10)
-ax.set_ylabel("Break-even: adverse events avoided\n(per 1,000 patient-days)", fontsize=10)
-# Title removed per JCMC requirements (no chart titles inside figures)
-
-# Reference line: typical deterioration rate range
-ax.axhline(y=2, color="orange", linestyle="--", linewidth=1, alpha=0.7)
-ax.axhline(y=10, color="orange", linestyle="--", linewidth=1, alpha=0.7)
-ax.text(len(sc_labels) - 0.6, 2.2, "Lower bound: typical\ndeterioration rate",
-        fontsize=7, color="orange", alpha=0.8)
-ax.text(len(sc_labels) - 0.6, 10.2, "Upper bound: typical\ndeterioration rate",
-        fontsize=7, color="orange", alpha=0.8)
-
-ax.spines["top"].set_visible(False)
-ax.spines["right"].set_visible(False)
-
-ax.text(0.02, -0.15,
-        "Best case: all assumption parameters simultaneously set to values favoring device adoption.\n"
-        "Worst case: all assumption parameters simultaneously set to values disfavoring device adoption.\n"
-        "Orange dashed lines: published range of deterioration events (2–10 per 1,000 patient-days [17, 21]).",
-        transform=ax.transAxes, fontsize=7, color="gray")
-
+# ══════════════════════════════════════════════════════════════════════
+# Figure 6: Required avoidable fraction versus baseline event rate
+# ══════════════════════════════════════════════════════════════════════
+rates = np.linspace(1, 12, 221)
+dev_colors = ["#2E7D32", "#1565C0", "#F9A825", "#6A1B9A", "#C62828"]
+fig, axes = plt.subplots(1, 2, figsize=(11, 5), sharey=True)
+for ax, ev_name in zip(axes, ("Japan, fee schedule", "UK, NHS cost collection")):
+    b = EV[ev_name]["value"]
+    for color, name in zip(dev_colors, DEVICES):
+        be = breakeven_per_1000(incremental(name), b)
+        ax.plot(rates, q_required(be, rates) * 100, color=color, linewidth=1.8,
+                label=DEVICES[name]["short"])
+    ax.axhline(100, color="black", linewidth=1)
+    ax.axvline(I_REF, color="gray", linestyle=":", linewidth=1)
+    ax.text(I_REF + 0.15, 185, f"I = {I_REF:g}/1,000 patient-days\n(illustrative reading point)",
+            fontsize=7, color="gray", va="top")
+    ax.text(11.9, 103, "q_required > 100%: not attainable", fontsize=7,
+            ha="right", va="bottom")
+    ax.set_xlim(1, 12)
+    ax.set_ylim(0, 200)
+    ax.set_xlabel("Baseline unplanned ICU transfer rate, I\n"
+                  "(per 1,000 patient-days)", fontsize=9)
+    ax.set_title(f"{'a' if ax is axes[0] else 'b'}  {ev_name} "
+                 f"(V = ¥{b:,.0f})", fontsize=9, loc="left")
+    ax.spines["top"].set_visible(False)
+    ax.spines["right"].set_visible(False)
+axes[0].set_ylabel("Required avoidable fraction, q_required (%)", fontsize=9)
+axes[0].legend(fontsize=8, loc="upper right")
 plt.tight_layout()
-fig.savefig(FIGURES / "fig6_scenario.pdf", dpi=300, bbox_inches="tight")
-fig.savefig(FIGURES / "fig6_scenario.png", dpi=300, bbox_inches="tight")
+fig.savefig(FIGURES / "fig6_required_fraction.pdf", dpi=300, bbox_inches="tight")
+fig.savefig(FIGURES / "fig6_required_fraction.png", dpi=300, bbox_inches="tight")
 plt.close()
-print(f"\nFigure 6 saved to {FIGURES}")
+print(f"Figure 6 saved to {FIGURES}")
 
 if __name__ == "__main__":
     print("\n=== 04_sensitivity.py complete ===")

@@ -1,6 +1,6 @@
 {
-  "title": "Economic Evaluation of Automated Respiratory Rate Monitoring in General Hospital Wards: A Deterministic Cost-Minimization and Break-Even Modeling Study",
-  "description": "Companion repository for a manuscript submitted to the Journal of Clinical Monitoring and Computing. Contains a reproducible deterministic cost-minimization and break-even model comparing manual respiratory rate counting with five automated monitoring scenarios across four national healthcare systems (Japan, UK, Australia, USA). All input data, Python analysis scripts, generated figures and tables, and supplementary materials are included; reporting follows CHEERS 2022.",
+  "title": "Automated Respiratory Rate Monitoring in General Hospital Wards: A Deterministic Break-Even Threshold Analysis",
+  "description": "Companion repository for a manuscript submitted to the Journal of Clinical Monitoring and Computing. Contains a reproducible deterministic break-even threshold model comparing manual respiratory rate counting with five automated monitoring scenarios. For each scenario the model calculates the number of unplanned ICU transfers that must be averted to offset the monitoring cost and the corresponding required avoidable fraction of baseline transfers, using event values from Japan and the UK (Australian and US values reported separately). All input data, Python analysis scripts, generated figures and tables, and supplementary materials are included; reporting follows CHEERS 2022.",
   "creators": [
     {
       "name": "Saito, Kenichi",
@@ -30,9 +30,9 @@
   "keywords": [
     "respiratory rate",
     "continuous monitoring",
-    "cost-minimization analysis",
+    "threshold analysis",
     "break-even analysis",
-    "patient deterioration",
+    "clinical deterioration",
     "health economic modeling",
     "CHEERS 2022",
     "reproducible research"
