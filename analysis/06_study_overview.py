@@ -167,7 +167,7 @@ draw_arrow(ax, mx + mw/2, persp_y, mx + mw/2, persp_y - GAP_Y + 0.005)
 # Parameters
 par_y = persp_y - 0.13 - GAP_Y
 draw_box(ax, mx, par_y, mw, 0.13,
-         "Cost Parameters\n\nNurse wages | Device costs\nEarly-warning costs\nAdverse-event costs",
+         "Cost Parameters\n\nNurse time | Device costs\nMaintenance | Consumables\nEvent values (V)",
          edgecolor=COL_MODEL, fontsize=7)
 
 # Arrow down
@@ -176,7 +176,7 @@ draw_arrow(ax, mx + mw/2, par_y, mx + mw/2, par_y - GAP_Y + 0.005)
 # Countries
 ctr_y = par_y - BOX_H - GAP_Y
 draw_box(ax, mx, ctr_y, mw, BOX_H,
-         "4 Countries\nJapan | UK | Australia | USA",
+         "Event values: Japan | UK\n(Australia | USA separate)",
          facecolor=COL_MODEL, edgecolor=COL_MODEL,
          fontsize=7.5, fontweight="bold", text_color=WHITE)
 
@@ -186,11 +186,11 @@ draw_box(ax, mx, ctr_y, mw, BOX_H,
 ax_x, aw = 0.72, 0.23
 
 analyses = [
-    "Cost-Minimization\nAnalysis",
     "Break-Even\nThreshold Analysis",
-    "One-Way\nSensitivity Analysis",
-    "Multi-Way\nScenario Analysis",
-    "Cross-Country\nComparison",
+    "Required Avoidable\nFraction (q_required)",
+    "One-Way & Two-Way\nSensitivity Analysis",
+    "Released-Time &\nAlarm Scenarios",
+    "Event-Value Scenarios\n(endpoint & construct)",
 ]
 
 top_y = 0.74

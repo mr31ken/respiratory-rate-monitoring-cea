@@ -1,4 +1,51 @@
-scenario,incremental_cost_jpd,ae_cost_jpy,breakeven_events_year,breakeven_per_1000pd
-Best case (device favored),-336.7,2000000,-1.8,-0.17
-Base case,550.9,476420,11.4,1.16
-Worst case (device disfavored),1778.6,300000,48.7,5.93
+device_scenario,scenario,event_value_scenario,incremental_cost_jpd,breakeven_per_1000pd,q_required_pct_at_ref_rate,threshold_extra_alarm_min_per_pd
+Radar sensor (Guardian M10-type),Base case (20 s released),"Japan, fee schedule",368.4,0.76,15.3,
+Radar sensor (Guardian M10-type),Base case (20 s released),"UK, NHS cost collection",368.4,0.26,5.3,
+Radar sensor (Guardian M10-type),No nurse time released (0 s),"Japan, fee schedule",455.9,0.95,18.9,
+Radar sensor (Guardian M10-type),No nurse time released (0 s),"UK, NHS cost collection",455.9,0.33,6.5,
+Radar sensor (Guardian M10-type),Full counting time released (80 s),"Japan, fee schedule",105.9,0.22,4.4,
+Radar sensor (Guardian M10-type),Full counting time released (80 s),"UK, NHS cost collection",105.9,0.08,1.5,
+Radar sensor (Guardian M10-type),Alarm handling +5 min/patient-day,"Japan, fee schedule",660.0,1.37,27.4,
+Radar sensor (Guardian M10-type),Alarm handling +5 min/patient-day,"UK, NHS cost collection",660.0,0.47,9.4,
+Radar sensor (Guardian M10-type),Alarm handling time (min/pd) at which q_required = 100%,"Japan, fee schedule",,5.0,100.0,35.0
+Radar sensor (Guardian M10-type),Alarm handling time (min/pd) at which q_required = 100%,"UK, NHS cost collection",,5.0,100.0,113.7
+Under-mattress sensor (EarlySense-type),Base case (20 s released),"Japan, fee schedule",813.4,1.69,33.7,
+Under-mattress sensor (EarlySense-type),Base case (20 s released),"UK, NHS cost collection",813.4,0.58,11.6,
+Under-mattress sensor (EarlySense-type),No nurse time released (0 s),"Japan, fee schedule",900.9,1.87,37.4,
+Under-mattress sensor (EarlySense-type),No nurse time released (0 s),"UK, NHS cost collection",900.9,0.64,12.9,
+Under-mattress sensor (EarlySense-type),Full counting time released (80 s),"Japan, fee schedule",550.9,1.14,22.8,
+Under-mattress sensor (EarlySense-type),Full counting time released (80 s),"UK, NHS cost collection",550.9,0.39,7.9,
+Under-mattress sensor (EarlySense-type),Alarm handling +5 min/patient-day,"Japan, fee schedule",1105.0,2.29,45.8,
+Under-mattress sensor (EarlySense-type),Alarm handling +5 min/patient-day,"UK, NHS cost collection",1105.0,0.79,15.8,
+Under-mattress sensor (EarlySense-type),Alarm handling time (min/pd) at which q_required = 100%,"Japan, fee schedule",,5.0,100.0,27.4
+Under-mattress sensor (EarlySense-type),Alarm handling time (min/pd) at which q_required = 100%,"UK, NHS cost collection",,5.0,100.0,106.0
+Wearable patch (RespiraSense-type),Base case (20 s released),"Japan, fee schedule",1154.2,2.39,47.9,
+Wearable patch (RespiraSense-type),Base case (20 s released),"UK, NHS cost collection",1154.2,0.82,16.5,
+Wearable patch (RespiraSense-type),No nurse time released (0 s),"Japan, fee schedule",1241.7,2.57,51.5,
+Wearable patch (RespiraSense-type),No nurse time released (0 s),"UK, NHS cost collection",1241.7,0.89,17.7,
+Wearable patch (RespiraSense-type),Full counting time released (80 s),"Japan, fee schedule",891.7,1.85,37.0,
+Wearable patch (RespiraSense-type),Full counting time released (80 s),"UK, NHS cost collection",891.7,0.64,12.7,
+Wearable patch (RespiraSense-type),Alarm handling +5 min/patient-day,"Japan, fee schedule",1445.8,3.0,60.0,
+Wearable patch (RespiraSense-type),Alarm handling +5 min/patient-day,"UK, NHS cost collection",1445.8,1.03,20.7,
+Wearable patch (RespiraSense-type),Alarm handling time (min/pd) at which q_required = 100%,"Japan, fee schedule",,5.0,100.0,21.5
+Wearable patch (RespiraSense-type),Alarm handling time (min/pd) at which q_required = 100%,"UK, NHS cost collection",,5.0,100.0,100.2
+Bedside monitor (impedance RR),Base case (20 s released),"Japan, fee schedule",1261.7,2.62,52.3,
+Bedside monitor (impedance RR),Base case (20 s released),"UK, NHS cost collection",1261.7,0.9,18.0,
+Bedside monitor (impedance RR),No nurse time released (0 s),"Japan, fee schedule",1349.2,2.8,56.0,
+Bedside monitor (impedance RR),No nurse time released (0 s),"UK, NHS cost collection",1349.2,0.96,19.3,
+Bedside monitor (impedance RR),Full counting time released (80 s),"Japan, fee schedule",999.2,2.07,41.4,
+Bedside monitor (impedance RR),Full counting time released (80 s),"UK, NHS cost collection",999.2,0.71,14.3,
+Bedside monitor (impedance RR),Alarm handling +5 min/patient-day,"Japan, fee schedule",1553.4,3.22,64.4,
+Bedside monitor (impedance RR),Alarm handling +5 min/patient-day,"UK, NHS cost collection",1553.4,1.11,22.2,
+Bedside monitor (impedance RR),Alarm handling time (min/pd) at which q_required = 100%,"Japan, fee schedule",,5.0,100.0,19.7
+Bedside monitor (impedance RR),Alarm handling time (min/pd) at which q_required = 100%,"UK, NHS cost collection",,5.0,100.0,98.4
+Capnography (Capnostream-type),Base case (20 s released),"Japan, fee schedule",2162.1,4.48,89.7,
+Capnography (Capnostream-type),Base case (20 s released),"UK, NHS cost collection",2162.1,1.54,30.9,
+Capnography (Capnostream-type),No nurse time released (0 s),"Japan, fee schedule",2249.6,4.67,93.3,
+Capnography (Capnostream-type),No nurse time released (0 s),"UK, NHS cost collection",2249.6,1.61,32.1,
+Capnography (Capnostream-type),Full counting time released (80 s),"Japan, fee schedule",1899.6,3.94,78.8,
+Capnography (Capnostream-type),Full counting time released (80 s),"UK, NHS cost collection",1899.6,1.36,27.1,
+Capnography (Capnostream-type),Alarm handling +5 min/patient-day,"Japan, fee schedule",2453.8,5.09,101.8,
+Capnography (Capnostream-type),Alarm handling +5 min/patient-day,"UK, NHS cost collection",2453.8,1.75,35.1,
+Capnography (Capnostream-type),Alarm handling time (min/pd) at which q_required = 100%,"Japan, fee schedule",,5.0,100.0,4.3
+Capnography (Capnostream-type),Alarm handling time (min/pd) at which q_required = 100%,"UK, NHS cost collection",,5.0,100.0,82.9

@@ -52,7 +52,7 @@ ba_data = ba_data.dropna(subset=["bias_bpm"]).copy()
 # Keys correspond to (study_id) → (device_name, category).
 fallback_map = {
     "ACC03": ("Nellcor CNRRS",                "Pulse oximetry derived"),  # Bergese 2017 — Medtronic Nellcor pulse-ox-derived RR (not Masimo Rad-G)
-    "ACC10": ("IPG (impedance plethysmography)", "Bedside monitor (impedance)"),  # van Loon 2018 — generic IPG, not specifically PVM-4000
+    "ACC10": ("IPG (impedance pneumography)", "Bedside monitor (impedance)"),  # van Loon 2018 — generic IPG, not specifically PVM-4000
     "ACC11": ("Telemetry impedance (generic)", "Bedside monitor (impedance)"),  # Lee 2024 — ED telemetry monitor
 }
 for sid, (devname, cat) in fallback_map.items():
@@ -90,14 +90,15 @@ for i, (_, row) in enumerate(ba_data.iterrows()):
                  color=color, alpha=0.25, edgecolor=color, linewidth=1.0)
         # Bias point
         ax1.plot(row["bias_bpm"], i, "o", color=color, markersize=9, zorder=5)
-        # Annotation
-        annotation = f'Bias {row["bias_bpm"]:.1f}, LoA [{row["loa_lower_bpm"]:.1f}, {row["loa_upper_bpm"]:.1f}]'
+        # Annotation; flag studies that report 98.9% rather than 95% LoA
+        loa_label = "98.9% LoA" if "98.9% LoA" in str(row["notes"]) else "LoA"
+        annotation = f'Bias {row["bias_bpm"]:.1f}, {loa_label} [{row["loa_lower_bpm"]:.1f}, {row["loa_upper_bpm"]:.1f}]'
         text_x = max(row["loa_upper_bpm"] + 0.3, 3.5)
     else:
         # Bias only (diamond marker)
         ax1.plot(row["bias_bpm"], i, "D", color=color, markersize=8, zorder=5,
                  markeredgecolor="black", markeredgewidth=0.5)
-        annotation = f'Bias {row["bias_bpm"]:.1f} (LoA not reported)'
+        annotation = f'Bias {row["bias_bpm"]:.1f} (LoA not plotted)'
         text_x = row["bias_bpm"] + 0.5
 
     ax1.text(text_x, i, annotation, va="center", fontsize=7, color=color)
@@ -107,9 +108,10 @@ ax1.set_yticklabels(ba_data["label"], fontsize=8)
 ax1.axvline(0, color="black", linestyle="--", linewidth=0.8, alpha=0.5)
 ax1.axvline(-3, color="red", linestyle=":", linewidth=0.8, alpha=0.3)
 ax1.axvline(3, color="red", linestyle=":", linewidth=0.8, alpha=0.3)
-ax1.set_xlabel("Bias and 95% Limits of Agreement (breaths/min)", fontsize=9)
+ax1.set_xlabel("Bias and limits of agreement (breaths/min); 95% LoA unless marked 98.9%",
+               fontsize=9)
 # Title removed per JCMC requirements (no chart titles inside figures)
-ax1.set_xlim(-10, 12)
+ax1.set_xlim(-15, 13)  # include the full reported LoA of every study
 ax1.spines["top"].set_visible(False)
 ax1.spines["right"].set_visible(False)
 
@@ -119,10 +121,11 @@ legend_a = [
     Line2D([0], [0], marker="o", color="w", markerfacecolor="gray", markersize=8,
            label="Bias (with LoA bars)"),
     Line2D([0], [0], marker="D", color="w", markerfacecolor="gray", markersize=7,
-           markeredgecolor="black", markeredgewidth=0.5, label="Bias only (LoA N/A)"),
-    Line2D([0], [0], color="red", linestyle=":", linewidth=1, label="±3 bpm threshold"),
+           markeredgecolor="black", markeredgewidth=0.5, label="Bias only (LoA not plotted)"),
+    Line2D([0], [0], color="red", linestyle=":", linewidth=1,
+           label="±3 breaths/min reference lines"),
 ]
-ax1.legend(handles=legend_a, fontsize=7, loc="lower right")
+ax1.legend(handles=legend_a, fontsize=7, loc="upper left")
 
 
 plt.tight_layout(rect=[0, 0, 1, 0.95])

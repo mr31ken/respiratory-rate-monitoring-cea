@@ -1,0 +1,3 @@
+stress_test,incremental_cost_jpd,event_value_jpy,breakeven_per_1000pd,q_required_pct_at_ref_rate,note
+All values favouring the device,-308.4,777341,,,Incremental cost <= 0; no threshold
+All values disfavouring the device,2283.4,482210,4.74,94.7,

@@ -118,4 +118,4 @@ Complete reference list with verification information.
 
 4. **Exchange rates** are approximate and for cross-country reference only. They are explicitly labeled as assumptions in cost_parameters.csv.
 
-5. **EarlySense** data should be interpreted in the context that the company ceased independent operations in 2022. The technology is now owned by Baxter International.
+5. **EarlySense** data should be interpreted in the context that its contact-free monitoring technology was acquired by Hillrom (now Baxter International) in February 2021 and is no longer independently available.
